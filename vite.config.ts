@@ -7,6 +7,16 @@ const base = process.env.BASE_PATH ?? '/';
 
 export default defineConfig({
   base,
+  build: {
+    rolldownOptions: {
+      output: {
+        chunkFileNames: (chunk) =>
+          chunk.facadeModuleId?.includes('/src/info/')
+            ? 'assets/info/[name]-[hash].js'
+            : 'assets/[name]-[hash].js',
+      },
+    },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -37,7 +47,16 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webmanifest,mp3}'],
+        globIgnores: ['**/assets/info/**'],
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.includes('/assets/info/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'digizoo-info', expiration: { maxEntries: 400 } },
+          },
+        ],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
       },
@@ -46,5 +65,6 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
+    fsModuleCache: false,
   },
 });

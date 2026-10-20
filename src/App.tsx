@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { setAudioMuted } from './audio/engine';
+import { preloadSounds, setAudioMuted, setPreferredVoice } from './audio/engine';
+import { animalsIn } from './registry/animals';
 import { releaseScenesExcept } from './art/cache';
 import { zoomBy } from './engine/camera';
+import { ttsLang, useI18n } from './i18n';
+import { LANGUAGES } from './i18n/languages';
+import { prefetchInfo } from './info';
 import { useStore } from './store/store';
 import {
   bringForward,
@@ -14,6 +18,8 @@ import {
   toggleWalk,
 } from './ui/actions';
 import { StartOverDialog, TopBar, ZoomControls } from './ui/Chrome';
+import { InfoCard, closeInfo, openInfo, useInfoCard } from './ui/InfoCard';
+import { MatchGame, closeGame, useGame } from './ui/MatchGame';
 import { MapView } from './ui/MapView';
 import { SidePanel } from './ui/SidePanel';
 import { ThemePicker } from './ui/ThemePicker';
@@ -42,6 +48,12 @@ function useKeyboard(enabled: boolean) {
       if (!id) return;
       const step = e.shiftKey ? 60 : 12;
       switch (e.key) {
+        case 'i':
+        case 'I': {
+          const st = s.stickers.find((x) => x.id === id);
+          if (st) openInfo(st.animalId, st.style);
+          break;
+        }
         case 'Delete':
         case 'Backspace':
           e.preventDefault();
@@ -103,14 +115,37 @@ export function App() {
   const themeId = useStore((s) => s.themeId);
   const panelOpen = useStore((s) => s.panelOpen);
   const hasSelection = useStore((s) => s.selectedId !== null);
+  const infoOpen = useInfoCard((s) => s.id !== null);
+  const gameOpen = useGame((s) => s.open);
+  const lang = useI18n((s) => s.lang);
+  const voices = useStore((s) => s.voices);
 
-  useKeyboard(!pickerOpen && !startOver);
+  useKeyboard(!pickerOpen && !startOver && !infoOpen && !gameOpen);
+
+  useEffect(() => {
+    const timer = setTimeout(() => prefetchInfo(lang), 2500);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  useEffect(() => closeInfo(), [themeId, pickerOpen]);
+
+  useEffect(() => {
+    if (pickerOpen) closeGame();
+  }, [pickerOpen]);
 
   useEffect(() => setAudioMuted(muted), [muted]);
 
   useEffect(() => {
+    for (const l of LANGUAGES) setPreferredVoice(ttsLang(l.code), voices[l.code] ?? null);
+  }, [voices]);
+
+  useEffect(() => {
     if (!pickerOpen) releaseScenesExcept(themeId);
   }, [themeId, pickerOpen]);
+
+  useEffect(() => {
+    preloadSounds(animalsIn(themeId).map((a) => a.sound || a.id));
+  }, [themeId]);
 
   const closeStartOver = useCallback(() => setStartOver(false), []);
 
@@ -121,6 +156,8 @@ export function App() {
       <ZoomControls />
       <SidePanel />
       {startOver && <StartOverDialog onClose={closeStartOver} />}
+      <InfoCard />
+      <MatchGame />
       <ThemePicker />
     </div>
   );

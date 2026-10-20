@@ -1,4 +1,7 @@
 import { cancelSpeech, playAnimal, playSfx, speak } from '../audio/engine';
+import { likes } from '../food/diets';
+import type { FoodId } from '../food/foods';
+import { tr, ttsLang } from '../i18n';
 import type { StyleId } from '../art/core/types';
 import { useCamera } from '../engine/camera';
 import { frameOf } from '../engine/geometry';
@@ -31,8 +34,31 @@ export function playSticker(id: string): void {
     Math.max(500, duration * 1000),
   );
   spawnEffect('notes', frame.cx + frame.w * 0.15, frame.cy - frame.h * 0.5, Math.min(260, frame.h));
-  if (store().sayNames) speak(def.name, duration * 1000 + 120);
+  const t = tr();
+  if (store().sayNames) speak(t.name(def.id, def.name), duration * 1000 + 120, ttsLang(t.lang));
   else cancelSpeech();
+}
+
+let feedTimer: ReturnType<typeof setTimeout> | undefined;
+
+export function feedSticker(id: string, food: FoodId): void {
+  const found = stickerFrame(id);
+  if (!found) return;
+  const { st, def, frame } = found;
+  const happy = likes(def.id, food);
+  const facing = st.flipX ? -1 : 1;
+  const mouthX = frame.cx + facing * frame.w * 0.26;
+  const mouthY = frame.cy - frame.h * 0.12;
+  const zoom = useCamera.getState().t.s;
+  const size = Math.max(110 / zoom, Math.min(520, frame.h * 1.25));
+  spawnEffect('feed', mouthX, mouthY, size, { food, happy });
+  playSfx(happy ? 'munch' : 'click');
+  clearTimeout(feedTimer);
+  feedTimer = setTimeout(() => {
+    store().bumpSticker(id, happy ? 'happy' : 'sad');
+    playSfx(happy ? 'yum' : 'yuck');
+    if (happy) spawnEffect('hearts', mouthX, mouthY - frame.h * 0.2, size);
+  }, 560);
 }
 
 export function toggleWalk(id: string): void {

@@ -12,6 +12,7 @@ import {
   zoomAtPoint,
 } from './camera';
 import { frameOf, hitTest } from './geometry';
+import { tapBackground } from './interact';
 import { MAX_ZOOM, coverScale, screenToWorld, worldToScreen } from './viewport';
 
 type Mode =
@@ -299,6 +300,7 @@ export function attachGestures(el: HTMLElement): () => void {
     const remaining = [...pointers.values()][0];
     switch (mode) {
       case 'pendingMap':
+        tapBackground(e.clientX, e.clientY);
         store().select(null);
         mode = 'idle';
         break;

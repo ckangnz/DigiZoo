@@ -5,6 +5,7 @@ import { getTheme, type ThemeMeta } from '../registry/themes';
 import { useStore } from '../store/store';
 import { Ambient } from './Ambient';
 import { EffectsLayer } from './EffectsLayer';
+import { InteractiveLayer } from './Interactives';
 import { SceneBack, SceneFront } from './SceneLayers';
 import { SelectionOverlay, Toolbar } from './Selection';
 import { StickerLayer } from './Stickers';
@@ -28,10 +29,13 @@ const World = memo(function World({ theme, night }: { theme: ThemeMeta; night: b
   return (
     <div ref={ref} className={`world${night ? ' night' : ''}`} style={{ width: w, height: h }}>
       <SceneBack scene={theme.scene} night={night} />
-      <Ambient scene={theme.scene} night={night} />
+      <Ambient scene={theme.scene} night={night} sky />
+      <InteractiveLayer scene={theme.scene} night={night} front={false} />
+      <Ambient scene={theme.scene} night={night} sky={false} />
       <StickerLayer />
       <EffectsLayer />
       <SceneFront scene={theme.scene} night={night} />
+      <InteractiveLayer scene={theme.scene} night={night} front />
     </div>
   );
 });

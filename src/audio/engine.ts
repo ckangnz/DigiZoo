@@ -276,32 +276,67 @@ export function setAudioMuted(value: boolean): void {
   }
 }
 
-const PREFERRED_VOICES = [
-  'Samantha',
-  'Karen',
-  'Moira',
-  'Tessa',
-  'Yuna',
-  'Kyoko',
-  'Tingting',
-  'Google',
-  'Microsoft',
-];
+const NOVELTY_VOICES =
+  /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|hysterical|jester|organ|superstar|trinoids|whisper|wobble|zarvox|ralph|fred|junior|kathy|grandma|grandpa|rocko|eddy|flo|reed|sandy|shelley)\b/i;
+
+export type VoiceQuality = 'natural' | 'good' | 'basic';
+
+export interface VoiceOption {
+  uri: string;
+  name: string;
+  lang: string;
+  quality: VoiceQuality;
+}
+
+const preferredVoices = new Map<string, string>();
+
+export function setPreferredVoice(lang: string, uri: string | null): void {
+  if (uri) preferredVoices.set(lang, uri);
+  else preferredVoices.delete(lang);
+}
+
+function voiceScore(v: SpeechSynthesisVoice, lang: string): number {
+  const name = v.name.toLowerCase();
+  let score = 0;
+  if (/premium|neural|natural/.test(name)) score += 60;
+  else if (/enhanced|siri/.test(name)) score += 45;
+  else if (/google|online/.test(name)) score += 30;
+  if (/compact/.test(name)) score -= 20;
+  if (NOVELTY_VOICES.test(name)) score -= 100;
+  if (v.lang.toLowerCase().replace('_', '-') === lang.toLowerCase()) score += 8;
+  if (v.localService) score += 2;
+  if (v.default) score += 1;
+  return score;
+}
+
+function qualityOf(score: number): VoiceQuality {
+  return score >= 50 ? 'natural' : score >= 25 ? 'good' : 'basic';
+}
+
+function voicesFor(lang: string): SpeechSynthesisVoice[] {
+  if (typeof speechSynthesis === 'undefined') return [];
+  const base = lang.toLowerCase().split('-')[0];
+  return speechSynthesis
+    .getVoices()
+    .filter((v) => v.lang.toLowerCase().replace('_', '-').split('-')[0] === base)
+    .sort((a, b) => voiceScore(b, lang) - voiceScore(a, lang) || a.name.localeCompare(b.name));
+}
+
+export function listVoices(lang: string): VoiceOption[] {
+  return voicesFor(lang)
+    .filter((v) => !NOVELTY_VOICES.test(v.name))
+    .map((v) => ({
+      uri: v.voiceURI,
+      name: v.name,
+      lang: v.lang,
+      quality: qualityOf(voiceScore(v, lang)),
+    }));
+}
 
 function pickVoice(lang: string): SpeechSynthesisVoice | undefined {
-  const all = speechSynthesis.getVoices();
-  const base = lang.toLowerCase().split('-')[0];
-  const exact = all.filter((v) => v.lang.toLowerCase().replace('_', '-') === lang.toLowerCase());
-  const sameBase = all.filter((v) => v.lang.toLowerCase().startsWith(base));
-  for (const pool of [exact, sameBase]) {
-    for (const name of PREFERRED_VOICES) {
-      const v = pool.find((x) => x.name.includes(name));
-      if (v) return v;
-    }
-    const local = pool.find((v) => v.localService) ?? pool[0];
-    if (local) return local;
-  }
-  return undefined;
+  const voices = voicesFor(lang);
+  const wanted = preferredVoices.get(lang);
+  return (wanted && voices.find((v) => v.voiceURI === wanted)) || voices[0];
 }
 
 export function speak(text: string, delayMs = 0, lang = 'en-US', onEnd?: () => void): void {
@@ -314,8 +349,8 @@ export function speak(text: string, delayMs = 0, lang = 'en-US', onEnd?: () => v
     try {
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.rate = 0.92;
-      u.pitch = 1.15;
+      u.rate = 0.95;
+      u.pitch = 1;
       const voice = pickVoice(lang);
       if (voice) u.voice = voice;
       u.lang = voice?.lang ?? lang;

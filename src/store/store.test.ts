@@ -71,6 +71,8 @@ describe('persistence', () => {
       night: false,
       muted: false,
       sayNames: true,
+      lang: null,
+      voices: {},
     });
   });
 });

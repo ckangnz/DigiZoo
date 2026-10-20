@@ -7,6 +7,7 @@ import type { AnimalDef, StyleId } from '../art/core/types';
 import { metricsOf } from '../engine/geometry';
 import { attachRig } from '../engine/walker';
 import { getAnimal } from '../registry/animals';
+import { useT } from '../i18n';
 import { useStore } from '../store/store';
 
 let walkerSeq = 0;
@@ -70,8 +71,8 @@ const StickerView = memo(function StickerView({ id }: { id: string }) {
   useEffect(() => {
     const el = bodyRef.current;
     if (!bump || !el) return;
-    const cls = bump.kind === 'pop' ? 'anim-pop' : 'anim-wiggle';
-    el.classList.remove('anim-pop', 'anim-wiggle');
+    const cls = `anim-${bump.kind}`;
+    el.classList.remove('anim-pop', 'anim-wiggle', 'anim-happy', 'anim-sad');
     void el.offsetWidth;
     el.classList.add(cls);
     const done = () => el.classList.remove(cls);
@@ -79,6 +80,7 @@ const StickerView = memo(function StickerView({ id }: { id: string }) {
     return () => el.removeEventListener('animationend', done);
   }, [bump]);
 
+  const { name } = useT();
   const def = st ? getAnimal(st.animalId) : undefined;
   if (!st || !def) return null;
   const m = metricsOf(def);
@@ -99,7 +101,7 @@ const StickerView = memo(function StickerView({ id }: { id: string }) {
           ) : (
             <img
               src={stickerUrl(def, st.style)}
-              alt={def.name}
+              alt={name(def.id, def.name)}
               draggable={false}
               decoding="async"
             />

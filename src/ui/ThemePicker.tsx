@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { playSfx } from '../audio/engine';
-import { sceneUrls, stickerUrl } from '../art/cache';
+import { sceneThumbUrl, stickerUrl } from '../art/cache';
+import { useT } from '../i18n';
 import { animalsIn, getAnimal } from '../registry/animals';
 import { THEMES } from '../registry/themes';
 import { useStore } from '../store/store';
@@ -15,6 +16,7 @@ export function ThemePicker() {
   const themeId = useStore((s) => s.themeId);
   const openTheme = useStore((s) => s.openTheme);
   const close = useStore((s) => s.setPickerOpen);
+  const tr = useT();
 
   useEffect(() => {
     if (!open || firstRun) return;
@@ -40,10 +42,16 @@ export function ThemePicker() {
                 </span>
               ))}
             </h1>
-            <p className="picker-sub">Pick a world!</p>
+            <p className="picker-sub" dir="auto">
+              {tr.t('pickWorld')}
+            </p>
           </div>
           {!firstRun && (
-            <button className="btn picker-close" aria-label="Close" onClick={() => close(false)}>
+            <button
+              className="btn picker-close"
+              aria-label={tr.t('close')}
+              onClick={() => close(false)}
+            >
               <CloseIcon />
             </button>
           )}
@@ -60,10 +68,11 @@ export function ThemePicker() {
               }}
             >
               <span className="world-thumb">
-                <img src={sceneUrls(t.scene, 'day').back} alt="" draggable={false} />
-                <img src={sceneUrls(t.scene, 'day').front} alt="" draggable={false} />
+                <img src={sceneThumbUrl(t.scene)} alt="" draggable={false} />
               </span>
-              <span className="world-name">{t.name}</span>
+              <span className="world-name" dir="auto">
+                {tr.world(t.id)}
+              </span>
               <span className="world-count">
                 <PawsIcon size={18} />
                 {animalsIn(t.id).length}

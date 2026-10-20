@@ -1,10 +1,15 @@
 # DigiZoo
 
-A sticker-book PWA for babies and kids. Pick a world (Safari, Jungle, Rainforest, Desert, Farm, Ocean),
-then play with cute animal stickers: drag, pinch to scale and rotate, flip, duplicate, layer, delete,
-tap ▶ to hear the animal and 🐾 to make it walk, swim, hop or fly across the map. Toggle day and
-night, zoom and pan around, and start over whenever you like. Everything is saved on the device and
-works offline once installed.
+A sticker-book PWA for babies and kids. Pick a world — Safari, Jungle, Rainforest, Desert, Farm,
+Ocean, Dinosaurs, Halloween, Space, My Body or Bible — then play with 160+ cute stickers: drag, pinch
+to scale and rotate, flip, duplicate, layer, delete, tap ▶ to hear a real animal sound, 🐾 to make it
+walk, swim, hop or fly a few steps (it turns around before leaving the screen), 🍽 to feed it — meat
+makes the lion happy, carrots make it sad — and ⓘ to read (or hear) what it is, three fun facts and
+what it likes to eat. Tap the sun, clouds, trees, the windmill and other things in the background
+and they react. Play the matching-card game (3×3, 4×4 or 5×5) with the stickers of a world. Toggle
+day and night, zoom and pan around, switch between 16 languages (names and facts are spoken in the
+chosen language), and start over whenever you like. Everything is saved on the device and works
+offline once installed.
 
 ## Run it
 
@@ -22,6 +27,11 @@ npm run dev        # http://localhost:5173
 | `npm run e2e`         | End-to-end tests (Playwright: desktop Chromium, iPad + iPhone WebKit)                  |
 | `npm run art:preview` | Render animal sheets to `.art-preview/` (`-- lion`, `-- --sheet`, `-- --scene safari`) |
 | `npm run icons`       | Regenerate the PWA icons in `public/`                                                  |
+| `npm run audio:check` | Render every synthesised sound offline and check levels                                |
+| `npm run credits`     | Regenerate `CREDITS.md` from the sound credit files                                    |
+
+Real recordings are fetched and processed with the scripts in `scripts/sounds/` (Wikimedia Commons
+search with licence filtering, a reproducible spec per clip in `scripts/sounds/specs/`, review sheets).
 
 ## Deploy to GitHub Pages
 
@@ -32,23 +42,33 @@ npm run dev        # http://localhost:5173
 
 ## How it is made
 
-There are no image or audio files. Everything is generated from code:
+There are no image files. Everything visual is generated from code:
 
-- **Animals** (`src/art/animals/*.ts`) are rigged vector drawings: a tree of parts (body, legs, head,
-  tail…) with pivots. `src/art/core/render.ts` turns each one into an SVG sticker with a white die-cut
-  border in three finishes — **cartoon**, **comic** (ink + halftone) and **painted** (texture filters).
-  `src/art/core/motion.ts` animates the parts for each way of moving (walk, waddle, hop, fly, flutter,
-  swim, slither, crawl, pulse).
+- **Stickers** (`src/art/animals/*.ts`, listed in `src/registry/roster.ts`) are rigged vector drawings:
+  a tree of parts (body, legs, head, tail…) with pivots. `src/art/core/render.ts` turns each one into
+  an SVG sticker with a white die-cut border in three finishes — **cartoon**, **comic** (ink + halftone)
+  and **painted** (texture filters). `src/art/core/motion.ts` animates the parts for each way of moving
+  (walk, waddle, hop, fly, flutter, swim, slither, crawl, pulse, float, beat, breathe, wobble, roll).
 - **Worlds** (`src/art/scenes/*.ts`) are layered SVG landscapes built from a prop library; night
-  colours are derived automatically, with per-world tweaks (glowing windows, fireflies, moonlight).
-- **Sounds** (`src/audio/recipes/*.ts`) are synthesised live with the Web Audio API. The animal's
-  name is spoken afterwards (can be turned off in settings).
+  colours are derived automatically. `interactives` are props drawn as their own layer so they can
+  react when tapped (spin, shake, bounce, glow… with leaves, rain, splashes, coins and other effects).
+- **Sounds**: real recordings in `src/audio/samples/` (licensed CC0 / public domain / CC BY / CC BY-SA,
+  credited in [CREDITS.md](CREDITS.md) and in the app's settings), with synthesised Web Audio recipes
+  (`src/audio/recipes/*.ts`) for everything else. The name is spoken afterwards (toggle in settings).
+- **Food** (`src/food/`): 14 foods and what each creature likes to eat.
+- **Facts** (`src/info/<lang>/<world>.ts`): a short description and three facts for every sticker,
+  loaded on demand per language and cached by the service worker when first read.
+- **Matching game** (`src/game/`, `src/ui/MatchGame.tsx`): odd grids get a free star card in the middle.
+- **Languages** (`src/i18n/`): English plus 15 translations, loaded on demand.
 
 Only one animal walks at a time: starting a walk stops the previous one, and the animation loop only
 runs while something is walking.
 
 ### Adding an animal
 
-Create `src/art/animals/<id>.ts` exporting an `AnimalDef` (see `lion.ts`), preview it with
-`npm run art:preview -- <id>`, add a sound in `src/audio/recipes/<id>.ts`, and list it in a world's
-`defaults` if it should appear there from the start. New files are picked up automatically.
+Add it to `src/registry/roster.ts`, create `src/art/animals/<id>.ts` exporting an `AnimalDef` (see
+`lion.ts`), preview it with `npm run art:preview -- <id>`, add a sound (`src/audio/samples/<id>.mp3` +
+`<id>.json` credit, or a recipe in `src/audio/recipes/<id>.ts`), a diet in `src/food/diets.ts`, its
+name in each `src/i18n/locales/*.ts`, its card in each `src/info/<lang>/<world>.ts`, and list it in a
+world's `defaults` if it should appear there from the start. The unit tests check that nothing is
+missing.

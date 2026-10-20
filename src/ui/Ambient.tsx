@@ -3,7 +3,7 @@ import { cloudSprite } from '../art/cache';
 import { rng } from '../art/scenes/rng';
 import type { SceneDef } from '../art/scenes/types';
 
-type Item = { key: string; className: string; style: CSSProperties; src?: string };
+type Item = { key: string; className: string; style: CSSProperties; src?: string; sky?: boolean };
 
 function build(scene: SceneDef, night: boolean): Item[] {
   const [w, h] = scene.world;
@@ -51,6 +51,7 @@ function build(scene: SceneDef, night: boolean): Item[] {
     for (let i = 0; i < a.stars; i++) {
       items.push({
         key: `s${i}`,
+        sky: true,
         className: 'amb star',
         style: {
           left: between(20, w - 20),
@@ -110,6 +111,87 @@ function build(scene: SceneDef, night: boolean): Item[] {
       });
     }
   }
+  if (a.twinkles) {
+    for (let i = 0; i < a.twinkles; i++) {
+      items.push({
+        key: `t${i}`,
+        sky: true,
+        className: 'amb star',
+        style: {
+          left: between(20, w - 20),
+          top: between(20, h - 20),
+          ['--size' as string]: `${between(10, 30)}px`,
+          animationDuration: `${between(1.6, 4.4)}s`,
+          animationDelay: `${-between(0, 4)}s`,
+        },
+      });
+    }
+  }
+  if (a.meteors) {
+    for (let i = 0; i < a.meteors; i++) {
+      const duration = between(7, 13);
+      items.push({
+        key: `m${i}`,
+        sky: true,
+        className: 'amb meteor',
+        style: {
+          left: between(200, w - 600),
+          top: between(40, Math.max(200, horizon - 300)),
+          animationDuration: `${duration}s`,
+          animationDelay: `${-between(0, duration)}s`,
+          ['--size' as string]: `${between(160, 280)}px`,
+        },
+      });
+    }
+  }
+  if (a.bats) {
+    for (let i = 0; i < a.bats; i++) {
+      const duration = between(26, 44);
+      items.push({
+        key: `bt${i}`,
+        className: 'amb bat',
+        style: {
+          top: between(80, skyBottom + 120),
+          animationDuration: `${duration}s, ${between(0.28, 0.4)}s`,
+          animationDelay: `${-between(0, duration)}s, 0s`,
+          ['--travel' as string]: `${w + 400}px`,
+          ['--size' as string]: `${between(40, 70)}px`,
+        },
+      });
+    }
+  }
+  if (a.cells) {
+    for (let i = 0; i < a.cells; i++) {
+      items.push({
+        key: `ce${i}`,
+        className: `amb cell${i % 3 === 0 ? ' white' : ''}`,
+        style: {
+          left: between(40, w - 40),
+          top: between(40, h - 40),
+          ['--size' as string]: `${between(28, 70)}px`,
+          animationDuration: `${between(9, 16)}s`,
+          animationDelay: `${-between(0, 12)}s`,
+        },
+      });
+    }
+  }
+  if (a.smoke && a.smokeAt) {
+    for (let i = 0; i < a.smoke; i++) {
+      const duration = between(5, 8);
+      items.push({
+        key: `sm${i}`,
+        className: 'amb smoke',
+        style: {
+          left: a.smokeAt[0] + between(-30, 30),
+          top: a.smokeAt[1],
+          ['--size' as string]: `${between(70, 130) * (a.smokeScale ?? 1)}px`,
+          ['--rise' as string]: `${-420 * (a.smokeScale ?? 1)}px`,
+          animationDuration: `${duration}s`,
+          animationDelay: `${-((duration * i) / a.smoke)}s`,
+        },
+      });
+    }
+  }
   if (a.sparkles) {
     for (let i = 0; i < a.sparkles; i++) {
       items.push({
@@ -131,27 +213,22 @@ function build(scene: SceneDef, night: boolean): Item[] {
 export const Ambient = memo(function Ambient({
   scene,
   night,
+  sky,
 }: {
   scene: SceneDef;
   night: boolean;
+  sky: boolean;
 }) {
-  const items = useMemo(() => build(scene, night), [scene, night]);
+  const all = useMemo(() => build(scene, night), [scene, night]);
+  const items = useMemo(() => all.filter((it) => !!it.sky === sky), [all, sky]);
+  if (!items.length) return null;
   return (
     <div className="layer ambient" aria-hidden="true">
-      {items.map((it) =>
-        it.src ? (
-          <img
-            key={it.key}
-            className={it.className}
-            style={it.style}
-            src={it.src}
-            alt=""
-            draggable={false}
-          />
-        ) : (
-          <div key={it.key} className={it.className} style={it.style} />
-        ),
-      )}
+      {items.map((it) => (
+        <div key={it.key} className={it.className} style={it.style}>
+          {it.src && <img className="amb-img" src={it.src} alt="" draggable={false} />}
+        </div>
+      ))}
     </div>
   );
 });

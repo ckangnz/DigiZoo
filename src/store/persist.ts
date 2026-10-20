@@ -1,4 +1,5 @@
 import { STYLES, type HabitatId } from '../art/core/types';
+import { isLangCode } from '../i18n/languages';
 import type { Prefs, Sticker, View } from './types';
 
 const PREFIX = 'digizoo:v1:';
@@ -94,6 +95,12 @@ export function loadPrefs(isTheme: (id: string) => boolean): Prefs {
     night: raw.night === true,
     muted: raw.muted === true,
     sayNames: raw.sayNames !== false,
+    lang: isLangCode(raw.lang) ? raw.lang : null,
+    voices: Object.fromEntries(
+      Object.entries(raw.voices ?? {}).filter(
+        ([code, uri]) => isLangCode(code) && typeof uri === 'string',
+      ),
+    ),
   };
 }
 

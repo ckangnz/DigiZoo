@@ -1,4 +1,5 @@
 import type { HabitatId, StyleId } from '../art/core/types';
+import type { LangCode } from '../i18n/types';
 
 export interface Sticker {
   id: string;
@@ -22,4 +23,6 @@ export interface Prefs {
   night: boolean;
   muted: boolean;
   sayNames: boolean;
+  lang: LangCode | null;
+  voices: Partial<Record<LangCode, string>>;
 }

@@ -14,14 +14,9 @@ import { screenToWorld } from '../engine/viewport';
 import { ANIMALS, animalsIn, searchAnimals } from '../registry/animals';
 import { THEMES, getTheme } from '../registry/themes';
 import { useStore } from '../store/store';
+import { useT } from '../i18n';
 import { addAnimal } from './actions';
 import { AddAnimalIcon, ChevronLeftIcon, CloseIcon, SearchIcon } from './icons';
-
-const STYLE_LABEL: Record<StyleId, string> = {
-  cartoon: 'Cartoon',
-  comic: 'Comic',
-  painted: 'Painted',
-};
 
 type Chip = 'here' | 'all' | HabitatId;
 
@@ -140,11 +135,12 @@ function startTileGesture(e: ReactPointerEvent<HTMLButtonElement>, def: AnimalDe
 const StickerTile = memo(function StickerTile({ def, style }: { def: AnimalDef; style: StyleId }) {
   const ref = useRef<HTMLButtonElement>(null);
   const visible = useInView(ref);
+  const tr = useT();
   return (
     <button
       ref={ref}
       className="tile"
-      aria-label={`Add ${def.name} (${STYLE_LABEL[style]})`}
+      aria-label={tr.t('addSticker', { name: tr.name(def.id, def.name), style: tr.style(style) })}
       onPointerDown={(e) => startTileGesture(e, def, style)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -155,15 +151,16 @@ const StickerTile = memo(function StickerTile({ def, style }: { def: AnimalDef; 
       onContextMenu={(e) => e.preventDefault()}
     >
       {visible && <img src={stickerUrl(def, style)} alt="" draggable={false} decoding="async" />}
-      <span className="tile-style">{STYLE_LABEL[style]}</span>
+      <span className="tile-style">{tr.style(style)}</span>
     </button>
   );
 });
 
 const AnimalRow = memo(function AnimalRow({ def }: { def: AnimalDef }) {
+  const tr = useT();
   return (
     <section className="animal-row">
-      <h3>{def.name}</h3>
+      <h3 dir="auto">{tr.name(def.id, def.name)}</h3>
       <div className="variants">
         {STYLES.map((style) => (
           <StickerTile key={style} def={def} style={style} />
@@ -181,21 +178,26 @@ export function SidePanel() {
   const [chip, setChip] = useState<Chip>('here');
   const listRef = useRef<HTMLDivElement>(null);
 
+  const tr = useT();
   const list = useMemo(() => {
-    if (query.trim()) return searchAnimals(query);
+    if (query.trim())
+      return searchAnimals(query, (def) => [tr.name(def.id, def.name), ...tr.aliases(def.id)]);
     if (chip === 'here') return animalsIn(themeId);
     if (chip === 'all') return ANIMALS;
     return animalsIn(chip);
-  }, [query, chip, themeId]);
+  }, [query, chip, themeId, tr]);
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: 0 });
   }, [chip, query, themeId]);
 
   const chips: { id: Chip; label: string }[] = [
-    { id: 'here', label: `Here · ${getTheme(themeId).name}` },
-    { id: 'all', label: 'All' },
-    ...THEMES.filter((t) => t.id !== themeId).map((t) => ({ id: t.id as Chip, label: t.name })),
+    { id: 'here', label: `${tr.t('here')} · ${tr.world(getTheme(themeId).id)}` },
+    { id: 'all', label: tr.t('all') },
+    ...THEMES.filter((t) => t.id !== themeId).map((t) => ({
+      id: t.id as Chip,
+      label: tr.world(t.id),
+    })),
   ];
 
   return (
@@ -204,7 +206,7 @@ export function SidePanel() {
         <button
           className="fab"
           data-ui
-          aria-label="Add animals"
+          aria-label={tr.t('addStickers')}
           onClick={() => {
             playSfx('swoosh');
             setOpen(true);
@@ -215,8 +217,12 @@ export function SidePanel() {
       )}
       <aside className={`panel${open ? ' open' : ''}`} data-ui aria-hidden={!open} inert={!open}>
         <header className="panel-head">
-          <h2>Animals</h2>
-          <button className="btn small" aria-label="Close animals" onClick={() => setOpen(false)}>
+          <h2>{tr.t('stickers')}</h2>
+          <button
+            className="btn small"
+            aria-label={tr.t('closeStickers')}
+            onClick={() => setOpen(false)}
+          >
             {isNarrowSafe() ? <CloseIcon size={22} /> : <ChevronLeftIcon size={22} />}
           </button>
         </header>
@@ -225,14 +231,18 @@ export function SidePanel() {
           <input
             type="search"
             value={query}
-            placeholder="Find an animal…"
+            placeholder={tr.t('findSticker')}
             onChange={(e) => setQuery(e.target.value)}
             enterKeyHint="search"
             autoComplete="off"
             spellCheck={false}
           />
           {query && (
-            <button className="search-clear" aria-label="Clear search" onClick={() => setQuery('')}>
+            <button
+              className="search-clear"
+              aria-label={tr.t('clearSearch')}
+              onClick={() => setQuery('')}
+            >
               <CloseIcon size={18} />
             </button>
           )}
@@ -256,7 +266,11 @@ export function SidePanel() {
           {list.map((def) => (
             <AnimalRow key={def.id} def={def} />
           ))}
-          {!list.length && <p className="empty">No animals called “{query}” yet</p>}
+          {!list.length && (
+            <p className="empty" dir="auto">
+              {tr.t('noResults', { query })}
+            </p>
+          )}
         </div>
       </aside>
     </>

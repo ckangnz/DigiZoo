@@ -2,15 +2,27 @@ import { gaitPeriod, gaitStride, travelFactor } from '../art/core/motion';
 import { getAnimal } from '../registry/animals';
 import { getTheme } from '../registry/themes';
 import { useStore } from '../store/store';
+import { useCamera } from './camera';
 import { halfWidth, metricsOf } from './geometry';
 
 type RigUpdate = (phase: number) => void;
 
+interface Walk {
+  id: string;
+  phase: number;
+  last: number;
+  originX: number;
+  pausedUntil: number;
+}
+
 let rig: { id: string; update: RigUpdate } | null = null;
-let current: { id: string; phase: number; last: number } | null = null;
+let current: Walk | null = null;
 let frame = 0;
 
 const EDGE_MARGIN = 30;
+const SCREEN_MARGIN = 16;
+const CYCLES_EACH_WAY = 2.5;
+const TURN_PAUSE_MS = 320;
 
 export function attachRig(id: string, update: RigUpdate): () => void {
   rig = { id, update };
@@ -20,42 +32,85 @@ export function attachRig(id: string, update: RigUpdate): () => void {
   };
 }
 
+export function patrolBounds(
+  originX: number,
+  reach: number,
+  half: number,
+  worldW: number,
+  view: [number, number] | null,
+): [number, number] {
+  let lo = originX - reach;
+  let hi = originX + reach;
+  if (view) {
+    lo = Math.max(lo, view[0] + half);
+    hi = Math.min(hi, view[1] - half);
+  }
+  lo = Math.max(lo, half + EDGE_MARGIN);
+  hi = Math.min(hi, worldW - half - EDGE_MARGIN);
+  if (hi < lo) {
+    const mid = (lo + hi) / 2;
+    return [mid, mid];
+  }
+  return [lo, hi];
+}
+
+function visibleWorldRange(): [number, number] | null {
+  const { t, vp } = useCamera.getState();
+  if (vp.w <= 1) return null;
+  const pad = SCREEN_MARGIN / t.s;
+  return [-t.tx / t.s + pad, (vp.w - t.tx) / t.s - pad];
+}
+
 function tick(now: number) {
   frame = 0;
   const state = useStore.getState();
   if (!current || state.walkingId !== current.id) return;
-  const st = state.stickers.find((s) => s.id === current!.id);
+  const walk = current;
+  const st = state.stickers.find((s) => s.id === walk.id);
   const def = st && getAnimal(st.animalId);
   if (!st || !def) {
     state.stopWalk();
     return;
   }
-  const dt = Math.min(0.05, Math.max(0, (now - current.last) / 1000));
-  current.last = now;
+  const dt = Math.min(0.05, Math.max(0, (now - walk.last) / 1000));
+  walk.last = now;
+  if (now < walk.pausedUntil) {
+    frame = requestAnimationFrame(tick);
+    return;
+  }
   const period = gaitPeriod(def);
-  current.phase += dt / period;
+  walk.phase += dt / period;
   const m = metricsOf(def);
-  const speed = (gaitStride(def) * m.k * st.scale) / period;
+  const strideWorld = gaitStride(def) * m.k * st.scale;
+  const speed = strideWorld / period;
   const dir = st.flipX ? -1 : 1;
-  let x = st.x + dir * speed * travelFactor(def, current.phase) * dt;
-  let flipX = st.flipX;
-  const worldW = getTheme(state.themeId).scene.world[0];
   const half = halfWidth(st, def);
-  if (dir > 0 && x > worldW - half - EDGE_MARGIN) {
-    x = worldW - half - EDGE_MARGIN;
-    flipX = true;
-  } else if (dir < 0 && x < half + EDGE_MARGIN) {
-    x = half + EDGE_MARGIN;
-    flipX = false;
+  const worldW = getTheme(state.themeId).scene.world[0];
+  const [lo, hi] = patrolBounds(
+    walk.originX,
+    Math.max(strideWorld * CYCLES_EACH_WAY, half * 0.6),
+    half,
+    worldW,
+    visibleWorldRange(),
+  );
+  const roomToWalk = hi - lo > 1;
+  let x = roomToWalk ? st.x + dir * speed * travelFactor(def, walk.phase) * dt : st.x;
+  x = Math.min(worldW - half - EDGE_MARGIN, Math.max(half + EDGE_MARGIN, x));
+  let flipX = st.flipX;
+  if (roomToWalk && speed > 0 && ((dir > 0 && x >= hi) || (dir < 0 && x <= lo))) {
+    flipX = !flipX;
+    walk.pausedUntil = now + TURN_PAUSE_MS;
   }
   state.patch(st.id, { x, flipX });
-  if (rig?.id === st.id) rig.update(current.phase);
+  if (rig?.id === st.id) rig.update(walk.phase);
   frame = requestAnimationFrame(tick);
 }
 
 function start(id: string) {
   stop();
-  current = { id, phase: 0, last: performance.now() };
+  const st = useStore.getState().stickers.find((s) => s.id === id);
+  if (!st) return;
+  current = { id, phase: 0, last: performance.now(), originX: st.x, pausedUntil: 0 };
   frame = requestAnimationFrame(tick);
 }
 

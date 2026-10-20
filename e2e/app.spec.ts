@@ -21,6 +21,7 @@ interface DebugHandle {
     };
   };
   useCamera: { getState: () => { t: { s: number } } };
+  centerOn: (x: number, y: number) => void;
 }
 
 declare global {
@@ -68,7 +69,7 @@ test('first launch shows the world picker, then opens a world with starter anima
 }) => {
   await page.goto('/?debug');
   await expect(page.locator('.picker')).toBeVisible();
-  await expect(page.locator('.world-card')).toHaveCount(6);
+  await expect(page.locator('.world-card')).toHaveCount(11);
   await page.locator('.world-card', { hasText: 'Farm' }).click();
   const s = await state(page);
   expect(s.themeId).toBe('farm');
@@ -116,7 +117,7 @@ test('only one animal walks at a time', async ({ page }) => {
   await openWorld(page);
   const lion = await selectAnimal(page, 'lion');
   const startX = (await state(page)).stickers.find((s) => s.id === lion)!.x;
-  await tool(page, 'Walk').click({ force: true });
+  await tool(page, 'Walk').dispatchEvent('click');
   await expect.poll(async () => (await state(page)).walkingId).toBe(lion);
   await expect(page.locator('.walker')).toHaveCount(1);
   await expect
@@ -124,13 +125,34 @@ test('only one animal walks at a time', async ({ page }) => {
     .toBeGreaterThan(20);
   await page.locator('[data-sticker]').first().waitFor();
   const zebra = await selectAnimal(page, 'zebra');
-  await tool(page, 'Walk').click({ force: true });
+  await tool(page, 'Walk').dispatchEvent('click');
   await expect.poll(async () => (await state(page)).walkingId).toBe(zebra);
   await expect(page.locator('.walker')).toHaveCount(1);
   await expect(page.locator(`[data-sticker="${lion}"] .walker`)).toHaveCount(0);
-  await tool(page, 'Stop walking').click({ force: true });
+  await tool(page, 'Stop walking').dispatchEvent('click');
   await expect.poll(async () => (await state(page)).walkingId).toBeNull();
   await expect(page.locator('.walker')).toHaveCount(0);
+});
+
+test('a walking animal turns around and stays on screen', async ({ page }) => {
+  await openWorld(page);
+  const lion = await selectAnimal(page, 'lion');
+  await tool(page, 'Walk').dispatchEvent('click');
+  const xs: number[] = [];
+  const flips = new Set<boolean>();
+  const viewport = page.viewportSize()!;
+  for (let i = 0; i < 16; i++) {
+    await page.waitForTimeout(450);
+    const st = (await state(page)).stickers.find((s) => s.id === lion)!;
+    xs.push(st.x);
+    flips.add(st.flipX);
+    const box = (await page.locator(`[data-sticker="${lion}"]`).boundingBox())!;
+    const centre = box.x + box.width / 2;
+    expect(centre).toBeGreaterThan(0);
+    expect(centre).toBeLessThan(viewport.width);
+  }
+  expect(flips.size).toBe(2);
+  expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(30);
 });
 
 test('flip, duplicate, reorder, delete and undo', async ({ page }) => {
@@ -139,23 +161,23 @@ test('flip, duplicate, reorder, delete and undo', async ({ page }) => {
   const count = (await state(page)).stickers.length;
   const initial = (await state(page)).stickers.find((s) => s.id === id)!;
 
-  await tool(page, 'Flip').click({ force: true });
+  await tool(page, 'Flip').dispatchEvent('click');
   const flipped = (await state(page)).stickers.find((s) => s.id === id)!;
   expect(flipped.flipX).toBe(!initial.flipX);
 
-  await tool(page, 'Duplicate').click({ force: true });
+  await tool(page, 'Duplicate').dispatchEvent('click');
   expect((await state(page)).stickers.length).toBe(count + 1);
   const copyId = (await state(page)).selectedId!;
   expect(copyId).not.toBe(id);
 
   const order = () => state(page).then((s) => s.stickers.map((x) => x.id));
   const beforeIndex = (await order()).indexOf(copyId);
-  await tool(page, 'Send backward').click({ force: true });
+  await tool(page, 'Send backward').dispatchEvent('click');
   expect((await order()).indexOf(copyId)).toBe(beforeIndex - 1);
-  await tool(page, 'Bring forward').click({ force: true });
+  await tool(page, 'Bring forward').dispatchEvent('click');
   expect((await order()).indexOf(copyId)).toBe(beforeIndex);
 
-  await tool(page, 'Delete').click({ force: true });
+  await tool(page, 'Delete').dispatchEvent('click');
   expect((await state(page)).stickers.length).toBe(count);
   await expect(page.locator('.toolbar')).toHaveCount(0);
 
@@ -179,7 +201,7 @@ test('start over needs a press-and-hold, then empties or restores the map', asyn
   expect((await state(page)).stickers.length).toBe(0);
 
   await page.locator('[aria-label="Start over"]').click();
-  const starter = page.locator('.hold', { hasText: 'Starter animals' });
+  const starter = page.locator('.hold', { hasText: 'Starter set' });
   const sb = (await starter.boundingBox())!;
   await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
   await page.mouse.down();
@@ -270,4 +292,85 @@ test.describe('multi-touch', () => {
     expect(after.scale).toBeGreaterThan(1.6);
     expect(Math.abs(after.rotation)).toBeGreaterThan(15);
   });
+});
+
+test('feeding makes meat-eaters happy with meat and sad with carrots', async ({ page }) => {
+  await openWorld(page);
+  await selectAnimal(page, 'lion');
+  await tool(page, 'Feed').dispatchEvent('click');
+  await expect(page.locator('.food-tray')).toBeVisible();
+  await page.locator('.food-btn[aria-label="Feed Meat"]').dispatchEvent('click');
+  await expect(page.locator('.fx-feed.happy')).toHaveCount(1);
+  await expect(page.locator('.sticker-body.anim-happy')).toHaveCount(1);
+  await page.waitForTimeout(2600);
+  await page.locator('.food-btn[aria-label="Feed Carrot"]').dispatchEvent('click');
+  await expect(page.locator('.fx-feed.sad')).toHaveCount(1);
+  await expect(page.locator('.sticker-body.anim-sad')).toHaveCount(1);
+});
+
+test('planets have no feed button and move instead of walking', async ({ page }) => {
+  await openWorld(page, 'Space');
+  const jupiter = await selectAnimal(page, 'jupiter');
+  await expect(tool(page, 'Feed')).toHaveCount(0);
+  await tool(page, 'Move').dispatchEvent('click');
+  await expect.poll(async () => (await state(page)).walkingId).toBe(jupiter);
+});
+
+test('tapping the sun makes it react', async ({ page }) => {
+  await openWorld(page);
+  const sun = page.locator('[data-interactive="sun"]');
+  await expect(sun).toHaveCount(1);
+  await page.evaluate(() => window.__digizoo.centerOn(2950, 320));
+  await page.waitForTimeout(500);
+  const box = (await sun.boundingBox())!;
+  await tapAt(page, box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page.locator('[data-interactive="sun"].act')).toHaveCount(1);
+});
+
+test('switching to Korean translates the app and remembers it', async ({ page }) => {
+  await openWorld(page);
+  await page.locator('[aria-label="Settings"]').click();
+  await page.locator('.toggle-row', { hasText: 'Language' }).click();
+  await page.locator('.lang-btn', { hasText: '한국어' }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
+  await expect(page.locator('.theme-pill span')).not.toHaveText('Safari');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
+});
+
+test('the info button tells you about the sticker', async ({ page }) => {
+  await openWorld(page);
+  await selectAnimal(page, 'lion');
+  await tool(page, 'About Lion').dispatchEvent('click');
+  const card = page.locator('.info-card');
+  await expect(card).toBeVisible();
+  await expect(card.locator('h2')).toHaveText('Lion');
+  await expect(card.locator('.info-facts li')).toHaveCount(3);
+  await expect(card.locator('.info-food')).toContainText('Meat');
+  await card.locator('.dialog-close').click();
+  await expect(card).toHaveCount(0);
+});
+
+test('the matching game can be played to the end', async ({ page }) => {
+  await openWorld(page);
+  await page.locator('[aria-label="Matching game"]').click();
+  await expect(page.locator('.game')).toBeVisible();
+  await page.locator('.seg button', { hasText: '3 × 3' }).click();
+  await expect(page.locator('.card')).toHaveCount(9);
+  await expect(page.locator('.card.card-star')).toHaveCount(1);
+  const ids = await page
+    .locator('.card[data-card]')
+    .evaluateAll((els) => els.map((el) => el.getAttribute('data-card')!));
+  const pairs = new Map<string, number[]>();
+  ids.forEach((id, i) => pairs.set(id, [...(pairs.get(id) ?? []), i]));
+  expect([...pairs.values()].every((p) => p.length === 2)).toBe(true);
+  for (const [a, b] of pairs.values()) {
+    await page.locator('.card[data-card]').nth(a).click();
+    await page.locator('.card[data-card]').nth(b).click();
+  }
+  await expect(page.locator('.card.matched')).toHaveCount(8);
+  await expect(page.locator('.game-win')).toBeVisible();
+  await expect(page.locator('.game-win')).toContainText('4 moves');
+  await page.locator('.game-win button', { hasText: 'Back to the map' }).click();
+  await expect(page.locator('.game')).toHaveCount(0);
 });

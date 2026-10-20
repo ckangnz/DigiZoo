@@ -229,3 +229,47 @@ export const SparkleIcon = (p: IconProps) => (
     />
   </Icon>
 );
+
+export const BowlIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M3 12.5h18a9 7.5 0 0 1-18 0z" fill="currentColor" />
+    <path d="M8 21h8" />
+    <circle cx="9" cy="8.5" r="2.4" fill="currentColor" stroke="none" />
+    <circle cx="14.5" cy="7.5" r="2.8" fill="currentColor" stroke="none" />
+    <path d="M14.5 4.7c.4-1.2 1.3-2 2.6-2.2" strokeWidth={1.8} />
+  </Icon>
+);
+
+export const LanguageIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M4 5h9M8.5 3v2M6 5c.6 3.4 2.9 6.2 6.2 7.6M11 5c-.8 3.8-3.6 6.9-7 8.2" />
+    <path d="m13 21 4-9 4 9M14.4 18h5.2" />
+  </Icon>
+);
+
+export const InfoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 11v6" strokeWidth={2.8} />
+    <circle cx="12" cy="7.5" r="1.4" fill="currentColor" stroke="none" />
+  </Icon>
+);
+
+export const CardsIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect x="3.5" y="6" width="10" height="14" rx="2.4" transform="rotate(-12 8.5 13)" />
+    <rect x="10.5" y="4" width="10" height="14" rx="2.4" transform="rotate(10 15.5 11)" />
+    <path
+      d="m15.6 8.6.7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z"
+      fill="currentColor"
+      strokeWidth={1}
+    />
+  </Icon>
+);
+
+export const RefreshIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M20 11a8 8 0 1 0-2.3 5.7" />
+    <path d="M20 4.5V11h-6.5" />
+  </Icon>
+);

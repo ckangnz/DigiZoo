@@ -1,5 +1,8 @@
 import { create } from 'zustand';
 import type { HabitatId, StyleId } from '../art/core/types';
+import { loadLanguage } from '../i18n';
+import { detectLanguage } from '../i18n/languages';
+import type { LangCode } from '../i18n/types';
 import { getAnimal } from '../registry/animals';
 import { DEFAULT_THEME, getTheme, hasTheme } from '../registry/themes';
 import {
@@ -45,7 +48,7 @@ function stickersFor(theme: HabitatId): Sticker[] {
   return loadScene(theme, known) ?? defaultStickers(theme);
 }
 
-export type BumpKind = 'wiggle' | 'pop';
+export type BumpKind = 'wiggle' | 'pop' | 'happy' | 'sad';
 
 export interface State {
   themeId: HabitatId;
@@ -54,6 +57,9 @@ export interface State {
   night: boolean;
   muted: boolean;
   sayNames: boolean;
+  lang: LangCode;
+  langChosen: boolean;
+  voices: Partial<Record<LangCode, string>>;
   panelOpen: boolean;
   stickers: Sticker[];
   view: View | null;
@@ -71,6 +77,8 @@ export interface Actions {
   toggleNight: () => void;
   setMuted: (muted: boolean) => void;
   setSayNames: (on: boolean) => void;
+  setLang: (lang: LangCode) => Promise<void>;
+  setVoice: (lang: LangCode, uri: string | null) => void;
   setView: (view: View) => void;
   select: (id: string | null) => void;
   bumpSticker: (id: string, kind?: BumpKind) => void;
@@ -91,6 +99,12 @@ export interface Actions {
 }
 
 const prefs = loadPrefs(hasTheme);
+
+export function initialLanguage(): LangCode {
+  if (prefs.lang) return prefs.lang;
+  if (typeof navigator === 'undefined') return 'en';
+  return detectLanguage(navigator.languages ?? [navigator.language]);
+}
 const initialTheme: HabitatId = prefs.themeId ?? DEFAULT_THEME;
 let hasChosenTheme = prefs.themeId !== null;
 
@@ -107,6 +121,9 @@ export const useStore = create<State & Actions>()((set, get) => ({
   night: prefs.night,
   muted: prefs.muted,
   sayNames: prefs.sayNames,
+  lang: initialLanguage(),
+  langChosen: prefs.lang !== null,
+  voices: prefs.voices,
   panelOpen: false,
   stickers: stickersFor(initialTheme),
   view: loadView(initialTheme),
@@ -141,6 +158,16 @@ export const useStore = create<State & Actions>()((set, get) => ({
   toggleNight: () => set({ night: !get().night }),
   setMuted: (muted) => set({ muted }),
   setSayNames: (on) => set({ sayNames: on }),
+  setVoice: (lang, uri) => {
+    const voices = { ...get().voices };
+    if (uri) voices[lang] = uri;
+    else delete voices[lang];
+    set({ voices });
+  },
+  setLang: async (lang) => {
+    await loadLanguage(lang);
+    set({ lang, langChosen: true });
+  },
   setView: (view) => set({ view }),
   select: (id) => set({ selectedId: id }),
   bumpSticker: (id, kind = 'wiggle') => set({ bump: { id, n: (get().bump?.n ?? 0) + 1, kind } }),
@@ -292,6 +319,8 @@ useStore.subscribe((s, prev) => {
     s.night !== prev.night ||
     s.muted !== prev.muted ||
     s.sayNames !== prev.sayNames ||
+    s.lang !== prev.lang ||
+    s.voices !== prev.voices ||
     s.pickerOpen !== prev.pickerOpen
   ) {
     if (!s.pickerOpen) hasChosenTheme = true;
@@ -300,6 +329,8 @@ useStore.subscribe((s, prev) => {
       night: s.night,
       muted: s.muted,
       sayNames: s.sayNames,
+      lang: s.langChosen ? s.lang : null,
+      voices: s.voices,
     });
   }
 });

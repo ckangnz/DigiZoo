@@ -6,12 +6,14 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 export function HoldButton({
   label,
+  hint,
   icon,
   onComplete,
   duration = 1100,
   className = '',
 }: {
   label: string;
+  hint: string;
   icon: ReactNode;
   onComplete: () => void;
   duration?: number;
@@ -74,7 +76,7 @@ export function HoldButton({
         if (e.key === 'Enter' || e.key === ' ') cancel();
       }}
       onContextMenu={(e) => e.preventDefault()}
-      aria-label={`${label} (press and hold)`}
+      aria-label={`${label} (${hint})`}
     >
       <span className="hold-ring">
         <svg viewBox="0 0 72 72" aria-hidden="true">
@@ -91,7 +93,7 @@ export function HoldButton({
         <span className="hold-icon">{icon}</span>
       </span>
       <span className="hold-label">{label}</span>
-      <span className="hold-hint">Press and hold</span>
+      <span className="hold-hint">{hint}</span>
     </button>
   );
 }
