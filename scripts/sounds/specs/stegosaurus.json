@@ -1,0 +1,36 @@
+{
+  "id": "stegosaurus",
+  "title": "Stegosaurus grunt (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (hippopotamus honks and an American alligator groan, pitched down and layered)",
+  "layers": [
+    {
+      "file": "File:Hippopotamuses vocalising in South Africa.webm",
+      "start": 1.55,
+      "end": 3.0,
+      "rate": 0.7,
+      "level": -20
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-AlligatorEVER1.mp3",
+      "credit": {
+        "title": "Alligator (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+      },
+      "start": 7.3,
+      "end": 9.0,
+      "rate": 0.8,
+      "at": 0.2,
+      "level": -25
+    }
+  ],
+  "highpass": 28,
+  "reverb": {
+    "room": 0.6,
+    "damp": 0.6,
+    "wet": 0.08,
+    "tail": 0.3
+  }
+}

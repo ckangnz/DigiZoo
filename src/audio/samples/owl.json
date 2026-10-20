@@ -1,0 +1,11 @@
+{
+  "id": "owl",
+  "file": "owl.mp3",
+  "duration": 2.56,
+  "title": "Strix aluco male",
+  "author": "Vianney Bajart",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Strix_aluco_male.oga",
+  "changes": "Male tawny owl (Strix aluco) hooting. Trimmed to 4.85–7.45 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

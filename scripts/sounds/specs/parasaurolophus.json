@@ -1,0 +1,36 @@
+{
+  "id": "parasaurolophus",
+  "title": "Parasaurolophus horn call (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (elk bugle and sandhill crane calls pitched down an octave into a hollow horn, then layered)",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-ElkBuglingGRSA.mp3",
+      "credit": {
+        "title": "Elk bugle (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-elk.htm"
+      },
+      "start": 8.35,
+      "end": 9.55,
+      "rate": 0.5,
+      "level": -20
+    },
+    {
+      "file": "File:Yellowstone sound library - Sandhill Crane - 002.mp3",
+      "start": 9.5,
+      "end": 10.4,
+      "rate": 0.55,
+      "at": 0.2,
+      "level": -25
+    }
+  ],
+  "highpass": 40,
+  "reverb": {
+    "room": 0.85,
+    "damp": 0.45,
+    "wet": 0.2,
+    "tail": 0.5
+  }
+}

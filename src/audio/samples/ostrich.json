@@ -1,0 +1,11 @@
+{
+  "id": "ostrich",
+  "file": "ostrich.mp3",
+  "duration": 2.48,
+  "title": "Dromaius novaehollandiae Lue0043 03",
+  "author": "Lütgens, Hans",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Dromaius_novaehollandiae_Lue0043_03.wav",
+  "changes": "Recording of an emu (Dromaius novaehollandiae), a fellow flightless ratite, standing in for the ostrich's deep booming call. Trimmed to 15.50–17.95 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "orangutan",
+  "layers": [
+    {
+      "file": "File:Speech-Like-Rhythm-in-a-Voiced-and-Voiceless-Orangutan-Call-pone.0116136.s002.ogv",
+      "start": 1.45,
+      "end": 3.6
+    }
+  ],
+  "highpass": 0,
+  "note": "Audio track of the video; orangutan kiss-squeak calls."
+}

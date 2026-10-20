@@ -1,0 +1,45 @@
+{
+  "id": "spinosaurus",
+  "title": "Spinosaurus roar (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (American alligator bellows and a tiger snarl, pitched down and layered)",
+  "layers": [
+    {
+      "file": "File:Alligatorbellow1.ogg",
+      "start": 8.0,
+      "end": 10.4,
+      "rate": 0.85,
+      "level": -20
+    },
+    {
+      "file": "File:439280 schots angry-tiger.wav",
+      "start": 26.05,
+      "end": 28.2,
+      "rate": 0.75,
+      "at": 0.1,
+      "level": -22
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-AlligatorEVER1.mp3",
+      "credit": {
+        "title": "Alligator (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+      },
+      "start": 3.6,
+      "end": 5.0,
+      "rate": 0.8,
+      "at": 0.6,
+      "level": -26
+    }
+  ],
+  "highpass": 28,
+  "lowpass": 9000,
+  "reverb": {
+    "room": 0.75,
+    "damp": 0.5,
+    "wet": 0.1,
+    "tail": 0.35
+  }
+}

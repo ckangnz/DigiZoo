@@ -1,0 +1,12 @@
+{
+  "id": "hippo",
+  "layers": [
+    {
+      "file": "File:Hippopotamuses vocalising in South Africa.webm",
+      "start": 1.55,
+      "end": 4.3
+    }
+  ],
+  "highpass": 0,
+  "note": "Audio track of the video."
+}

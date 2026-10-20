@@ -1,0 +1,12 @@
+{
+  "id": "snake",
+  "layers": [
+    {
+      "file": "File:Rattlesnake.ogg",
+      "start": 0.4,
+      "end": 3.0
+    }
+  ],
+  "highpass": 0,
+  "species": "Rattlesnake rattle"
+}

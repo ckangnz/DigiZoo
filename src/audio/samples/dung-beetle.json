@@ -1,0 +1,11 @@
+{
+  "id": "dung-beetle",
+  "file": "dung-beetle.mp3",
+  "duration": 1.59,
+  "title": "Polyphylla fullo stridulation",
+  "author": "Jakob Jilg",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Polyphylla_fullo_stridulation.ogg",
+  "changes": "Recording of a pine chafer (Polyphylla fullo), a scarab beetle related to dung beetles, squeaking (stridulating). Trimmed to 0.45–2.00 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

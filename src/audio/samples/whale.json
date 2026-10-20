@@ -1,0 +1,11 @@
+{
+  "id": "whale",
+  "file": "whale.mp3",
+  "duration": 1.67,
+  "title": "Humpback-Whale-Song-on-the-Southern-Ocean-Feeding-Grounds-Implications-for-Cultural-Transmission-pone.0079422.s003",
+  "author": "Garland E, Gedamke J, Rekdahl M, Noad M, Garrigue C, Gales N",
+  "license": "CC BY 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:Humpback-Whale-Song-on-the-Southern-Ocean-Feeding-Grounds-Implications-for-Cultural-Transmission-pone.0079422.s003.oga",
+  "changes": "Humpback whale (Megaptera novaeangliae) song unit. Trimmed to 46.20–47.90 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 120 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 120 Hz because the hydrophone recording has strong rumble below 100 Hz; the moan itself sits at about 200 Hz and above."
+}

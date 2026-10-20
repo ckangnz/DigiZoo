@@ -1,0 +1,12 @@
+{
+  "id": "horse",
+  "layers": [
+    {
+      "file": "File:Het hinniken van een paard - SoundCloud - Beeld en Geluid.ogg",
+      "start": 20.85,
+      "end": 23.25
+    }
+  ],
+  "highpass": 120,
+  "note": "The high-pass is set to 120 Hz because the original carries 50 Hz mains hum."
+}

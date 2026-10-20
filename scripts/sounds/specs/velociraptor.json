@@ -1,0 +1,39 @@
+{
+  "id": "velociraptor",
+  "title": "Velociraptor call (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (honking geese, screaming dolphins and a hissing turkey vulture, pitched and layered)",
+  "layers": [
+    {
+      "file": "File:Geese Honking (loud).ogg",
+      "start": 1.38,
+      "end": 2.62,
+      "rate": 0.85,
+      "highpass": 300,
+      "level": -21
+    },
+    {
+      "file": "File:161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
+      "start": 3.45,
+      "end": 4.2,
+      "rate": 0.8,
+      "at": 0.55,
+      "highpass": 800,
+      "level": -24
+    },
+    {
+      "file": "File:Turkey Vulture.ogg",
+      "start": 18.45,
+      "end": 19.0,
+      "rate": 0.9,
+      "at": 1.35,
+      "level": -21
+    }
+  ],
+  "highpass": 150,
+  "reverb": {
+    "room": 0.5,
+    "damp": 0.5,
+    "wet": 0.1,
+    "tail": 0.3
+  }
+}

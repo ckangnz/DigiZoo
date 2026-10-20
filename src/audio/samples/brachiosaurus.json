@@ -1,0 +1,34 @@
+{
+  "id": "brachiosaurus",
+  "file": "brachiosaurus.mp3",
+  "duration": 2.95,
+  "title": "Brachiosaurus call (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by National Park Service; King L, Soltis J, Douglas-Hamilton I, Savage A, Vollrath F",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-wolf.htm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (wolf howl, humpback whale call and African elephant rumble, pitched down and layered). Sound design from 3 real recordings: \"Wolf (NPS Sound Gallery)\" 0.30–1.85 s, slowed to 0.55× speed (pitched down 45%); \"Humpback Whale (NPS Sound Gallery)\" 2.60–3.15 s, slowed to 0.7× speed (pitched down 30%), placed at 0.05 s; \"Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003\" 3.20–5.20 s, slowed to 0.85× speed (pitched down 15%), placed at 0.30 s; then mixed to mono, gentle 12 dB/oct high-pass at 28 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Wolf (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-wolf.htm"
+    },
+    {
+      "title": "Humpback Whale (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm"
+    },
+    {
+      "title": "Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003",
+      "author": "King L, Soltis J, Douglas-Hamilton I, Savage A, Vollrath F",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003.ogg"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "t-rex",
+  "file": "t-rex.mp3",
+  "duration": 2.95,
+  "title": "T. rex roar (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by தகவலுழவன்; த*உழவன்; U.S. Fish and Wildlife Service",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (Asian elephant trumpet, lion roar and American alligator bellow, pitched down and layered). Sound design from 3 real recordings: \"Elephant voice - trumpeting\" 0.05–1.42 s, slowed to 0.55× speed (pitched down 45%); \"Lion raring-sound1TamilNadu178\" 0.38–2.40 s, slowed to 0.72× speed (pitched down 28%), placed at 0.05 s; \"27alligator2bellow\" 0.85–2.45 s, slowed to 0.8× speed (pitched down 20%), placed at 0.35 s; then mixed to mono, gentle 12 dB/oct high-pass at 28 Hz, low-passed at 9000 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Elephant voice - trumpeting",
+      "author": "தகவலுழவன்",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg"
+    },
+    {
+      "title": "Lion raring-sound1TamilNadu178",
+      "author": "த*உழவன்",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Lion_raring-sound1TamilNadu178.ogg"
+    },
+    {
+      "title": "27alligator2bellow",
+      "author": "U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:27alligator2bellow.ogg"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "plesiosaurus",
+  "title": "Plesiosaurus call (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (humpback whale calls pitched down over an African elephant rumble, layered)",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-HumpbackGLBA.mp3",
+      "credit": {
+        "title": "Humpback Whale (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm"
+      },
+      "start": 0.25,
+      "end": 0.55,
+      "rate": 0.6,
+      "level": -21
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-HumpbackGLBA.mp3",
+      "credit": {
+        "title": "Humpback Whale (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm"
+      },
+      "start": 2.62,
+      "end": 3.12,
+      "rate": 0.6,
+      "at": 0.55,
+      "level": -21
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-HumpbackGLBA.mp3",
+      "credit": {
+        "title": "Humpback Whale (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm"
+      },
+      "start": 3.95,
+      "end": 4.27,
+      "rate": 0.6,
+      "at": 1.45,
+      "level": -22
+    },
+    {
+      "file": "File:Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003.ogg",
+      "start": 1.2,
+      "end": 4.2,
+      "rate": 0.9,
+      "level": -26
+    }
+  ],
+  "highpass": 35,
+  "lowpass": 5000,
+  "reverb": {
+    "room": 0.8,
+    "damp": 0.5,
+    "wet": 0.15,
+    "tail": 0.45
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "heart",
+  "layers": [
+    { "file": "File:Human heart beating at 61 bpm (Cc-by-3.0).ogg", "start": 1.95, "end": 4.62 }
+  ],
+  "highpass": 25,
+  "note": "Three lub-dub heartbeats. The high-pass is lowered to 25 Hz so the low heart thumps are kept."
+}

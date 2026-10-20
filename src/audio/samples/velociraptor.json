@@ -1,0 +1,34 @@
+{
+  "id": "velociraptor",
+  "file": "velociraptor.mp3",
+  "duration": 2.19,
+  "title": "Velociraptor call (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by U.S. Fish and Wildlife Service; The user Felix.Blume https://freesound.org/people/felix.blume/; G. McGrane",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Geese_Honking_(loud).ogg",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (honking geese, screaming dolphins and a hissing turkey vulture, pitched and layered). Sound design from 3 real recordings: \"Geese Honking (loud)\" 1.38–2.62 s, high-passed at 300 Hz, slowed to 0.85× speed (pitched down 15%); \"161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico\" 3.45–4.20 s, high-passed at 800 Hz, slowed to 0.8× speed (pitched down 20%), placed at 0.55 s; \"Turkey Vulture\" 18.45–19.00 s, slowed to 0.9× speed (pitched down 10%), placed at 1.35 s; then mixed to mono, gentle 12 dB/oct high-pass at 150 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Geese Honking (loud)",
+      "author": "U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Geese_Honking_(loud).ogg"
+    },
+    {
+      "title": "161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico",
+      "author": "The user Felix.Blume https://freesound.org/people/felix.blume/",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:161691_felixblume_dolphin-screaming-underwater-in-caribbean-sea-mexico.wav"
+    },
+    {
+      "title": "Turkey Vulture",
+      "author": "G. McGrane",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Turkey_Vulture.ogg"
+    }
+  ]
+}

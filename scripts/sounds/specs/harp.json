@@ -1,0 +1,6 @@
+{
+  "id": "harp",
+  "layers": [{ "file": "File:Gliss.ogg", "start": 0.98, "end": 3.92 }],
+  "species": "C major glissando on a concert harp",
+  "note": "The default 70 Hz high-pass also removes a constant DC offset in the original file."
+}

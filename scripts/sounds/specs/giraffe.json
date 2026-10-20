@@ -1,0 +1,12 @@
+{
+  "id": "giraffe",
+  "layers": [
+    {
+      "file": "File:Giraffe bursts.oga",
+      "start": 0.0,
+      "end": 1.5,
+      "highpass": 80
+    }
+  ],
+  "highpass": 0
+}

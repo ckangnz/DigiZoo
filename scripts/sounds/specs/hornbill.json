@@ -1,0 +1,11 @@
+{
+  "id": "hornbill",
+  "layers": [
+    {
+      "file": "File:Rhinoceros hornbill call.ogg",
+      "start": 0.15,
+      "end": 3.05
+    }
+  ],
+  "highpass": 0
+}

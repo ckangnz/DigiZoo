@@ -1,0 +1,12 @@
+{
+  "id": "zebra",
+  "layers": [
+    {
+      "file": "File:A Zebra at the Oribi Gorge Nature reserve.webm",
+      "start": 3.4,
+      "end": 4.42
+    }
+  ],
+  "highpass": 0,
+  "note": "Audio track of the video."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "giraffe",
+  "file": "giraffe.mp3",
+  "duration": 1.54,
+  "title": "Giraffe bursts",
+  "author": "Anton Baotic, Florian Sicks and Angela S. Stoeger",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Giraffe_bursts.oga",
+  "changes": "Trimmed to 0.00–1.50 s of the original, high-passed at 80 Hz, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

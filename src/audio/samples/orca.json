@@ -1,0 +1,11 @@
+{
+  "id": "orca",
+  "file": "orca.mp3",
+  "duration": 2.3,
+  "title": "Killer whale",
+  "author": "National Park Service",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Killer_whale.ogg",
+  "changes": "Trimmed to 7.50–9.75 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 200 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.2 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 200 Hz because the hydrophone recording has strong rumble below 100 Hz; the call itself is above 500 Hz."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "zebra",
+  "file": "zebra.mp3",
+  "duration": 1.07,
+  "title": "A Zebra at the Oribi Gorge Nature reserve",
+  "author": "Amada44",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:A_Zebra_at_the_Oribi_Gorge_Nature_reserve.webm",
+  "changes": "Trimmed to 3.40–4.42 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video."
+}

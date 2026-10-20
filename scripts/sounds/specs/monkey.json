@@ -1,0 +1,12 @@
+{
+  "id": "monkey",
+  "layers": [
+    {
+      "file": "File:Chlorocebus pygerythrus cloetei, roep, 1 min 5 s, Spitskop, a.mp3",
+      "start": 33.85,
+      "end": 35.8
+    }
+  ],
+  "highpass": 0,
+  "species": "Vervet monkey (Chlorocebus pygerythrus)"
+}

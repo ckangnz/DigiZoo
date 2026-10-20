@@ -182,6 +182,89 @@ export interface BellOptions extends Routing {
   pan?: Contour;
 }
 
+export type Partials = readonly (readonly [ratio: number, amp: number, decay: number])[];
+
+export interface MalletOptions extends Routing {
+  freq: number;
+  dur?: number;
+  gain?: number;
+  partials?: Partials;
+  hit?: number;
+  pan?: Contour;
+}
+
+export interface PadOptions extends Span {
+  freqs: readonly Contour[];
+  wave?: Wave;
+  voices?: number;
+  spread?: number;
+  gain?: number;
+  env?: readonly Point[];
+  attack?: number;
+  release?: number;
+  lowpass?: Contour;
+  shimmer?: Vibrato;
+  vibrato?: Vibrato;
+  pan?: Contour;
+}
+
+export interface SpringOptions extends Span {
+  freq: Contour;
+  rate?: Contour;
+  depth?: number;
+  settle?: number;
+  wave?: Wave;
+  gain?: number;
+  env?: readonly Point[];
+  pan?: Contour;
+}
+
+export interface SquelchOptions extends Routing {
+  freq?: number;
+  dur?: number;
+  gain?: number;
+  q?: number;
+  pan?: Contour;
+}
+
+export interface FlapOptions extends Routing {
+  freq?: number;
+  dur?: number;
+  gain?: number;
+  pan?: Contour;
+}
+
+export interface StompOptions extends Routing {
+  freq?: number;
+  dur?: number;
+  gain?: number;
+  pan?: Contour;
+}
+
+export interface ChoirOptions extends Span {
+  freqs: readonly Contour[];
+  vowel?: VowelPath;
+  gain?: number;
+  env?: readonly Point[];
+  attack?: number;
+  release?: number;
+  vibrato?: Vibrato;
+  shimmer?: Vibrato;
+  shift?: number;
+  width?: number;
+  pan?: Contour;
+}
+
+export interface BrassOptions extends Span {
+  freq: Contour;
+  gain?: number;
+  attack?: number;
+  release?: number;
+  bright?: number;
+  vibrato?: Vibrato;
+  pan?: Contour;
+}
+
 export interface ReverbOptions extends Routing {
   seconds?: number;
   wet?: number;
@@ -226,6 +309,54 @@ export const BELL_PARTIALS: readonly (readonly [number, number, number])[] = [
   [5.4, 0.14, 0.32],
   [8.93, 0.06, 0.2],
 ];
+
+export const MARIMBA_PARTIALS: Partials = [
+  [1, 1, 1],
+  [3.93, 0.16, 0.3],
+  [9.2, 0.04, 0.12],
+];
+
+export const XYLOPHONE_PARTIALS: Partials = [
+  [1, 1, 1],
+  [3, 0.32, 0.4],
+  [6, 0.1, 0.18],
+];
+
+export const WOOD_PARTIALS: Partials = [
+  [1, 1, 1],
+  [2.42, 0.35, 0.35],
+  [4.53, 0.12, 0.18],
+];
+
+export const MUSIC_BOX_PARTIALS: Partials = [
+  [1, 1, 1],
+  [2, 0.14, 0.55],
+  [3.01, 0.07, 0.35],
+  [5.43, 0.05, 0.18],
+];
+
+export const GLASS_PARTIALS: Partials = [
+  [1, 1, 1],
+  [2.32, 0.22, 0.65],
+  [4.25, 0.09, 0.4],
+  [6.63, 0.04, 0.25],
+];
+
+export const HARP_PARTIALS: Partials = [
+  [1, 1, 1],
+  [2, 0.42, 0.7],
+  [3, 0.2, 0.5],
+  [4, 0.1, 0.35],
+  [5, 0.05, 0.25],
+];
+
+export const ORGAN_WAVE: readonly number[] = [1, 0.7, 0.5, 0.5, 0.18, 0.3, 0, 0.28];
+
+const CHOIR_MAKEUP = 2.5;
+
+export function midiHz(note: number): number {
+  return 440 * 2 ** ((note - 69) / 12);
+}
 
 const MIN_LEVEL = 1e-5;
 const FADE_FLOOR = 0.003;
@@ -649,6 +780,12 @@ export class Synth {
     limiter.oversample = '2x';
     limiter.connect(voice.out);
     this.master = this.gain(level / LIMIT_RANGE, { dest: limiter });
+  }
+
+  stereo(): this {
+    this.master.channelCount = 2;
+    this.master.channelCountMode = 'explicit';
+    return this;
   }
 
   vary(spread = 0.05): number {
@@ -1103,5 +1240,219 @@ export class Synth {
       this.osc('sine', freq * ratio, { at, dur: length + SOURCE_PAD, dest: level });
     }
     return at + dur;
+  }
+
+  mallet({
+    at = 0,
+    freq,
+    dur = 0.45,
+    gain = 0.3,
+    partials = MARIMBA_PARTIALS,
+    hit = 0.25,
+    dest,
+    pan,
+  }: MalletOptions): number {
+    const out = this.route(pan, at, dest);
+    this.bell({ at, freq, dur, gain, partials, dest: out });
+    if (hit > 0) {
+      const strike = Math.min(this.ctx.sampleRate * 0.4, freq * 4);
+      this.click({ at, freq: strike, q: 1.4, dur: 0.008, gain: gain * hit, dest: out });
+    }
+    return at + dur;
+  }
+
+  pad(o: PadOptions): number {
+    const at = o.at ?? 0;
+    const sourceDur = o.dur + SOURCE_PAD;
+    const out = this.route(o.pan, at, o.dest);
+    const level = o.shimmer
+      ? this.tremolo({
+          rate: o.shimmer.rate,
+          depth: o.shimmer.depth,
+          at,
+          dur: sourceDur,
+          dest: out,
+        })
+      : out;
+    const voices = Math.max(1, Math.round(o.voices ?? 2));
+    const count = o.freqs.length * voices;
+    const env =
+      o.env ??
+      adsr(o.dur, {
+        attack: o.attack ?? Math.min(0.25, o.dur * 0.3),
+        release: o.release ?? Math.min(0.5, o.dur * 0.5),
+      });
+    const amp = this.envelope(env, (o.gain ?? 0.4) / Math.sqrt(count), { at, dest: level });
+    const target =
+      o.lowpass !== undefined ? this.filter('lowpass', o.lowpass, 0, { at, dest: amp }) : amp;
+    const spread = o.spread ?? 9;
+    const params: AudioParam[] = [];
+    for (const freq of o.freqs) {
+      for (let v = 0; v < voices; v++) {
+        const detune = voices === 1 ? 0 : (v / (voices - 1) - 0.5) * 2 * spread;
+        const node = this.osc(o.wave ?? 'soft', freq, { at, dur: sourceDur, dest: target, detune });
+        params.push(node.detune);
+      }
+    }
+    if (o.vibrato) this.vibrato(params, { ...o.vibrato, at, dur: sourceDur });
+    return at + o.dur;
+  }
+
+  spring(o: SpringOptions): number {
+    const at = o.at ?? 0;
+    const sourceDur = o.dur + SOURCE_PAD;
+    const out = this.route(o.pan, at, o.dest);
+    const amp = this.envelope(o.env ?? pluck(o.dur, 1, 0.004), o.gain ?? 0.3, { at, dest: out });
+    const node = this.osc(o.wave ?? 'triangle', o.freq, { at, dur: sourceDur, dest: amp });
+    const depth = o.depth ?? 380;
+    this.lfo(node.detune, {
+      rate: o.rate ?? [
+        [0, 15],
+        [o.dur, 11],
+      ],
+      depth: [
+        [0, depth],
+        [o.dur, depth * (o.settle ?? 0.08), 'exp'],
+      ],
+      at,
+      dur: sourceDur,
+    });
+    return at + o.dur;
+  }
+
+  squelch({
+    at = 0,
+    freq = 600,
+    dur = 0.12,
+    gain = 0.3,
+    q = 9,
+    dest,
+    pan,
+  }: SquelchOptions): number {
+    return this.burst({
+      at,
+      dur,
+      color: 'pink',
+      type: 'lowpass',
+      freq: [
+        [0, freq * 0.5],
+        [dur * 0.3, freq * 2.2, 'exp'],
+        [dur, freq * 0.6, 'exp'],
+      ],
+      q,
+      env: [
+        [0, 0],
+        [0.006, 1],
+        [dur, 0, 'exp'],
+      ],
+      gain,
+      dest,
+      pan,
+    });
+  }
+
+  stomp({ at = 0, freq = 70, dur = 0.35, gain = 0.5, dest, pan }: StompOptions): number {
+    const out = this.route(pan, at, dest);
+    this.thump({ at, from: freq * 2.2, to: freq * 0.6, dur, gain, thud: 0.7, dest: out });
+    const body = dur * 0.6;
+    this.burst({
+      at,
+      dur: body,
+      color: 'pink',
+      type: 'lowpass',
+      freq: [
+        [0, freq * 9],
+        [body, freq * 3, 'exp'],
+      ],
+      q: 1,
+      env: [
+        [0, 0],
+        [0.005, 1],
+        [body, 0, 'exp'],
+      ],
+      gain: gain * 0.8,
+      dest: out,
+    });
+    return at + dur;
+  }
+
+  flap({ at = 0, freq = 900, dur = 0.16, gain = 0.4, dest, pan }: FlapOptions): number {
+    return this.burst({
+      at,
+      dur,
+      color: 'pink',
+      type: 'lowpass',
+      freq: [
+        [0, freq * 0.4],
+        [dur * 0.35, freq * 1.6, 'exp'],
+        [dur, freq * 0.5, 'exp'],
+      ],
+      q: 1.2,
+      env: [
+        [0, 0],
+        [dur * 0.3, 1],
+        [dur, 0, 'exp'],
+      ],
+      gain,
+      dest,
+      pan,
+    });
+  }
+
+  choir(o: ChoirOptions): number {
+    const at = o.at ?? 0;
+    const out = this.route(o.pan, at, o.dest);
+    const bank = this.formants(o.vowel ?? 'a', {
+      at,
+      shift: o.shift,
+      width: o.width ?? 1.6,
+      dest: out,
+    });
+    this.pad({
+      at,
+      dur: o.dur,
+      freqs: o.freqs,
+      wave: 'sawtooth',
+      voices: 2,
+      spread: 12,
+      env: o.env,
+      attack: o.attack ?? Math.min(0.3, o.dur * 0.3),
+      release: o.release ?? Math.min(0.45, o.dur * 0.5),
+      vibrato: o.vibrato ?? { rate: 5, depth: 14, delay: 0.2 },
+      shimmer: o.shimmer,
+      gain: (o.gain ?? 0.4) * CHOIR_MAKEUP,
+      dest: bank,
+    });
+    return at + o.dur;
+  }
+
+  brass(o: BrassOptions): number {
+    const attack = o.attack ?? 0.05;
+    const release = o.release ?? Math.min(0.15, o.dur * 0.4);
+    const base = contourPeak(o.freq);
+    const bright = o.bright ?? 6;
+    const hold = Math.max(attack, o.dur - release);
+    return this.note({
+      at: o.at,
+      dur: o.dur,
+      freq: o.freq,
+      wave: 'sawtooth',
+      env: [
+        [0, 0],
+        [attack, 1],
+        [hold, 0.8],
+        [o.dur, 0, 'exp'],
+      ],
+      lowpass: [
+        [0, base * 1.2],
+        [attack, base * bright],
+        [hold, base * bright * 0.6],
+        [o.dur, base * 1.2],
+      ],
+      vibrato: o.vibrato,
+      gain: o.gain ?? 0.3,
+      pan: o.pan,
+      dest: o.dest,
+    });
   }
 }

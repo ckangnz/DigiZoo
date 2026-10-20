@@ -1,0 +1,11 @@
+{
+  "id": "rabbit",
+  "file": "rabbit.mp3",
+  "duration": 1.41,
+  "title": "Lautäußerung Kaninchen",
+  "author": "Fiver, der Hellseher",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Laut%C3%A4u%C3%9Ferung_Kaninchen.flac",
+  "changes": "Pet rabbit honking (soft grunts). Trimmed to 2.55–4.05 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

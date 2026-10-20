@@ -1,0 +1,6 @@
+{
+  "id": "sheep",
+  "layers": [{ "file": "File:Sheep bleating.ogg", "start": 5.5, "end": 7.3 }],
+  "highpass": 120,
+  "note": "The high-pass is set to 120 Hz because the original field recording has wind rumble below 70 Hz."
+}

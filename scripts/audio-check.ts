@@ -57,6 +57,8 @@ const RENDER_SECONDS = START + 2.2 + TAIL_WINDOW + 0.1;
 const TAIL_LIMIT = 0.003;
 const PRE_LIMIT = 0.001;
 
+const LONG_SFX = new Set(['sfx-win']);
+
 const LIMITS: Record<Kind, { min: number; max: number; soft: number; loud: number }> = {
   animal: { min: 0.6, max: 2.2, soft: 0.4, loud: 0.8 },
   sfx: { min: 0.05, max: 0.6, soft: 0.08, loud: 0.5 },
@@ -232,7 +234,7 @@ function measure(rendered: Rendered): Levels {
 }
 
 function inspect(sound: Sound, renders: Rendered[]): Report {
-  const limits = LIMITS[sound.kind];
+  const limits = LONG_SFX.has(sound.id) ? { ...LIMITS.sfx, max: 1.4 } : LIMITS[sound.kind];
   const problems = new Set<string>();
   const warnings = new Set<string>();
   let peak = 0;

@@ -1,0 +1,18 @@
+{
+  "id": "trumpet",
+  "layers": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/The_National_Library_of_Israel_-_Shofar_Prayer%2C_Ashkenazi_version_-_1785188_SHOFAR78.ogg",
+      "credit": {
+        "title": "The National Library of Israel - Shofar Prayer, Ashkenazi version - 1785188 SHOFAR78",
+        "author": "The National Library of Israel (Music Collection and Sound Archive)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:The_National_Library_of_Israel_-_Shofar_Prayer,_Ashkenazi_version_-_1785188_SHOFAR78.ogg"
+      },
+      "start": 54.75,
+      "end": 56.25
+    }
+  ],
+  "species": "One tekiah blast on a shofar (ram's horn)"
+}

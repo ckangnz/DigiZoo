@@ -1,0 +1,11 @@
+{
+  "id": "cheetah",
+  "file": "cheetah.mp3",
+  "duration": 1.67,
+  "title": "Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-(Acinonyx-pone.0158546.s001",
+  "author": "Smirnova D, Volodin I, Demina T, Volodina E",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-(Acinonyx-pone.0158546.s001.oga",
+  "changes": "Trimmed to 16.02–17.66 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. A meow followed by two chirps."
+}

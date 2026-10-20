@@ -1,0 +1,11 @@
+{
+  "id": "toucan",
+  "layers": [
+    {
+      "file": "File:Keel-billed toucan.ogg",
+      "start": 0.3,
+      "end": 1.95
+    }
+  ],
+  "highpass": 0
+}

@@ -1,0 +1,11 @@
+{
+  "id": "hippo",
+  "file": "hippo.mp3",
+  "duration": 2.8,
+  "title": "Hippopotamuses vocalising in South Africa",
+  "author": "Kent Wang",
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Hippopotamuses_vocalising_in_South_Africa.webm",
+  "changes": "Trimmed to 1.55–4.30 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video."
+}

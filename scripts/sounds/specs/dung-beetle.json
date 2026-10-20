@@ -1,0 +1,12 @@
+{
+  "id": "dung-beetle",
+  "layers": [
+    {
+      "file": "File:Polyphylla fullo stridulation.ogg",
+      "start": 0.45,
+      "end": 2.0
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of a pine chafer (Polyphylla fullo), a scarab beetle related to dung beetles, squeaking (stridulating)"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "donkey",
+  "file": "donkey.mp3",
+  "duration": 2.95,
+  "title": "157763 felix-blume a-donkey-is-braying-in-his-enclosure-in-south-of-france",
+  "author": "felix-blume",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:157763_felix-blume_a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav",
+  "changes": "Trimmed to 5.62–8.58 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

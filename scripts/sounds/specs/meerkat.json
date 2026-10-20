@@ -1,0 +1,11 @@
+{
+  "id": "meerkat",
+  "layers": [
+    {
+      "file": "File:Erdmaennchen.ogg",
+      "start": 5.7,
+      "end": 8.5
+    }
+  ],
+  "highpass": 0
+}

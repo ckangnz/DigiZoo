@@ -1,0 +1,12 @@
+{
+  "id": "frog",
+  "layers": [
+    {
+      "file": "File:Hyla cinerea call audio.ogg",
+      "start": 9.38,
+      "end": 11.95
+    }
+  ],
+  "highpass": 0,
+  "species": "American green tree frog (Hyla cinerea)"
+}

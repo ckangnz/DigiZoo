@@ -1,0 +1,11 @@
+{
+  "id": "sheep",
+  "file": "sheep.mp3",
+  "duration": 1.83,
+  "title": "Sheep bleating",
+  "author": "earthcalling",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Sheep_bleating.ogg",
+  "changes": "Trimmed to 5.50–7.30 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 120 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 120 Hz because the original field recording has wind rumble below 70 Hz."
+}

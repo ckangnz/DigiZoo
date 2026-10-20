@@ -11,3 +11,4 @@ playwright-report
 .claude/settings.local.json
 .art-preview
 .audio-preview
+.sound-cache

@@ -1,0 +1,11 @@
+{
+  "id": "sea-otter",
+  "file": "sea-otter.mp3",
+  "duration": 1.88,
+  "title": "Cri loutre d'Asie au zoo de La Bourbansais",
+  "author": "Abujoy",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cri_loutre_d%27Asie_au_zoo_de_La_Bourbansais.webm",
+  "changes": "Smooth-coated otter (Lutrogale perspicillata) calls, a close relative standing in for the sea otter (no free sea otter call recording was found). Trimmed to 2.30–4.15 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 300 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 300 Hz because the zoo recording has low rumble; the otter calls are above 2 kHz."
+}

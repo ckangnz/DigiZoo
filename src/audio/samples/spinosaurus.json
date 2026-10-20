@@ -1,0 +1,34 @@
+{
+  "id": "spinosaurus",
+  "file": "spinosaurus.mp3",
+  "duration": 2.95,
+  "title": "Spinosaurus roar (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by U.S. Fish and Wildlife Service; schots; National Park Service",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Alligatorbellow1.ogg",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (American alligator bellows and a tiger snarl, pitched down and layered). Sound design from 3 real recordings: \"Alligatorbellow1\" 8.00–10.40 s, slowed to 0.85× speed (pitched down 15%); \"439280 schots angry-tiger\" 26.05–28.20 s, slowed to 0.75× speed (pitched down 25%), placed at 0.10 s; \"Alligator (NPS Sound Gallery)\" 3.60–5.00 s, slowed to 0.8× speed (pitched down 20%), placed at 0.60 s; then mixed to mono, gentle 12 dB/oct high-pass at 28 Hz, low-passed at 9000 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Alligatorbellow1",
+      "author": "U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Alligatorbellow1.ogg"
+    },
+    {
+      "title": "439280 schots angry-tiger",
+      "author": "schots",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:439280_schots_angry-tiger.wav"
+    },
+    {
+      "title": "Alligator (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+    }
+  ]
+}

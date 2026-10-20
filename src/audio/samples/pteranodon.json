@@ -1,0 +1,27 @@
+{
+  "id": "pteranodon",
+  "file": "pteranodon.mp3",
+  "duration": 2.74,
+  "title": "Pteranodon screech (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by National Park Service",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-bald-eagle.htm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (bald eagle and common raven calls, pitched down and layered). Sound design from 2 real recordings: \"Bald Eagle (NPS Sound Gallery)\" 0.18–1.20 s, high-passed at 500 Hz, slowed to 0.8× speed (pitched down 20%); \"Common Raven (NPS Sound Gallery)\" 3.38–3.80 s, high-passed at 400 Hz, slowed to 0.75× speed (pitched down 25%), placed at 1.20 s; \"Common Raven (NPS Sound Gallery)\" 4.48–4.85 s, high-passed at 400 Hz, slowed to 0.75× speed (pitched down 25%), placed at 1.75 s; then mixed to mono, gentle 12 dB/oct high-pass at 120 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Bald Eagle (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-bald-eagle.htm"
+    },
+    {
+      "title": "Common Raven (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-common-raven.htm"
+    }
+  ]
+}

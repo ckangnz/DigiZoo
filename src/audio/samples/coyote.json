@@ -1,0 +1,11 @@
+{
+  "id": "coyote",
+  "file": "coyote.mp3",
+  "duration": 2.95,
+  "title": "Coyotes Howling (Yellowstone Sound Library)",
+  "author": "NPS & MSU Acoustic Atlas / Jennifer Jerrett",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.nps.gov/yell/learn/photosmultimedia/sounds-coyote.htm",
+  "changes": "Trimmed to 21.60–24.55 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

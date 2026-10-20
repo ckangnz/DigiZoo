@@ -1,0 +1,43 @@
+{
+  "id": "ankylosaurus",
+  "title": "Ankylosaurus growl (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (American alligator groan, grizzly bear roar and a hippopotamus snort, pitched down and layered)",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-AlligatorEVER1.mp3",
+      "credit": {
+        "title": "Alligator (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+      },
+      "start": 3.62,
+      "end": 5.5,
+      "rate": 0.7,
+      "level": -20
+    },
+    {
+      "file": "File:Yellowstone sound library - Grizzly Bears Roar - 001.mp3",
+      "start": 1.0,
+      "end": 3.4,
+      "rate": 0.85,
+      "level": -25
+    },
+    {
+      "file": "File:Hippopotamuses vocalising in South Africa.webm",
+      "start": 0.05,
+      "end": 0.27,
+      "rate": 0.65,
+      "at": 0.1,
+      "level": -22
+    }
+  ],
+  "highpass": 28,
+  "reverb": {
+    "room": 0.6,
+    "damp": 0.6,
+    "wet": 0.08,
+    "tail": 0.3
+  }
+}

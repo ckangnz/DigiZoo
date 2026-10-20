@@ -1,0 +1,11 @@
+{
+  "id": "dolphin",
+  "file": "dolphin.mp3",
+  "duration": 1.2,
+  "title": "Dolfinarium, kreten van dolfijnen - SoundCloud - Beeld en Geluid",
+  "author": "Beeld en Geluid",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Dolfinarium,_kreten_van_dolfijnen_-_SoundCloud_-_Beeld_en_Geluid.ogg",
+  "changes": "Bottlenose dolphin calls recorded in air at a Dutch dolphinarium. Trimmed to 1.35–2.50 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "red-panda",
+  "layers": [
+    {
+      "file": "File:Red panda twittering.ogg",
+      "start": 0.2,
+      "end": 2.2
+    }
+  ],
+  "highpass": 0
+}

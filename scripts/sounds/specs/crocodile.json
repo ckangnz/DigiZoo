@@ -1,0 +1,12 @@
+{
+  "id": "crocodile",
+  "layers": [
+    {
+      "file": "File:Alligatorbellow1.ogg",
+      "start": 1.55,
+      "end": 4.15
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of an American alligator (Alligator mississippiensis), a crocodilian cousin of the crocodile"
+}

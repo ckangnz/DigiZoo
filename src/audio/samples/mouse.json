@@ -1,0 +1,11 @@
+{
+  "id": "mouse",
+  "file": "mouse.mp3",
+  "duration": 0.89,
+  "title": "Mouse voice",
+  "author": "Yosef Ben Melamed",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Mouse_voice.flac",
+  "changes": "Trimmed to 3.25–4.10 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 400 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 400 Hz because the original has strong room rumble below the squeak; the natural room tone after the squeak is kept."
+}

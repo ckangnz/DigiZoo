@@ -1,0 +1,11 @@
+{
+  "id": "lungs",
+  "file": "lungs.mp3",
+  "duration": 2.95,
+  "title": "Ujjayi",
+  "author": "Lcporschen",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Ujjayi.ogg",
+  "changes": "Trimmed to 1.94–4.90 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The end of one slow breath in, the natural pause, then the start of the breath out; gentle 0.3 s / 0.4 s fades because a full slow breath cycle is longer than 3 s."
+}

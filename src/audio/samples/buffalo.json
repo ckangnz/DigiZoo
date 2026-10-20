@@ -1,0 +1,11 @@
+{
+  "id": "buffalo",
+  "file": "buffalo.mp3",
+  "duration": 2.04,
+  "title": "Bison (NPS Sound Gallery)",
+  "author": "National Park Service",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-bison.htm",
+  "changes": "Recording of an American bison (Bison bison), commonly called a buffalo, standing in for the African buffalo. Trimmed to 0.30–2.40 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

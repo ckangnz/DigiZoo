@@ -1,0 +1,7 @@
+{
+  "id": "mouse",
+  "layers": [{ "file": "File:Mouse voice.flac", "start": 3.25, "end": 4.1 }],
+  "highpass": 400,
+  "trimDb": 70,
+  "note": "The high-pass is set to 400 Hz because the original has strong room rumble below the squeak; the natural room tone after the squeak is kept."
+}

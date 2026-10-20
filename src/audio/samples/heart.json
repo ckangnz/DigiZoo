@@ -1,0 +1,11 @@
+{
+  "id": "heart",
+  "file": "heart.mp3",
+  "duration": 2.72,
+  "title": "Human heart beating at 61 bpm (Cc-by-3.0)",
+  "author": "\"Benboncan\" at Freesound.org http://www.freesound.org/people/Benboncan/",
+  "license": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Human_heart_beating_at_61_bpm_(Cc-by-3.0).ogg",
+  "changes": "Trimmed to 1.95–4.62 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 25 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Three lub-dub heartbeats. The high-pass is lowered to 25 Hz so the low heart thumps are kept."
+}

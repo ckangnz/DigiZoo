@@ -1,0 +1,11 @@
+{
+  "id": "tiger",
+  "file": "tiger.mp3",
+  "duration": 1.7,
+  "title": "439280 schots angry-tiger",
+  "author": "schots",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:439280_schots_angry-tiger.wav",
+  "changes": "Trimmed to 23.10–24.75 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

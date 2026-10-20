@@ -1,0 +1,12 @@
+{
+  "id": "ostrich",
+  "layers": [
+    {
+      "file": "File:Dromaius novaehollandiae Lue0043 03.wav",
+      "start": 15.5,
+      "end": 17.95
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of an emu (Dromaius novaehollandiae), a fellow flightless ratite, standing in for the ostrich's deep booming call"
+}

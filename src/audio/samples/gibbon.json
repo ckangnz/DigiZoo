@@ -1,0 +1,11 @@
+{
+  "id": "gibbon",
+  "file": "gibbon.mp3",
+  "duration": 2.95,
+  "title": "Gibbon Rehabilitation Project - Phuket - 20131029 - Cris de singes 1",
+  "author": "Clément Bucco-Lechat",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Gibbon_Rehabilitation_Project_-_Phuket_-_20131029_-_Cris_de_singes_1.ogg",
+  "changes": "Trimmed to 7.70–10.66 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "gorilla",
+  "file": "gorilla.mp3",
+  "duration": 2.66,
+  "title": "Pant-hoot call made by a male chimpanzee",
+  "author": "Pawel Fedurek et al.",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Pant-hoot_call_made_by_a_male_chimpanzee.ogg",
+  "changes": "Recording of a chimpanzee (Pan troglodytes) pant-hoot, a fellow great ape, standing in for the gorilla (no free gorilla vocal recording was found). Trimmed to 3.90–6.52 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "lamb",
+  "file": "lamb.mp3",
+  "duration": 1.28,
+  "title": "Lamb bleating and its mother's response",
+  "author": "Yosef Ben Melamed",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Lamb_bleating_and_its_mother%27s_response.flac",
+  "changes": "Trimmed to 1.10–2.35 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

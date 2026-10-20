@@ -1,0 +1,11 @@
+{
+  "id": "elephant",
+  "layers": [
+    {
+      "file": "File:Elephant voice - trumpeting.ogg",
+      "start": 0.05,
+      "end": 1.42
+    }
+  ],
+  "highpass": 50
+}

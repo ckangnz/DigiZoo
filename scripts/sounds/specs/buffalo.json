@@ -1,0 +1,19 @@
+{
+  "id": "buffalo",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-BisonYELL.mp3",
+      "credit": {
+        "title": "Bison (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-bison.htm"
+      },
+      "start": 0.3,
+      "end": 2.4
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of an American bison (Bison bison), commonly called a buffalo, standing in for the African buffalo"
+}

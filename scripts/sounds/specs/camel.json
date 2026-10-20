@@ -1,0 +1,12 @@
+{
+  "id": "camel",
+  "layers": [
+    {
+      "file": "File:Cri du chameau.wav",
+      "start": 0.05,
+      "end": 2.45
+    }
+  ],
+  "highpass": 0,
+  "species": "Bactrian camel"
+}

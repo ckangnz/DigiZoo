@@ -1,0 +1,34 @@
+{
+  "id": "ankylosaurus",
+  "file": "ankylosaurus.mp3",
+  "duration": 2.95,
+  "title": "Ankylosaurus growl (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by National Park Service; NPS & MSU Acoustic Atlas / Jennifer Jerrett; Kent Wang",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (American alligator groan, grizzly bear roar and a hippopotamus snort, pitched down and layered). Sound design from 3 real recordings: \"Alligator (NPS Sound Gallery)\" 3.62–5.50 s, slowed to 0.7× speed (pitched down 30%); \"Yellowstone sound library - Grizzly Bears Roar - 001\" 1.00–3.40 s, slowed to 0.85× speed (pitched down 15%); \"Hippopotamuses vocalising in South Africa\" 0.05–0.27 s, slowed to 0.65× speed (pitched down 35%), placed at 0.10 s; then mixed to mono, gentle 12 dB/oct high-pass at 28 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Alligator (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+    },
+    {
+      "title": "Yellowstone sound library - Grizzly Bears Roar - 001",
+      "author": "NPS & MSU Acoustic Atlas / Jennifer Jerrett",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Yellowstone_sound_library_-_Grizzly_Bears_Roar_-_001.mp3"
+    },
+    {
+      "title": "Hippopotamuses vocalising in South Africa",
+      "author": "Kent Wang",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Hippopotamuses_vocalising_in_South_Africa.webm"
+    }
+  ]
+}

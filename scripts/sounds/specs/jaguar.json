@@ -1,0 +1,11 @@
+{
+  "id": "jaguar",
+  "layers": [
+    {
+      "file": "File:Jaguar saw.flac",
+      "start": 0.0,
+      "end": 1.39
+    }
+  ],
+  "highpass": 0
+}

@@ -1,0 +1,19 @@
+{
+  "id": "bat",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-SpottedBatYOSE.mp3",
+      "credit": {
+        "title": "Spotted Bat (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-spotted-bat.htm"
+      },
+      "start": 2.15,
+      "end": 5.1
+    }
+  ],
+  "highpass": 0,
+  "species": "Spotted bat (Euderma maculatum), whose calls are audible to humans"
+}

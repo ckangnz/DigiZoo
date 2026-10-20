@@ -1,0 +1,61 @@
+{
+  "id": "pteranodon",
+  "title": "Pteranodon screech (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (bald eagle and common raven calls, pitched down and layered)",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-BaldEagleYELL.mp3",
+      "credit": {
+        "title": "Bald Eagle (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-bald-eagle.htm"
+      },
+      "start": 0.18,
+      "end": 1.2,
+      "rate": 0.8,
+      "highpass": 500,
+      "level": -20
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-CommonRavenGRTE.mp3",
+      "credit": {
+        "title": "Common Raven (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-common-raven.htm"
+      },
+      "start": 3.38,
+      "end": 3.8,
+      "rate": 0.75,
+      "at": 1.2,
+      "highpass": 400,
+      "level": -21
+    },
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-CommonRavenGRTE.mp3",
+      "credit": {
+        "title": "Common Raven (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-common-raven.htm"
+      },
+      "start": 4.48,
+      "end": 4.85,
+      "rate": 0.75,
+      "at": 1.75,
+      "highpass": 400,
+      "level": -22
+    }
+  ],
+  "highpass": 120,
+  "reverb": {
+    "room": 0.7,
+    "damp": 0.5,
+    "wet": 0.15,
+    "tail": 0.45
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "horse",
+  "file": "horse.mp3",
+  "duration": 2.43,
+  "title": "Het hinniken van een paard - SoundCloud - Beeld en Geluid",
+  "author": "Beeld en Geluid",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Het_hinniken_van_een_paard_-_SoundCloud_-_Beeld_en_Geluid.ogg",
+  "changes": "Trimmed to 20.85–23.25 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 120 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The high-pass is set to 120 Hz because the original carries 50 Hz mains hum."
+}

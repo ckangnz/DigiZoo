@@ -1,0 +1,11 @@
+{
+  "id": "peacock",
+  "file": "peacock.mp3",
+  "duration": 2.3,
+  "title": "Pavo cristatus (call)",
+  "author": "Ke4roh",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Pavo_cristatus_(call).ogg",
+  "changes": "Trimmed to 1.05–3.40 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

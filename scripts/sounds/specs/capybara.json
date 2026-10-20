@@ -1,0 +1,12 @@
+{
+  "id": "capybara",
+  "layers": [
+    {
+      "file": "File:Capivara nadando e vocalizando.ogv",
+      "start": 1.95,
+      "end": 2.95
+    }
+  ],
+  "highpass": 70,
+  "note": "Audio track of the video."
+}

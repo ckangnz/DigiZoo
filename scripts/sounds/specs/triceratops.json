@@ -1,0 +1,34 @@
+{
+  "id": "triceratops",
+  "title": "Triceratops bellow (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (American bison bellow and African elephant rumble, pitched down and layered)",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-BisonYELL.mp3",
+      "credit": {
+        "title": "Bison (NPS Sound Gallery)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-bison.htm"
+      },
+      "start": 2.64,
+      "end": 4.2,
+      "rate": 0.7,
+      "level": -20
+    },
+    {
+      "file": "File:Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003.ogg",
+      "start": 1.2,
+      "end": 3.4,
+      "level": -24
+    }
+  ],
+  "highpass": 28,
+  "reverb": {
+    "room": 0.6,
+    "damp": 0.6,
+    "wet": 0.08,
+    "tail": 0.3
+  }
+}

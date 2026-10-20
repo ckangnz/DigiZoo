@@ -1,0 +1,38 @@
+{
+  "id": "t-rex",
+  "title": "T. rex roar (sound design from real animal recordings)",
+  "species": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (Asian elephant trumpet, lion roar and American alligator bellow, pitched down and layered)",
+  "layers": [
+    {
+      "file": "File:Elephant voice - trumpeting.ogg",
+      "start": 0.05,
+      "end": 1.42,
+      "rate": 0.55,
+      "level": -20
+    },
+    {
+      "file": "File:Lion raring-sound1TamilNadu178.ogg",
+      "start": 0.38,
+      "end": 2.4,
+      "rate": 0.72,
+      "at": 0.05,
+      "level": -21
+    },
+    {
+      "file": "File:27alligator2bellow.ogg",
+      "start": 0.85,
+      "end": 2.45,
+      "rate": 0.8,
+      "at": 0.35,
+      "level": -25
+    }
+  ],
+  "highpass": 28,
+  "lowpass": 9000,
+  "reverb": {
+    "room": 0.8,
+    "damp": 0.5,
+    "wet": 0.12,
+    "tail": 0.4
+  }
+}

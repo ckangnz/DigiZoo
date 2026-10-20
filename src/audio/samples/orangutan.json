@@ -1,0 +1,11 @@
+{
+  "id": "orangutan",
+  "file": "orangutan.mp3",
+  "duration": 2.19,
+  "title": "Speech-Like-Rhythm-in-a-Voiced-and-Voiceless-Orangutan-Call-pone.0116136.s002",
+  "author": "Lameira A, Hardus M, Bartlett A, Shumaker R, Wich S, Menken S",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Speech-Like-Rhythm-in-a-Voiced-and-Voiceless-Orangutan-Call-pone.0116136.s002.ogv",
+  "changes": "Trimmed to 1.45–3.60 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.9 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video; orangutan kiss-squeak calls."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "elephant",
+  "file": "elephant.mp3",
+  "duration": 1.33,
+  "title": "Elephant voice - trumpeting",
+  "author": "தகவலுழவன்",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg",
+  "changes": "Trimmed to 0.05–1.42 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 50 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

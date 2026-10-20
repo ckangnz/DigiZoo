@@ -1,0 +1,11 @@
+{
+  "id": "trumpet",
+  "file": "trumpet.mp3",
+  "duration": 1.52,
+  "title": "The National Library of Israel - Shofar Prayer, Ashkenazi version - 1785188 SHOFAR78",
+  "author": "The National Library of Israel (Music Collection and Sound Archive)",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:The_National_Library_of_Israel_-_Shofar_Prayer,_Ashkenazi_version_-_1785188_SHOFAR78.ogg",
+  "changes": "One tekiah blast on a shofar (ram's horn). Trimmed to 54.75–56.25 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "parrot",
+  "layers": [
+    {
+      "file": "File:Scarlet macaw 01.wav",
+      "start": 10.85,
+      "end": 13.3
+    }
+  ],
+  "highpass": 0
+}

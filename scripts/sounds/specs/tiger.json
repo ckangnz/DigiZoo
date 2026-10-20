@@ -1,0 +1,11 @@
+{
+  "id": "tiger",
+  "layers": [
+    {
+      "file": "File:439280 schots angry-tiger.wav",
+      "start": 23.1,
+      "end": 24.75
+    }
+  ],
+  "highpass": 0
+}

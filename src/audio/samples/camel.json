@@ -1,0 +1,11 @@
+{
+  "id": "camel",
+  "file": "camel.mp3",
+  "duration": 2.43,
+  "title": "Cri du chameau",
+  "author": "J.P Longre. S. Mercier. M.Harry. P. Louisons. C. Ferry. G. Muys. K. Lens. B. Picard. V. Sandrilli. H. Van Hoeven. L. Rodriguez. B. Couderc",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cri_du_chameau.wav",
+  "changes": "Bactrian camel. Trimmed to 0.05–2.45 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

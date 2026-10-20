@@ -1,0 +1,12 @@
+{
+  "id": "river-dolphin",
+  "layers": [
+    {
+      "file": "File:161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
+      "start": 7.65,
+      "end": 10.2
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of wild dolphins calling underwater in the Caribbean, close relatives of the Amazon river dolphin"
+}

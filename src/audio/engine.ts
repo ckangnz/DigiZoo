@@ -17,6 +17,50 @@ const sfxModules = import.meta.glob<Partial<Record<SfxName, Recipe>>>('./sfx.ts'
 });
 const SFX: Partial<Record<SfxName, Recipe>> = Object.values(sfxModules)[0] ?? {};
 
+export interface SampleCredit {
+  id: string;
+  file: string;
+  duration: number;
+  title: string;
+  author: string;
+  license: string;
+  licenseUrl?: string;
+  source: string;
+  changes?: string;
+  sources?: {
+    title: string;
+    author: string;
+    license: string;
+    licenseUrl?: string;
+    source: string;
+  }[];
+}
+
+const idOf = (file: string) => file.replace(/^.*\//, '').replace(/\.[a-z0-9]+$/, '');
+
+const sampleUrlModules = import.meta.glob<string>('./samples/*.mp3', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const SAMPLE_URLS = new Map(Object.entries(sampleUrlModules).map(([f, url]) => [idOf(f), url]));
+
+const creditModules = import.meta.glob<SampleCredit>('./samples/*.json', {
+  eager: true,
+  import: 'default',
+});
+const CREDITS = new Map(Object.entries(creditModules).map(([f, c]) => [idOf(f), c]));
+
+export function soundCredits(): SampleCredit[] {
+  return [...CREDITS.values()]
+    .filter((c) => SAMPLE_URLS.has(c.id))
+    .sort((a, b) => a.id.localeCompare(b.id));
+}
+
+export function hasSample(id: string): boolean {
+  return SAMPLE_URLS.has(id);
+}
+
 const fallback: Recipe = ({ ctx, out, t0, rand }) => {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -37,7 +81,12 @@ const fallback: Recipe = ({ ctx, out, t0, rand }) => {
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
 let bus: DynamicsCompressorNode | null = null;
-let current: { gain: GainNode; timer: ReturnType<typeof setTimeout> } | null = null;
+let current: {
+  gain: GainNode;
+  timer: ReturnType<typeof setTimeout>;
+  source?: AudioBufferSourceNode;
+} | null = null;
+const buffers = new Map<string, Promise<AudioBuffer>>();
 let muted = false;
 let speechUnlocked = false;
 let speakTimer: ReturnType<typeof setTimeout> | undefined;
@@ -61,6 +110,10 @@ function ensure(): AudioContext | null {
     master = ctx.createGain();
     master.gain.value = muted ? 0 : MASTER_LEVEL;
     bus.connect(master).connect(ctx.destination);
+    const created = ctx;
+    setTimeout(() => {
+      for (const id of wanted) void loadBuffer(created, id)?.catch(() => undefined);
+    }, 50);
     const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
     if (session) {
       try {
@@ -99,10 +152,29 @@ export function hasRecipe(id: string): boolean {
   return RECIPES.has(id);
 }
 
-export function playAnimal(id: string): number {
-  const c = ensure();
-  if (!c) return 0;
-  stopAnimal();
+function loadBuffer(c: BaseAudioContext, id: string): Promise<AudioBuffer> | null {
+  const url = SAMPLE_URLS.get(id);
+  if (!url) return null;
+  let pending = buffers.get(id);
+  if (!pending) {
+    pending = fetch(url)
+      .then((r) => r.arrayBuffer())
+      .then((data) => c.decodeAudioData(data));
+    pending.catch(() => buffers.delete(id));
+    buffers.set(id, pending);
+  }
+  return pending;
+}
+
+let wanted: string[] = [];
+
+export function preloadSounds(ids: string[]): void {
+  wanted = ids;
+  if (!ctx) return;
+  for (const id of ids) void loadBuffer(ctx, id)?.catch(() => undefined);
+}
+
+function playRecipe(c: AudioContext, id: string): number {
   const { voice, gain } = createVoice(c, 1);
   let duration = 0.8;
   try {
@@ -121,16 +193,62 @@ export function playAnimal(id: string): number {
   return duration;
 }
 
+export function playAnimal(id: string): number {
+  const c = ensure();
+  if (!c) return 0;
+  stopAnimal();
+  const pending = loadBuffer(c, id);
+  if (!pending) return playRecipe(c, id);
+  const duration = CREDITS.get(id)?.duration ?? 1.6;
+  const gain = c.createGain();
+  gain.gain.value = 1;
+  gain.connect(master!);
+  const timer = setTimeout(
+    () => {
+      gain.disconnect();
+      if (current?.gain === gain) current = null;
+    },
+    (duration + 1.2) * 1000,
+  );
+  const voice: NonNullable<typeof current> = { gain, timer };
+  current = voice;
+  pending
+    .then((buffer) => {
+      if (current !== voice) return;
+      const source = c.createBufferSource();
+      source.buffer = buffer;
+      source.connect(gain);
+      source.start();
+      voice.source = source;
+    })
+    .catch(() => {
+      if (current === voice) {
+        current = null;
+        clearTimeout(timer);
+        gain.disconnect();
+        playRecipe(c, id);
+      }
+    });
+  return duration;
+}
+
 export function stopAnimal(): void {
   if (!current || !ctx) return;
-  const { gain, timer } = current;
+  const { gain, timer, source } = current;
   current = null;
   clearTimeout(timer);
   const t = ctx.currentTime;
   gain.gain.cancelScheduledValues(t);
   gain.gain.setValueAtTime(gain.gain.value, t);
   gain.gain.linearRampToValueAtTime(0, t + 0.08);
-  setTimeout(() => gain.disconnect(), 160);
+  setTimeout(() => {
+    try {
+      source?.stop();
+    } catch {
+      gain.disconnect();
+    }
+    gain.disconnect();
+  }, 160);
 }
 
 export function playSfx(name: SfxName): void {
@@ -163,23 +281,34 @@ const PREFERRED_VOICES = [
   'Karen',
   'Moira',
   'Tessa',
-  'Google US English',
-  'Google UK English Female',
-  'Microsoft Aria',
-  'Microsoft Jenny',
+  'Yuna',
+  'Kyoko',
+  'Tingting',
+  'Google',
+  'Microsoft',
 ];
 
-function pickVoice(): SpeechSynthesisVoice | undefined {
-  const voices = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith('en'));
-  for (const name of PREFERRED_VOICES) {
-    const v = voices.find((x) => x.name.includes(name));
-    if (v) return v;
+function pickVoice(lang: string): SpeechSynthesisVoice | undefined {
+  const all = speechSynthesis.getVoices();
+  const base = lang.toLowerCase().split('-')[0];
+  const exact = all.filter((v) => v.lang.toLowerCase().replace('_', '-') === lang.toLowerCase());
+  const sameBase = all.filter((v) => v.lang.toLowerCase().startsWith(base));
+  for (const pool of [exact, sameBase]) {
+    for (const name of PREFERRED_VOICES) {
+      const v = pool.find((x) => x.name.includes(name));
+      if (v) return v;
+    }
+    const local = pool.find((v) => v.localService) ?? pool[0];
+    if (local) return local;
   }
-  return voices.find((v) => v.localService) ?? voices[0];
+  return undefined;
 }
 
-export function speak(text: string, delayMs = 0): void {
-  if (muted || typeof speechSynthesis === 'undefined') return;
+export function speak(text: string, delayMs = 0, lang = 'en-US', onEnd?: () => void): void {
+  if (muted || typeof speechSynthesis === 'undefined') {
+    onEnd?.();
+    return;
+  }
   clearTimeout(speakTimer);
   speakTimer = setTimeout(() => {
     try {
@@ -187,12 +316,16 @@ export function speak(text: string, delayMs = 0): void {
       const u = new SpeechSynthesisUtterance(text);
       u.rate = 0.92;
       u.pitch = 1.15;
-      const voice = pickVoice();
+      const voice = pickVoice(lang);
       if (voice) u.voice = voice;
-      u.lang = voice?.lang ?? 'en-US';
+      u.lang = voice?.lang ?? lang;
+      if (onEnd) {
+        u.onend = onEnd;
+        u.onerror = onEnd;
+      }
       speechSynthesis.speak(u);
     } catch {
-      return;
+      onEnd?.();
     }
   }, delayMs);
 }

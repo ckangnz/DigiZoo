@@ -1,0 +1,11 @@
+{
+  "id": "lion",
+  "file": "lion.mp3",
+  "duration": 2.06,
+  "title": "Lion raring-sound1TamilNadu178",
+  "author": "த*உழவன்",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Lion_raring-sound1TamilNadu178.ogg",
+  "changes": "Trimmed to 0.38–2.40 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "lion",
+  "layers": [
+    {
+      "file": "File:Lion raring-sound1TamilNadu178.ogg",
+      "start": 0.38,
+      "end": 2.4
+    }
+  ],
+  "highpass": 0
+}

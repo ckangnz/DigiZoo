@@ -1,0 +1,11 @@
+{
+  "id": "goose",
+  "file": "goose.mp3",
+  "duration": 2.12,
+  "title": "Artis, knobbelganzen - SoundCloud - Beeld en Geluid",
+  "author": "Beeld en Geluid",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Artis,_knobbelganzen_-_SoundCloud_-_Beeld_en_Geluid.ogg",
+  "changes": "Domestic swan goose (Chinese goose) recorded at Artis zoo, Amsterdam. Trimmed to 50.45–52.60 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

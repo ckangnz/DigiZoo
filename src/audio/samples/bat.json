@@ -1,0 +1,11 @@
+{
+  "id": "bat",
+  "file": "bat.mp3",
+  "duration": 2.95,
+  "title": "Spotted Bat (NPS Sound Gallery)",
+  "author": "National Park Service",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-spotted-bat.htm",
+  "changes": "Spotted bat (Euderma maculatum), whose calls are audible to humans. Trimmed to 2.15–5.10 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "snake",
+  "file": "snake.mp3",
+  "duration": 2.64,
+  "title": "Rattlesnake",
+  "author": "U.S. Fish and Wildlife Service",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Rattlesnake.ogg",
+  "changes": "Rattlesnake rattle. Trimmed to 0.40–3.00 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "penguin",
+  "file": "penguin.mp3",
+  "duration": 2.59,
+  "title": "Het krijsen en klapperen van een kolonie pinguïns - SoundCloud - Beeld en Geluid",
+  "author": "Beeld en Geluid",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Het_krijsen_en_klapperen_van_een_kolonie_pingu%C3%AFns_-_SoundCloud_-_Beeld_en_Geluid.ogg",
+  "changes": "Trimmed to 1.00–3.55 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "hummingbird",
+  "layers": [
+    {
+      "file": "File:Calliope Hummingbird Grand Teton National Park.ogg",
+      "start": 0.05,
+      "end": 2.75
+    }
+  ],
+  "highpass": 0
+}

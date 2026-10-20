@@ -15,7 +15,8 @@
     "format:check": "prettier --check .",
     "art:preview": "node --import tsx scripts/preview-art.ts",
     "icons": "node --import tsx scripts/generate-icons.ts",
-    "audio:check": "node --import tsx scripts/audio-check.ts"
+    "audio:check": "node --import tsx scripts/audio-check.ts",
+    "credits": "node --import tsx scripts/credits.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -23,6 +24,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@breezystack/lamejs": "^1.2.7",
     "@playwright/test": "^1.64.1",
     "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^22.0.0",

@@ -1,0 +1,27 @@
+{
+  "id": "plesiosaurus",
+  "file": "plesiosaurus.mp3",
+  "duration": 2.95,
+  "title": "Plesiosaurus call (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by National Park Service; King L, Soltis J, Douglas-Hamilton I, Savage A, Vollrath F",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (humpback whale calls pitched down over an African elephant rumble, layered). Sound design from 2 real recordings: \"Humpback Whale (NPS Sound Gallery)\" 0.25–0.55 s, slowed to 0.6× speed (pitched down 40%); \"Humpback Whale (NPS Sound Gallery)\" 2.62–3.12 s, slowed to 0.6× speed (pitched down 40%), placed at 0.55 s; \"Humpback Whale (NPS Sound Gallery)\" 3.95–4.27 s, slowed to 0.6× speed (pitched down 40%), placed at 1.45 s; \"Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003\" 1.20–4.20 s, slowed to 0.9× speed (pitched down 10%); then mixed to mono, gentle 12 dB/oct high-pass at 35 Hz, low-passed at 5000 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Humpback Whale (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-humpback-whale.htm"
+    },
+    {
+      "title": "Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003",
+      "author": "King L, Soltis J, Douglas-Hamilton I, Savage A, Vollrath F",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Bee-Threat-Elicits-Alarm-Call-in-African-Elephants-pone.0010346.s003.ogg"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "vulture",
+  "layers": [
+    {
+      "file": "File:Turkey Vulture.ogg",
+      "start": 18.45,
+      "end": 19.78
+    }
+  ],
+  "highpass": 0,
+  "species": "Turkey vulture (Cathartes aura) hisses"
+}

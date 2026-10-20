@@ -1,0 +1,27 @@
+{
+  "id": "parasaurolophus",
+  "file": "parasaurolophus.mp3",
+  "duration": 2.95,
+  "title": "Parasaurolophus horn call (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by National Park Service; NPS / Shan Burson",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-elk.htm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (elk bugle and sandhill crane calls pitched down an octave into a hollow horn, then layered). Sound design from 2 real recordings: \"Elk bugle (NPS Sound Gallery)\" 8.35–9.55 s, slowed to 0.5× speed (pitched down 50%); \"Yellowstone sound library - Sandhill Crane - 002\" 9.50–10.40 s, slowed to 0.55× speed (pitched down 45%), placed at 0.20 s; then mixed to mono, gentle 12 dB/oct high-pass at 40 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Elk bugle (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-elk.htm"
+    },
+    {
+      "title": "Yellowstone sound library - Sandhill Crane - 002",
+      "author": "NPS / Shan Burson",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Yellowstone_sound_library_-_Sandhill_Crane_-_002.mp3"
+    }
+  ]
+}

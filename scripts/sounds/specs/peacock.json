@@ -1,0 +1,11 @@
+{
+  "id": "peacock",
+  "layers": [
+    {
+      "file": "File:Pavo cristatus (call).ogg",
+      "start": 1.05,
+      "end": 3.4
+    }
+  ],
+  "highpass": 0
+}

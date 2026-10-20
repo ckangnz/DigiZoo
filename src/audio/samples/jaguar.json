@@ -1,0 +1,11 @@
+{
+  "id": "jaguar",
+  "file": "jaguar.mp3",
+  "duration": 1.25,
+  "title": "Jaguar saw",
+  "author": "About Zoos",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Jaguar_saw.flac",
+  "changes": "Trimmed to 0.00–1.39 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

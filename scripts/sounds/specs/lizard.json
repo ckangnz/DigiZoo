@@ -1,0 +1,12 @@
+{
+  "id": "lizard",
+  "layers": [
+    {
+      "file": "File:Mating call of a male Tokay gecko (Gekko gecko).ogg",
+      "start": 10.95,
+      "end": 11.95
+    }
+  ],
+  "highpass": 0,
+  "species": "Tokay gecko (Gekko gecko), a lizard named after its 'to-kay' call"
+}

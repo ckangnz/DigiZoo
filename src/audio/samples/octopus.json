@@ -1,0 +1,11 @@
+{
+  "id": "octopus",
+  "file": "octopus.mp3",
+  "duration": 1.75,
+  "title": "Water bubbles chortling",
+  "author": "stephan",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Water_bubbles_chortling.ogg",
+  "changes": "Real recording of big water bubbles (a bottle pushed under water), used for the octopus (octopuses make no sound). Trimmed to 8.10–9.80 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

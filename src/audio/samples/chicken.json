@@ -1,0 +1,11 @@
+{
+  "id": "chicken",
+  "file": "chicken.mp3",
+  "duration": 2.64,
+  "title": "Hen announcing shes lain an egg",
+  "author": "alys",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Hen_announcing_shes_lain_an_egg.ogg",
+  "changes": "Trimmed to 3.35–6.05 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

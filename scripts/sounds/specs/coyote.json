@@ -1,0 +1,18 @@
+{
+  "id": "coyote",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/imr/avElement/yell-YELLCoyotes150315.mp3",
+      "credit": {
+        "title": "Coyotes Howling (Yellowstone Sound Library)",
+        "author": "NPS & MSU Acoustic Atlas / Jennifer Jerrett",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/yell/learn/photosmultimedia/sounds-coyote.htm"
+      },
+      "start": 21.6,
+      "end": 24.55
+    }
+  ],
+  "highpass": 0
+}

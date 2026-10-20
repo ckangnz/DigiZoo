@@ -1,0 +1,11 @@
+{
+  "id": "parrot",
+  "file": "parrot.mp3",
+  "duration": 2.48,
+  "title": "Scarlet macaw 01",
+  "author": "Ganesh Mohan T",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Scarlet_macaw_01.wav",
+  "changes": "Trimmed to 10.85–13.30 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.2 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

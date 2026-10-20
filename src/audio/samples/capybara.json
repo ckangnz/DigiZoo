@@ -1,0 +1,11 @@
+{
+  "id": "capybara",
+  "file": "capybara.mp3",
+  "duration": 0.89,
+  "title": "Capivara nadando e vocalizando",
+  "author": "Sávio Freire Bruno",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Capivara_nadando_e_vocalizando.ogv",
+  "changes": "Trimmed to 1.95–2.95 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video."
+}

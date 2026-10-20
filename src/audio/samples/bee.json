@@ -1,0 +1,11 @@
+{
+  "id": "bee",
+  "file": "bee.mp3",
+  "duration": 2.95,
+  "title": "Bombus buzz",
+  "author": "Mysid",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Bombus_buzz.ogg",
+  "changes": "Bumblebee (Bombus), a close relative of the honey bee. Trimmed to 3.70–6.65 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.9 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

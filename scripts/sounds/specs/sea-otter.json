@@ -1,0 +1,9 @@
+{
+  "id": "sea-otter",
+  "layers": [
+    { "file": "File:Cri loutre d'Asie au zoo de La Bourbansais.webm", "start": 2.3, "end": 4.15 }
+  ],
+  "highpass": 300,
+  "species": "Smooth-coated otter (Lutrogale perspicillata) calls, a close relative standing in for the sea otter (no free sea otter call recording was found)",
+  "note": "The high-pass is set to 300 Hz because the zoo recording has low rumble; the otter calls are above 2 kHz."
+}

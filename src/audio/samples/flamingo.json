@@ -1,0 +1,11 @@
+{
+  "id": "flamingo",
+  "file": "flamingo.mp3",
+  "duration": 2.95,
+  "title": "Phoenicopterus roseus (Rosaflamingo - Greater Flamingo) — Weltvogelpark Walsrode 2013",
+  "author": "Olaf Oliviero Riemer",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Phoenicopterus_roseus_(Rosaflamingo_-_Greater_Flamingo)_%E2%80%94_Weltvogelpark_Walsrode_2013.ogg",
+  "changes": "Trimmed to 10.40–13.36 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.3 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

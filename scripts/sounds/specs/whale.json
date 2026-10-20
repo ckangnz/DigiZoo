@@ -1,0 +1,13 @@
+{
+  "id": "whale",
+  "layers": [
+    {
+      "file": "File:Humpback-Whale-Song-on-the-Southern-Ocean-Feeding-Grounds-Implications-for-Cultural-Transmission-pone.0079422.s003.oga",
+      "start": 46.2,
+      "end": 47.9
+    }
+  ],
+  "highpass": 120,
+  "species": "Humpback whale (Megaptera novaeangliae) song unit",
+  "note": "The high-pass is set to 120 Hz because the hydrophone recording has strong rumble below 100 Hz; the moan itself sits at about 200 Hz and above."
+}

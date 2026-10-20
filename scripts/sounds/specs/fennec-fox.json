@@ -1,0 +1,19 @@
+{
+  "id": "fennec-fox",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/imr/avElement/yell-YELLMJ23200837redfox.mp3",
+      "credit": {
+        "title": "Red Fox (Yellowstone Sound Library)",
+        "author": "NPS / Shan Burson",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/yell/learn/photosmultimedia/sounds-redfox.htm"
+      },
+      "start": 0.55,
+      "end": 2.85
+    }
+  ],
+  "highpass": 0,
+  "species": "Recording of a red fox (Vulpes vulpes) barking, a close cousin of the fennec fox"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "orca",
+  "layers": [{ "file": "File:Killer whale.ogg", "start": 7.5, "end": 9.75 }],
+  "highpass": 200,
+  "note": "The high-pass is set to 200 Hz because the hydrophone recording has strong rumble below 100 Hz; the call itself is above 500 Hz."
+}

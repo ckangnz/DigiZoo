@@ -1,0 +1,11 @@
+{
+  "id": "harp",
+  "file": "harp.mp3",
+  "duration": 2.95,
+  "title": "Gliss",
+  "author": "Daniel Musiklexikon",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Gliss.ogg",
+  "changes": "C major glissando on a concert harp. Trimmed to 0.98–3.92 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The default 70 Hz high-pass also removes a constant DC offset in the original file."
+}

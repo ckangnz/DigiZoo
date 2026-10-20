@@ -1,0 +1,11 @@
+{
+  "id": "sea-turtle",
+  "file": "sea-turtle.mp3",
+  "duration": 2.74,
+  "title": "Dermochelys coriacea 001",
+  "author": "Philippe Kurlapski",
+  "license": "CC BY 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:Dermochelys_coriacea_001.ogg",
+  "changes": "Leatherback sea turtle (Dermochelys coriacea) breathing on the beach after laying eggs. Trimmed to 9.30–12.00 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

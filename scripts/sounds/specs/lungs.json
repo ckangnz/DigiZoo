@@ -1,0 +1,7 @@
+{
+  "id": "lungs",
+  "layers": [
+    { "file": "File:Ujjayi.ogg", "start": 1.94, "end": 4.9, "fadeIn": 0.3, "fadeOut": 0.4 }
+  ],
+  "note": "The end of one slow breath in, the natural pause, then the start of the breath out; gentle 0.3 s / 0.4 s fades because a full slow breath cycle is longer than 3 s."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "stegosaurus",
+  "file": "stegosaurus.mp3",
+  "duration": 2.64,
+  "title": "Stegosaurus grunt (sound design from real animal recordings)",
+  "author": "DigiZoo sound design from recordings by Kent Wang; National Park Service",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Hippopotamuses_vocalising_in_South_Africa.webm",
+  "changes": "Movie-style dinosaur call: no recordings of dinosaurs exist, so it was designed from real animal recordings (hippopotamus honks and an American alligator groan, pitched down and layered). Sound design from 2 real recordings: \"Hippopotamuses vocalising in South Africa\" 1.55–3.00 s, slowed to 0.7× speed (pitched down 30%); \"Alligator (NPS Sound Gallery)\" 7.30–9.00 s, slowed to 0.8× speed (pitched down 20%), placed at 0.20 s; then mixed to mono, gentle 12 dB/oct high-pass at 28 Hz, added reverb, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3.",
+  "sources": [
+    {
+      "title": "Hippopotamuses vocalising in South Africa",
+      "author": "Kent Wang",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Hippopotamuses_vocalising_in_South_Africa.webm"
+    },
+    {
+      "title": "Alligator (NPS Sound Gallery)",
+      "author": "National Park Service",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source": "https://www.nps.gov/subjects/sound/sounds-alligator.htm"
+    }
+  ]
+}
