@@ -171,7 +171,8 @@ function Game() {
       later(() => {
         const def = getAnimal(a);
         const duration = playAnimal(def?.sound || a);
-        if (sayNames) speak(tr.name(a, def?.name), duration * 1000 + 120, ttsLang(tr.lang));
+        if (sayNames)
+          speak(tr.name(a, def?.name), duration ? duration * 1000 + 120 : 0, ttsLang(tr.lang));
       }, 260);
       if (found.size === pairsFor(size)) later(() => finish(total), 1100);
       return;

@@ -35,7 +35,8 @@ export function playSticker(id: string): void {
   );
   spawnEffect('notes', frame.cx + frame.w * 0.15, frame.cy - frame.h * 0.5, Math.min(260, frame.h));
   const t = tr();
-  if (store().sayNames) speak(t.name(def.id, def.name), duration * 1000 + 120, ttsLang(t.lang));
+  if (store().sayNames)
+    speak(t.name(def.id, def.name), duration ? duration * 1000 + 120 : 0, ttsLang(t.lang));
   else cancelSpeech();
 }
 

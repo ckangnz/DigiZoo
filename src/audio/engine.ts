@@ -197,6 +197,7 @@ export function playAnimal(id: string): number {
   const c = ensure();
   if (!c) return 0;
   stopAnimal();
+  if (muted) return 0;
   const pending = loadBuffer(c, id);
   if (!pending) return playRecipe(c, id);
   const duration = CREDITS.get(id)?.duration ?? 1.6;
@@ -270,10 +271,7 @@ export function playSfx(name: SfxName): void {
 export function setAudioMuted(value: boolean): void {
   muted = value;
   if (ctx && master) master.gain.setTargetAtTime(value ? 0 : MASTER_LEVEL, ctx.currentTime, 0.02);
-  if (value) {
-    stopAnimal();
-    cancelSpeech();
-  }
+  if (value) stopAnimal();
 }
 
 const NOVELTY_VOICES =
@@ -340,7 +338,7 @@ function pickVoice(lang: string): SpeechSynthesisVoice | undefined {
 }
 
 export function speak(text: string, delayMs = 0, lang = 'en-US', onEnd?: () => void): void {
-  if (muted || typeof speechSynthesis === 'undefined') {
+  if (typeof speechSynthesis === 'undefined') {
     onEnd?.();
     return;
   }

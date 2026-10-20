@@ -376,3 +376,23 @@ test('the matching game can be played to the end', async ({ page }) => {
   await page.locator('.game-win button', { hasText: 'Back to the map' }).click();
   await expect(page.locator('.game')).toHaveCount(0);
 });
+
+test('names are still spoken when sounds are off', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'needs speechSynthesis');
+  await page.addInitScript(() => {
+    const spoken: string[] = [];
+    Object.assign(window, { __spoken: spoken });
+    speechSynthesis.speak = (u: SpeechSynthesisUtterance) => {
+      if (u.text.trim()) spoken.push(u.text);
+    };
+  });
+  await openWorld(page);
+  await page.locator('[aria-label="Settings"]').click();
+  await page.locator('.toggle-row', { hasText: 'Sounds' }).click();
+  await page.locator('[aria-label="Settings"]').click();
+  await selectAnimal(page, 'lion');
+  await tool(page, 'Play sound').dispatchEvent('click');
+  await expect
+    .poll(() => page.evaluate(() => (window as unknown as { __spoken: string[] }).__spoken))
+    .toContain('Lion');
+});
