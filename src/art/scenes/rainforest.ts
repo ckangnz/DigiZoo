@@ -2,14 +2,18 @@ import {
   circle,
   curve,
   ellipse,
+  emptyBounds,
+  extendBounds,
   f,
   leaf,
   poly,
   roundRect,
+  samplePath,
   scallop,
   smooth,
   spline,
   tube,
+  type Bounds,
   type Pt,
 } from '../core/paths';
 import {
@@ -28,12 +32,15 @@ import {
   sun,
 } from './props';
 import { range, rng } from './rng';
-import type { Palette, SceneDef } from './types';
+import type { Mode, Palette, SceneDef } from './types';
 
 const W = 3600;
 const H = 2000;
 
 type Blob = [number, number, number, number];
+type Layer = [number, string][];
+type Shape = [Bounds, Pt[]];
+type Move = (pt: Pt) => Pt;
 
 function limb(pts: Pt[], r0: number, r1: number, color: string, extra = ''): string {
   return path(
@@ -838,15 +845,193 @@ function river(p: Palette): string {
   return out;
 }
 
-function fireflies(seed: number, count: number): string {
-  return scatter(seed, count, 100, W - 100, 900, 1800, (x, y, r) => {
+function fireflies(seed: number, count: number): Layer {
+  return scatterItems(seed, count, 100, W - 100, 900, 1800, (x, y, r) => {
     const s = range(r, 0.7, 1.2);
     return (
       `<circle cx="${f(x)}" cy="${f(y)}" r="${f(26 * s)}" fill="url(#rfFly)"/>` +
       path(circle(x, y, 4.5 * s), '#efffd0')
     );
+  }).map(([, svg]) => [H, svg]);
+}
+
+function glows(p: Palette): string {
+  return (
+    radialGlow('rfGlow', p.mushroom, 0.6) +
+    radialGlow('rfFly', '#e9ffb0', 0.7) +
+    radialGlow('rfSpray', p.foam, 0.45)
+  );
+}
+
+function sunWithSpinningRays(x: number, y: number, r: number, p: Palette): string {
+  const svg = sun(x, y, r, p.sun, p.sunRay, p.face);
+  const rays = svg.match(new RegExp(`(<path[^>]*fill="${p.sunRay}"/>)+`))?.[0] ?? '';
+  return svg.replace(rays, `<g data-spin="" style="transform-origin: ${x}px ${y}px">${rays}</g>`);
+}
+
+function transformer(transform: string, outer: Move): Move {
+  let move = outer;
+  for (const [, op, args] of transform.matchAll(/(\w+)\(([^)]*)\)/g)) {
+    const [a, b = op === 'scale' ? a : 0] = args
+      .trim()
+      .split(/[\s,]+/)
+      .map(Number);
+    const prev = move;
+    const cos = Math.cos((a * Math.PI) / 180);
+    const sin = Math.sin((a * Math.PI) / 180);
+    if (op === 'translate') move = ([x, y]) => prev([x + a, y + b]);
+    else if (op === 'scale') move = ([x, y]) => prev([x * a, y * b]);
+    else if (op === 'rotate') move = ([x, y]) => prev([x * cos - y * sin, x * sin + y * cos]);
+  }
+  return move;
+}
+
+function shapes(svg: string): Shape[] {
+  const out: Shape[] = [];
+  const stack: Move[] = [(pt) => pt];
+  const add = (pts: Pt[]) => out.push([extendBounds(emptyBounds(), pts), pts]);
+  const tags =
+    /<g(?: transform="([^"]*)")?[^>]*>|<\/g>| d="([^"]+)"|<circle cx="([^"]+)" cy="([^"]+)" r="([^"]+)"/g;
+  for (const m of svg.matchAll(tags)) {
+    const move = stack[stack.length - 1];
+    if (m[0] === '</g>') stack.pop();
+    else if (m[0].startsWith('<g')) stack.push(m[1] ? transformer(m[1], move) : move);
+    else if (m[2]) for (const d of m[2].split(/(?=M)/)) add(samplePath(d).map(move));
+    else add(samplePath(circle(Number(m[3]), Number(m[4]), Number(m[5]))).map(move));
+  }
+  return out;
+}
+
+function inside([x, y]: Pt, poly: Pt[]): boolean {
+  let hit = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [ax, ay] = poly[i];
+    const [bx, by] = poly[j];
+    if (ay > y !== by > y && x < ax + ((bx - ax) * (y - ay)) / (by - ay)) hit = !hit;
+  }
+  return hit;
+}
+
+function overlap(a: Shape[], b: Shape[]): boolean {
+  return a.some(([ab, ap]) =>
+    b.some(
+      ([bb, bp]) =>
+        ab.minX < bb.maxX &&
+        bb.minX < ab.maxX &&
+        ab.minY < bb.maxY &&
+        bb.minY < ab.maxY &&
+        (ap.some((pt) => inside(pt, bp)) || bp.some((pt) => inside(pt, ap))),
+    ),
+  );
+}
+
+function undergrowth(p: Palette, mode: Mode): Layer {
+  const night = mode === 'night';
+  return [
+    [1160, bananaClump(1280, 1160, 1, p)],
+    [1150, bananaClump(3480, 1150, 1.1, p)],
+    [1240, heliconia(860, 1240, 1.3, p)],
+    [1200, heliconia(2740, 1200, 1.2, p)],
+    [1560, monstera(150, 1560, 1, p, [-110, -60, -20])],
+    [1420, bromeliad(640, 1420, 1.4, p)],
+    [1640, bromeliad(2460, 1640, 1.5, p)],
+    [1200, mossyRock(1840, 1200, 0.8, p)],
+    [1700, mossyRock(1330, 1700, 1, p)],
+    [1500, mossyRock(1900, 1500, 0.9, p)],
+    [1380, mushrooms(560, 1380, 1, p, night)],
+    [1360, fern(2300, 1360, 1, p.fern, p.fernDark)],
+    [1760, fern(500, 1760, 1.2, p.fern, p.fernDark)],
+    ...floorFlowers(p),
+    ...scatterDry(14, 40, 1150, 1900, (x, y, r) =>
+      tuft(x, y, 0.8 + r() * 0.6, r() < 0.5 ? p.fern : p.fernDark),
+    ),
+    ...(night ? fireflies(71, 18) : []),
+  ];
+}
+
+const PROPS: Record<string, (p: Palette, mode: Mode) => Layer> = {
+  waterfall: (p) => [[0, foam(2197, 1112, 150, p) + foam(2462, 1076, 56, p)]],
+  'kapok-right': (p) => [
+    [
+      1230,
+      kapok(
+        3230,
+        1230,
+        1,
+        p,
+        90,
+        [
+          [60, -70, 430, 130],
+          [-300, 90, 260, 100],
+          [250, 80, 300, 110],
+          [-60, 40, 260, 110],
+          [-520, 170, 170, 90],
+        ],
+        8,
+      ) +
+        branch(3190, 540, 2800, 500, 1, p, 9) +
+        liana(2680, 220, 560, 1.1, p.liana, p.lianaLeaf, 21) +
+        bromeliad(3170, 780, 0.8, p) +
+        orchids(3290, 900, 1, p, 25),
+    ],
+  ],
+  'kapok-left': (p) => [
+    [
+      1250,
+      kapok(
+        430,
+        1250,
+        1,
+        p,
+        140,
+        [
+          [-200, 40, 330, 150],
+          [200, 60, 320, 140],
+          [0, -60, 380, 170],
+          [440, 130, 220, 110],
+          [-420, 120, 200, 110],
+        ],
+        3,
+      ) +
+        branch(470, 600, 900, 560, 1, p, 4) +
+        wrapVine(424, 1130, 700, 1, p) +
+        liana(990, 320, 480, 1.1, p.liana, p.lianaLeaf, 31) +
+        liana(760, 360, 220, 1, p.liana, p.lianaLeaf, 33) +
+        bromeliad(500, 840, 0.8, p) +
+        orchids(372, 960, 1, p, 35),
+    ],
+  ],
+  'monstera-right': (p) => [[1300, monstera(2930, 1300, 1, p, [-150, -100, -45])]],
+  'monstera-left': (p) => [[1330, monstera(1180, 1330, 1, p, [-160, -120, -60, -20])]],
+  heliconia: (p) => [[1520, heliconia(3420, 1520, 1.4, p)]],
+  log: (p, mode) => [[1600, log(2900, 1600, 420, 1, p, mode === 'night')]],
+  mushrooms: (p, mode) => [[1760, mushrooms(2250, 1760, 1.1, p, mode === 'night')]],
+};
+
+const owners: Partial<Record<Mode, string[]>> = {};
+
+function ownersOf(p: Palette, mode: Mode, items: Layer): string[] {
+  const ids = Object.keys(PROPS);
+  const covers = ids.flatMap((id, k) =>
+    PROPS[id](p, mode).map(([y, svg]): [number, number, Shape[]] => [k, y, shapes(svg)]),
+  );
+  return items.map(([y, svg]) => {
+    const own = shapes(svg);
+    let best = -1;
+    for (const [k, cy, c] of covers) if (k > best && y > cy && overlap(own, c)) best = k;
+    if (best >= 0) covers.push([best, y, own]);
+    return ids[best] ?? '';
   });
 }
+
+function undergrowthOf(p: Palette, mode: Mode, id: string): Layer {
+  const items = undergrowth(p, mode).sort((a, b) => a[0] - b[0]);
+  const owner = (owners[mode] ??= ownersOf(p, mode, items));
+  return items.filter((_, i) => owner[i] === id);
+}
+
+const standing = (id: string) => (p: Palette, mode: Mode) =>
+  `<defs>${glows(p)}</defs>` + layered([...PROPS[id](p, mode), ...undergrowthOf(p, mode, id)]);
 
 const rainforest: SceneDef = {
   id: 'rainforest',
@@ -862,6 +1047,9 @@ const rainforest: SceneDef = {
     { animal: 'capybara', x: 2600, y: 1240, flip: true },
     { animal: 'toucan', x: 2960, y: 420, flip: true },
     { animal: 'monkey', x: 2840, y: 1452, flip: true },
+    { animal: 'hummingbird', x: 930, y: 960, scale: 1.2 },
+    { animal: 'anteater', x: 560, y: 1700 },
+    { animal: 'okapi', x: 2520, y: 1740, flip: true },
   ],
   day: {
     skyTop: '#5ec0c9',
@@ -969,12 +1157,8 @@ const rainforest: SceneDef = {
         [0, p.mist, 0],
         [0.5, p.mist, 0.85],
         [1, p.mist, 0],
-      ])}${radialGlow('rfGlow', p.mushroom, 0.6)}${radialGlow('rfFly', '#e9ffb0', 0.7)}${radialGlow('rfSpray', p.foam, 0.45)}</defs>` +
-      `<rect width="${W}" height="${H}" fill="url(#rfSky)"/>`;
-    out += night
-      ? starField(31, 60, 40, 40, W - 40, 640, '#fff6d6') +
-        moon(1480, 230, 90, p.sun, p.sunRay, p.face)
-      : sun(1480, 230, 96, p.sun, p.sunRay, p.face);
+      ])}${glows(p)}</defs>` + `<rect width="${W}" height="${H}" fill="url(#rfSky)"/>`;
+    if (night) out += starField(31, 60, 40, 40, W - 40, 640, '#fff6d6');
     const rf = rng(5);
     for (let i = 0; i < 9; i++) {
       const x = 120 + i * 420 + range(rf, -100, 100);
@@ -999,79 +1183,7 @@ const rainforest: SceneDef = {
     );
     out += river(p);
     if (night) out += path(ellipse(2197, 1090, 300, 170), 'url(#rfSpray)');
-    out += foam(2197, 1112, 150, p);
-    out += foam(2462, 1076, 56, p);
-    out += layered([
-      [
-        1250,
-        kapok(
-          430,
-          1250,
-          1,
-          p,
-          140,
-          [
-            [-200, 40, 330, 150],
-            [200, 60, 320, 140],
-            [0, -60, 380, 170],
-            [440, 130, 220, 110],
-            [-420, 120, 200, 110],
-          ],
-          3,
-        ) +
-          branch(470, 600, 900, 560, 1, p, 4) +
-          wrapVine(424, 1130, 700, 1, p) +
-          liana(990, 320, 480, 1.1, p.liana, p.lianaLeaf, 31) +
-          liana(760, 360, 220, 1, p.liana, p.lianaLeaf, 33) +
-          bromeliad(500, 840, 0.8, p) +
-          orchids(372, 960, 1, p, 35),
-      ],
-      [
-        1230,
-        kapok(
-          3230,
-          1230,
-          1,
-          p,
-          90,
-          [
-            [60, -70, 430, 130],
-            [-300, 90, 260, 100],
-            [250, 80, 300, 110],
-            [-60, 40, 260, 110],
-            [-520, 170, 170, 90],
-          ],
-          8,
-        ) +
-          branch(3190, 540, 2800, 500, 1, p, 9) +
-          liana(2680, 220, 560, 1.1, p.liana, p.lianaLeaf, 21) +
-          bromeliad(3170, 780, 0.8, p) +
-          orchids(3290, 900, 1, p, 25),
-      ],
-      [1160, bananaClump(1280, 1160, 1, p)],
-      [1150, bananaClump(3480, 1150, 1.1, p)],
-      [1240, heliconia(860, 1240, 1.3, p)],
-      [1200, heliconia(2740, 1200, 1.2, p)],
-      [1520, heliconia(3420, 1520, 1.4, p)],
-      [1330, monstera(1180, 1330, 1, p, [-160, -120, -60, -20])],
-      [1300, monstera(2930, 1300, 1, p, [-150, -100, -45])],
-      [1560, monstera(150, 1560, 1, p, [-110, -60, -20])],
-      [1420, bromeliad(640, 1420, 1.4, p)],
-      [1640, bromeliad(2460, 1640, 1.5, p)],
-      [1600, log(2900, 1600, 420, 1, p, night)],
-      [1200, mossyRock(1840, 1200, 0.8, p)],
-      [1700, mossyRock(1330, 1700, 1, p)],
-      [1500, mossyRock(1900, 1500, 0.9, p)],
-      [1380, mushrooms(560, 1380, 1, p, night)],
-      [1760, mushrooms(2250, 1760, 1.1, p, night)],
-      [1360, fern(2300, 1360, 1, p.fern, p.fernDark)],
-      [1760, fern(500, 1760, 1.2, p.fern, p.fernDark)],
-      ...floorFlowers(p),
-      ...scatterDry(14, 40, 1150, 1900, (x, y, r) =>
-        tuft(x, y, 0.8 + r() * 0.6, r() < 0.5 ? p.fern : p.fernDark),
-      ),
-    ]);
-    if (night) out += fireflies(71, 18);
+    out += layered(undergrowthOf(p, mode, ''));
     return out;
   },
   front: (p) =>
@@ -1081,6 +1193,87 @@ const rainforest: SceneDef = {
     fern(2150, 2024, 1.2, p.fern, p.fernDark) +
     bromeliad(2700, 2012, 1.5, p) +
     monstera(3520, 2060, 1, p, [-145, -105]),
+  interactives: [
+    {
+      id: 'sun',
+      box: [1226, -24, 508, 508],
+      kind: 'spin',
+      effect: 'sparkle',
+      sound: 'shine',
+      night: { kind: 'rock', effect: 'stars', sound: 'twinkle' },
+      render: (p, mode) =>
+        mode === 'day'
+          ? sunWithSpinningRays(1480, 230, 96, p)
+          : moon(1480, 230, 90, p.sun, p.sunRay, p.face),
+    },
+    {
+      id: 'waterfall',
+      box: [2044, 980, 488, 205],
+      kind: 'pulse',
+      effect: 'splash',
+      sound: 'splash',
+      render: standing('waterfall'),
+    },
+    {
+      id: 'kapok-right',
+      box: [2501, -166, 1333, 1466],
+      origin: [3230, 1238],
+      kind: 'shake',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('kapok-right'),
+    },
+    {
+      id: 'kapok-left',
+      box: [-227, -136, 1362, 1454],
+      origin: [430, 1258],
+      kind: 'shake',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('kapok-left'),
+    },
+    {
+      id: 'monstera-right',
+      box: [2628, 953, 614, 397],
+      origin: [2930, 1300],
+      kind: 'sway',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('monstera-right'),
+    },
+    {
+      id: 'monstera-left',
+      box: [870, 1035, 657, 367],
+      origin: [1180, 1330],
+      kind: 'sway',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('monstera-left'),
+    },
+    {
+      id: 'heliconia',
+      box: [3142, 1159, 570, 401],
+      kind: 'bounce',
+      effect: 'petals',
+      sound: 'rustle',
+      render: standing('heliconia'),
+    },
+    {
+      id: 'log',
+      box: [2667, 1426, 465, 194],
+      kind: 'wiggle',
+      sound: 'thump',
+      render: standing('log'),
+    },
+    {
+      id: 'mushrooms',
+      box: [2157, 1657, 181, 170],
+      kind: 'bounce',
+      effect: 'sparkle',
+      sound: 'boing',
+      render: standing('mushrooms'),
+    },
+  ],
 };
 
 export default rainforest;

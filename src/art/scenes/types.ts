@@ -1,3 +1,4 @@
+import type { SfxName } from '../../audio/types';
 import type { HabitatId, StyleId } from '../core/types';
 
 export type Mode = 'day' | 'night';
@@ -12,6 +13,49 @@ export interface Ambient {
   birds?: number;
   leaves?: number;
   sparkles?: number;
+  twinkles?: number;
+  meteors?: number;
+  bats?: number;
+  cells?: number;
+  smoke?: number;
+  smokeAt?: [number, number];
+  smokeScale?: number;
+}
+
+export type InteractKind =
+  'spin' | 'shake' | 'bounce' | 'wiggle' | 'glow' | 'pulse' | 'sway' | 'rock';
+
+export type InteractEffect =
+  | 'leaves'
+  | 'rain'
+  | 'sparkle'
+  | 'splash'
+  | 'smoke'
+  | 'stars'
+  | 'petals'
+  | 'bubbles'
+  | 'coins'
+  | 'notes'
+  | 'fruit'
+  | 'hearts';
+
+export interface InteractMode {
+  kind?: InteractKind;
+  effect?: InteractEffect;
+  sound?: SfxName;
+}
+
+export interface Interactive {
+  id: string;
+  box: [number, number, number, number];
+  kind: InteractKind;
+  origin?: [number, number];
+  effect?: InteractEffect;
+  effectAt?: [number, number];
+  sound?: SfxName;
+  front?: boolean;
+  night?: InteractMode;
+  render: (p: Palette, mode: Mode) => string;
 }
 
 export interface Placement {
@@ -34,4 +78,5 @@ export interface SceneDef {
   front: (p: Palette, mode: Mode) => string;
   ambient: Ambient;
   defaults: Placement[];
+  interactives?: Interactive[];
 }

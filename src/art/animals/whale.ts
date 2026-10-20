@@ -26,7 +26,7 @@ const whale: AnimalDef = {
   name: 'Whale',
   aliases: ['blue whale', 'humpback'],
   group: 'mammal',
-  habitats: ['ocean'],
+  habitats: ['ocean', 'bible'],
   box: [430, 250],
   size: 300,
   locomotion: 'swim',

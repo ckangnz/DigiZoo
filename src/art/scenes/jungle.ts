@@ -2,13 +2,17 @@ import {
   circle,
   curve,
   ellipse,
+  emptyBounds,
+  extendBounds,
   f,
   leaf,
   roundRect,
+  samplePath,
   scallop,
   smooth,
   spline,
   tube,
+  type Bounds,
   type Pt,
 } from '../core/paths';
 import {
@@ -36,6 +40,9 @@ const W = 3600;
 const H = 2000;
 
 type Blob = [number, number, number, number];
+type Layer = [number, string][];
+type Shape = [Bounds, Pt[]];
+type Move = (pt: Pt) => Pt;
 
 function limb(pts: Pt[], r0: number, r1: number, color: string, extra = ''): string {
   return path(
@@ -731,6 +738,7 @@ const RIVER: Pt[] = [
 ];
 const riverR = (u: number) => 14 + 270 * Math.pow(u, 1.35);
 const RIVER_PTS = spline(RIVER, 80);
+const BIG_LOTUS: Pt = [RIVER_PTS[67][0] - 0.55 * riverR(0.84), RIVER_PTS[67][1]];
 
 function wet(x: number, y: number, margin = 30): boolean {
   return RIVER_PTS.some(([px, py], i) => Math.hypot(x - px, y - py) < riverR(i / 80) + 30 + margin);
@@ -791,7 +799,6 @@ function river(p: Palette, mode: Mode): string {
   });
   out += lotus(pts[36][0] - 0.3 * r(0.45), pts[36][1], 1.1, p, mode === 'night');
   out += lotus(pts[58][0] + 0.25 * r(0.72), pts[58][1], 1.4, p, mode === 'night');
-  out += lotus(pts[67][0] - 0.55 * r(0.84), pts[67][1], 1.6, p, mode === 'night');
   return out;
 }
 
@@ -846,15 +853,148 @@ function flowerHead(x: number, y: number, s: number, petal: string, center: stri
   return path(d, petal) + path(circle(x, y, 5.5 * s), center);
 }
 
-function fireflies(seed: number, count: number): string {
-  return scatter(seed, count, 100, W - 100, 1000, 1800, (x, y, r) => {
+function fireflies(seed: number, count: number): Layer {
+  return scatterItems(seed, count, 100, W - 100, 1000, 1800, (x, y, r) => {
     const s = range(r, 0.7, 1.2);
     return (
       `<circle cx="${f(x)}" cy="${f(y)}" r="${f(26 * s)}" fill="url(#jgFly)"/>` +
       path(circle(x, y, 4.5 * s), '#fff8c4')
     );
+  }).map(([, svg]) => [H, svg]);
+}
+
+function glows(p: Palette): string {
+  return (
+    radialGlow('jgLamp', p.flame, 0.7) +
+    radialGlow('jgFly', '#fff3a0', 0.7) +
+    radialGlow('jgLotus', p.lotus, 0.55)
+  );
+}
+
+function sunWithSpinningRays(x: number, y: number, r: number, p: Palette): string {
+  const svg = sun(x, y, r, p.sun, p.sunRay, p.face);
+  const rays = svg.match(new RegExp(`(<path[^>]*fill="${p.sunRay}"/>)+`))?.[0] ?? '';
+  return svg.replace(rays, `<g data-spin="" style="transform-origin: ${x}px ${y}px">${rays}</g>`);
+}
+
+function transformer(transform: string, outer: Move): Move {
+  let move = outer;
+  for (const [, op, args] of transform.matchAll(/(\w+)\(([^)]*)\)/g)) {
+    const [a, b = op === 'scale' ? a : 0] = args
+      .trim()
+      .split(/[\s,]+/)
+      .map(Number);
+    const prev = move;
+    const cos = Math.cos((a * Math.PI) / 180);
+    const sin = Math.sin((a * Math.PI) / 180);
+    if (op === 'translate') move = ([x, y]) => prev([x + a, y + b]);
+    else if (op === 'scale') move = ([x, y]) => prev([x * a, y * b]);
+    else if (op === 'rotate') move = ([x, y]) => prev([x * cos - y * sin, x * sin + y * cos]);
+  }
+  return move;
+}
+
+function shapes(svg: string): Shape[] {
+  const out: Shape[] = [];
+  const stack: Move[] = [(pt) => pt];
+  const add = (pts: Pt[]) => out.push([extendBounds(emptyBounds(), pts), pts]);
+  const tags =
+    /<g(?: transform="([^"]*)")?[^>]*>|<\/g>| d="([^"]+)"|<circle cx="([^"]+)" cy="([^"]+)" r="([^"]+)"/g;
+  for (const m of svg.matchAll(tags)) {
+    const move = stack[stack.length - 1];
+    if (m[0] === '</g>') stack.pop();
+    else if (m[0].startsWith('<g')) stack.push(m[1] ? transformer(m[1], move) : move);
+    else if (m[2]) for (const d of m[2].split(/(?=M)/)) add(samplePath(d).map(move));
+    else add(samplePath(circle(Number(m[3]), Number(m[4]), Number(m[5]))).map(move));
+  }
+  return out;
+}
+
+function inside([x, y]: Pt, poly: Pt[]): boolean {
+  let hit = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [ax, ay] = poly[i];
+    const [bx, by] = poly[j];
+    if (ay > y !== by > y && x < ax + ((bx - ax) * (y - ay)) / (by - ay)) hit = !hit;
+  }
+  return hit;
+}
+
+function overlap(a: Shape[], b: Shape[]): boolean {
+  return a.some(([ab, ap]) =>
+    b.some(
+      ([bb, bp]) =>
+        ab.minX < bb.maxX &&
+        bb.minX < ab.maxX &&
+        ab.minY < bb.maxY &&
+        bb.minY < ab.maxY &&
+        (ap.some((pt) => inside(pt, bp)) || bp.some((pt) => inside(pt, ap))),
+    ),
+  );
+}
+
+function undergrowth(p: Palette, mode: Mode): Layer {
+  return [
+    [1040, jungleTree(2470, 1050, 0.55, p, 41)],
+    [1080, bamboo(950, 1080, 1, p, 5)],
+    [1130, bamboo(3560, 1130, 0.9, p, 9)],
+    [1120, pillar(1080, 1120, 220, 1, p)],
+    [1140, pillar(2150, 1140, 140, 1, p)],
+    [1200, bananaPlant(2290, 1200, 0.95, p, true)],
+    [1300, hibiscusBush(760, 1300, 0.9, p, 3)],
+    [1520, hibiscusBush(1060, 1520, 1.1, p, 21)],
+    [1290, elephantEar(2140, 1290, 0.75, p)],
+    [1660, elephantEar(3560, 1660, 0.95, p)],
+    [1600, hibiscusBush(3420, 1600, 1, p, 13)],
+    [1220, rock(2560, 1220, 1, p.rock, p.rockShade, p.rockLight)],
+    [1520, rock(3150, 1520, 1.3, p.rock, p.rockShade, p.rockLight)],
+    [1340, fern(1960, 1340, 0.9, p.fern, p.fernDark)],
+    [1450, fern(300, 1450, 1.1, p.fern, p.fernDark)],
+    ...meadowFlowers(p),
+    ...scatterDry(12, 46, 1120, 1900, (x, y, r) =>
+      tuft(x, y, 0.8 + r() * 0.6, r() < 0.5 ? p.grass : p.grassDark),
+    ),
+    ...scatterDry(19, 10, 1150, 1850, (x, y, r) =>
+      tallGrass(x, y, 0.6 + r() * 0.4, p.grass, p.grassDark),
+    ),
+    ...(mode === 'night' ? fireflies(61, 18) : []),
+  ];
+}
+
+const PROPS: Record<string, (p: Palette, mode: Mode) => Layer> = {
+  temple: (p, mode) => [[1100, temple(1640, 1100, 0.85, p, mode)]],
+  banyan: (p) => [[1110, jungleTree(430, 1110, 1, p, 11, true)]],
+  mango: (p) => [[1150, jungleTree(3330, 1150, 0.9, p, 29, false, true, p.mango)]],
+  'banana-left': (p) => [[1210, bananaPlant(160, 1210, 1, p)]],
+  hibiscus: (p) => [[1240, hibiscusBush(2400, 1240, 0.8, p, 7)]],
+  'banana-right': (p) => [[1260, bananaPlant(3480, 1260, 1.1, p, true)]],
+  'elephant-ear': (p) => [[1400, elephantEar(170, 1400, 1, p)]],
+};
+
+const owners: Partial<Record<Mode, string[]>> = {};
+
+function ownersOf(p: Palette, mode: Mode, items: Layer): string[] {
+  const ids = Object.keys(PROPS);
+  const covers = ids.flatMap((id, k) =>
+    PROPS[id](p, mode).map(([y, svg]): [number, number, Shape[]] => [k, y, shapes(svg)]),
+  );
+  return items.map(([y, svg]) => {
+    const own = shapes(svg);
+    let best = -1;
+    for (const [k, cy, c] of covers) if (k > best && y > cy && overlap(own, c)) best = k;
+    if (best >= 0) covers.push([best, y, own]);
+    return ids[best] ?? '';
   });
 }
+
+function undergrowthOf(p: Palette, mode: Mode, id: string): Layer {
+  const items = undergrowth(p, mode).sort((a, b) => a[0] - b[0]);
+  const owner = (owners[mode] ??= ownersOf(p, mode, items));
+  return items.filter((_, i) => owner[i] === id);
+}
+
+const standing = (id: string) => (p: Palette, mode: Mode) =>
+  `<defs>${glows(p)}</defs>` + layered([...PROPS[id](p, mode), ...undergrowthOf(p, mode, id)]);
 
 const jungle: SceneDef = {
   id: 'jungle',
@@ -869,6 +1009,9 @@ const jungle: SceneDef = {
     { animal: 'tiger', x: 2200, y: 1440, flip: true },
     { animal: 'crocodile', x: 2560, y: 1700 },
     { animal: 'elephant', x: 3280, y: 1180, flip: true },
+    { animal: 'hornbill', x: 2620, y: 400, flip: true },
+    { animal: 'tapir', x: 1560, y: 1660 },
+    { animal: 'red-panda', x: 420, y: 1640 },
   ],
   day: {
     skyTop: '#7cc6ee',
@@ -981,12 +1124,8 @@ const jungle: SceneDef = {
         [0, p.skyTop],
         [0.55, p.skyMid],
         [1, p.skyBottom],
-      ])}${radialGlow('jgLamp', p.flame, 0.7)}${radialGlow('jgFly', '#fff3a0', 0.7)}${radialGlow('jgLotus', p.lotus, 0.55)}</defs>` +
-      `<rect width="${W}" height="${H}" fill="url(#jgSky)"/>`;
-    out += night
-      ? starField(23, 70, 40, 40, W - 40, 700, '#fff6d6') +
-        moon(1190, 250, 92, p.sun, p.sunRay, p.face)
-      : sun(1190, 250, 100, p.sun, p.sunRay, p.face);
+      ])}${glows(p)}</defs>` + `<rect width="${W}" height="${H}" fill="url(#jgSky)"/>`;
+    if (night) out += starField(23, 70, 40, 40, W - 40, 700, '#fff6d6');
     out += karst(2050, 960, 300, 330, p.karstFar, p.karstFar, p.karstFar);
     out += karst(2600, 960, 260, 420, p.karstFar, p.karstFar, p.karstFar);
     out += karst(3300, 960, 320, 360, p.karstFar, p.karstFar, p.karstFar);
@@ -1026,38 +1165,7 @@ const jungle: SceneDef = {
     out += scatter(83, 26, -40, W + 40, 1040, 1075, (x, y, r) =>
       bush(x, y, 0.7 + r() * 0.5, p.bushFar, p.bushFarDark),
     );
-    out += layered([
-      [1040, jungleTree(2470, 1050, 0.55, p, 41)],
-      [1110, jungleTree(430, 1110, 1, p, 11, true)],
-      [1100, temple(1640, 1100, 0.85, p, mode)],
-      [1080, bamboo(950, 1080, 1, p, 5)],
-      [1130, bamboo(3560, 1130, 0.9, p, 9)],
-      [1150, jungleTree(3330, 1150, 0.9, p, 29, false, true, p.mango)],
-      [1120, pillar(1080, 1120, 220, 1, p)],
-      [1140, pillar(2150, 1140, 140, 1, p)],
-      [1200, bananaPlant(2290, 1200, 0.95, p, true)],
-      [1260, bananaPlant(3480, 1260, 1.1, p, true)],
-      [1210, bananaPlant(160, 1210, 1, p)],
-      [1300, hibiscusBush(760, 1300, 0.9, p, 3)],
-      [1520, hibiscusBush(1060, 1520, 1.1, p, 21)],
-      [1400, elephantEar(170, 1400, 1, p)],
-      [1290, elephantEar(2140, 1290, 0.75, p)],
-      [1660, elephantEar(3560, 1660, 0.95, p)],
-      [1240, hibiscusBush(2400, 1240, 0.8, p, 7)],
-      [1600, hibiscusBush(3420, 1600, 1, p, 13)],
-      [1220, rock(2560, 1220, 1, p.rock, p.rockShade, p.rockLight)],
-      [1520, rock(3150, 1520, 1.3, p.rock, p.rockShade, p.rockLight)],
-      [1340, fern(1960, 1340, 0.9, p.fern, p.fernDark)],
-      [1450, fern(300, 1450, 1.1, p.fern, p.fernDark)],
-      ...meadowFlowers(p),
-      ...scatterDry(12, 46, 1120, 1900, (x, y, r) =>
-        tuft(x, y, 0.8 + r() * 0.6, r() < 0.5 ? p.grass : p.grassDark),
-      ),
-      ...scatterDry(19, 10, 1150, 1850, (x, y, r) =>
-        tallGrass(x, y, 0.6 + r() * 0.4, p.grass, p.grassDark),
-      ),
-    ]);
-    if (night) out += fireflies(61, 18);
+    out += layered(undergrowthOf(p, mode, ''));
     return out;
   },
   front: (p) =>
@@ -1072,6 +1180,87 @@ const jungle: SceneDef = {
     bigLeaf(3580, 2010, 1.3, -120, p.leaves, p.leavesDark) +
     bigLeaf(3590, 2020, 1.1, -155, p.leavesDark, p.leaves) +
     hibiscus(3460, 1962, 1.4, p.hibiscusPink, p.hibiscusDark, p.hibiscusCenter),
+  interactives: [
+    {
+      id: 'sun',
+      box: [930, -10, 520, 520],
+      kind: 'spin',
+      effect: 'sparkle',
+      sound: 'shine',
+      night: { kind: 'rock', effect: 'stars', sound: 'twinkle' },
+      render: (p, mode) =>
+        mode === 'day'
+          ? sunWithSpinningRays(1190, 250, 100, p)
+          : moon(1190, 250, 92, p.sun, p.sunRay, p.face),
+    },
+    {
+      id: 'lotus',
+      box: [2570, 1695, 260, 260],
+      kind: 'bounce',
+      effect: 'splash',
+      sound: 'splash',
+      render: (p, mode) =>
+        `<defs>${glows(p)}</defs>` + lotus(BIG_LOTUS[0], BIG_LOTUS[1], 1.6, p, mode === 'night'),
+    },
+    {
+      id: 'temple',
+      box: [1252, 399, 798, 802],
+      kind: 'glow',
+      effect: 'sparkle',
+      sound: 'chime',
+      render: standing('temple'),
+    },
+    {
+      id: 'banyan',
+      box: [-35, 305, 933, 916],
+      origin: [430, 1118],
+      kind: 'shake',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('banyan'),
+    },
+    {
+      id: 'mango',
+      box: [2910, 423, 844, 797],
+      origin: [3330, 1158],
+      kind: 'shake',
+      effect: 'fruit',
+      sound: 'rustle',
+      render: standing('mango'),
+    },
+    {
+      id: 'banana-left',
+      box: [-89, 788, 504, 468],
+      kind: 'shake',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('banana-left'),
+    },
+    {
+      id: 'hibiscus',
+      box: [2284, 1149, 232, 117],
+      kind: 'bounce',
+      effect: 'petals',
+      sound: 'rustle',
+      render: standing('hibiscus'),
+    },
+    {
+      id: 'banana-right',
+      box: [3208, 798, 550, 511],
+      kind: 'shake',
+      effect: 'fruit',
+      sound: 'rustle',
+      render: standing('banana-right'),
+    },
+    {
+      id: 'elephant-ear',
+      box: [-31, 1038, 524, 448],
+      kind: 'bounce',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: standing('elephant-ear'),
+    },
+  ],
 };
 
 export default jungle;

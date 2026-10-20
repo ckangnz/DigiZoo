@@ -42,7 +42,7 @@ const cow: AnimalDef = {
   name: 'Cow',
   aliases: ['moo', 'cattle', 'calf', 'moo cow', 'bull'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'bible'],
   box: [356, 290],
   size: 250,
   locomotion: 'walk4',

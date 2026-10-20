@@ -3,11 +3,50 @@ export type StyleId = 'cartoon' | 'comic' | 'painted';
 export const STYLES: StyleId[] = ['cartoon', 'comic', 'painted'];
 
 export type Locomotion =
-  'walk4' | 'walk2' | 'waddle' | 'hop' | 'fly' | 'flutter' | 'swim' | 'slither' | 'crawl' | 'pulse';
+  | 'walk4'
+  | 'walk2'
+  | 'waddle'
+  | 'hop'
+  | 'fly'
+  | 'flutter'
+  | 'swim'
+  | 'slither'
+  | 'crawl'
+  | 'pulse'
+  | 'float'
+  | 'beat'
+  | 'breathe'
+  | 'wobble'
+  | 'roll';
 
-export type HabitatId = 'safari' | 'jungle' | 'rainforest' | 'desert' | 'farm' | 'ocean';
+export type HabitatId =
+  | 'safari'
+  | 'jungle'
+  | 'rainforest'
+  | 'desert'
+  | 'farm'
+  | 'ocean'
+  | 'dinosaur'
+  | 'halloween'
+  | 'space'
+  | 'body'
+  | 'bible';
 
-export type AnimalGroup = 'mammal' | 'bird' | 'reptile' | 'amphibian' | 'fish' | 'bug' | 'sea';
+export type AnimalGroup =
+  | 'mammal'
+  | 'bird'
+  | 'reptile'
+  | 'amphibian'
+  | 'fish'
+  | 'bug'
+  | 'sea'
+  | 'dinosaur'
+  | 'spooky'
+  | 'space'
+  | 'body'
+  | 'bible';
+
+export type StickerKind = 'animal' | 'character' | 'object';
 
 export type ShapeKind = 'base' | 'detail' | 'feature' | 'line';
 
@@ -55,6 +94,7 @@ export interface Gait {
 export interface AnimalDef {
   id: string;
   name: string;
+  kind?: StickerKind;
   aliases?: string[];
   group: AnimalGroup;
   habitats: HabitatId[];

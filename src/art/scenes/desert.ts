@@ -1,5 +1,17 @@
 import { mix } from '../core/color';
-import { capsule, circle, curve, ellipse, f, leaf, scallop, smooth, type Pt } from '../core/paths';
+import {
+  capsule,
+  circle,
+  curve,
+  ellipse,
+  f,
+  leaf,
+  pathBounds,
+  scallop,
+  smooth,
+  type Bounds,
+  type Pt,
+} from '../core/paths';
 import {
   barrelCactus,
   bush,
@@ -243,10 +255,9 @@ function sandRipples(x: number, y: number, s: number, color: string): string {
   return out;
 }
 
-function tumbleweed(x: number, y: number, s: number, color: string, dark: string): string {
+function tumbleTrail(x: number, y: number, s: number, dark: string): string {
   const r = 58 * s;
-  const cy = y - r;
-  let out =
+  return (
     stroke(
       curve(x - r * 2.4, y - 4, x - r * 1.4, y - 6, -5),
       dark,
@@ -258,8 +269,14 @@ function tumbleweed(x: number, y: number, s: number, color: string, dark: string
       dark,
       6 * s,
       ' stroke-opacity=".28"',
-    ) +
-    path(circle(x, cy, r), dark, ' opacity=".3"');
+    )
+  );
+}
+
+function tumbleweed(x: number, y: number, s: number, color: string, dark: string): string {
+  const r = 58 * s;
+  const cy = y - r;
+  let out = path(circle(x, cy, r), dark, ' opacity=".3"');
   for (let i = 0; i < 8; i++) {
     out += stroke(
       ellipse(x, cy, r * (0.94 - (i % 3) * 0.1), r * (0.34 + (i % 4) * 0.14), i * 23),
@@ -392,36 +409,49 @@ function lilyPad(
   );
 }
 
-function oasis(p: Palette, mode: Mode): [number, string][] {
-  const x = 2560;
-  const y = 1262;
-  const palms = (px: number, py: number, s: number, lean: number, nut = true): [number, string] => [
+type Layer = [number, string];
+
+const OASIS: Pt = [2560, 1262];
+
+function oasisPalms(p: Palette): Layer[] {
+  const palms = (px: number, py: number, s: number, lean: number, nut = true): Layer => [
     py,
     palm(px, py, s, lean, p.trunk, p.trunkDark, p.frond, p.frondDark, nut ? p.coconut : undefined),
   ];
+  return [
+    palms(2360, 1222, 1.05, -70),
+    palms(2770, 1226, 1.2, 80),
+    palms(2575, 1196, 0.8, 24, false),
+  ];
+}
+
+function oasisWater(p: Palette, mode: Mode): string {
+  const [x, y] = OASIS;
   let water = pond(x, y, 300, 62, p.water, p.waterLight, p.waterRim);
   if (mode === 'night') {
     water +=
       stroke(curve(x + 60, y - 18, x + 180, y - 18, -4), p.sun, 9, ' stroke-opacity=".55"') +
       stroke(curve(x + 90, y + 4, x + 160, y + 4, -3), p.sun, 7, ' stroke-opacity=".4"');
   }
-  water +=
+  return (
+    water +
     lilyPad(x - 170, y + 14, 34, 13, p.lily, -30) +
     lilyPad(x - 120, y + 28, 24, 9, p.lilyDark, 200) +
     lilyPad(x + 200, y + 10, 30, 11, p.lily, 160) +
-    flower(x - 168, y + 6, 0.7, p.flower, p.flowerCenter);
+    flower(x - 168, y + 6, 0.7, p.flower, p.flowerCenter)
+  );
+}
+
+function oasis(p: Palette): Layer[] {
+  const [x, y] = OASIS;
   return [
     [
       1160,
       path(scallop(x, y + 8, 1, 26, 16, 0, 410, 104), p.oasisGrassDark) +
         path(scallop(x - 6, y, 1, 26, 15, 6, 396, 96), p.oasisGrass),
     ],
-    palms(2360, 1222, 1.05, -70),
-    palms(2770, 1226, 1.2, 80),
-    palms(2575, 1196, 0.8, 24, false),
     [1214, bush(2470, 1214, 0.42, p.oasisGrass, p.oasisGrassDark)],
     [1210, bush(2668, 1208, 0.36, p.oasisGrass, p.oasisGrassDark)],
-    [y, water],
     [1290, reeds(2290, 1292, 1, p.oasisGrass, p.oasisGrassDark, p.trunkDark)],
     [1296, reeds(2850, 1290, 0.9, p.oasisGrass, p.oasisGrassDark, p.trunkDark)],
     [1336, grassTuft(2440, 1336, 1.1, p.oasisGrassDark)],
@@ -493,6 +523,105 @@ const AVOID: Zone[] = [
   [2090, 1420, 160, 60],
 ];
 
+function tappables(p: Palette, mode: Mode): Record<string, Layer[]> {
+  return {
+    palms: oasisPalms(p),
+    saguaroMid: [
+      [
+        1250,
+        shadow(1700, 1250, 54, p.shadow) +
+          cactus(1700, 1250, 0.95, p.cactus, p.cactusDark, p.bloomYellow),
+      ],
+    ],
+    oasis: [[OASIS[1], oasisWater(p, mode)]],
+    saguaroEast: [
+      [
+        1330,
+        shadow(3330, 1330, 64, p.shadow) + cactus(3330, 1330, 1.1, p.cactus, p.cactusDark, p.bloom),
+      ],
+    ],
+    saguaroWest: [
+      [
+        1360,
+        shadow(460, 1360, 70, p.shadow) + cactus(460, 1360, 1.25, p.cactus, p.cactusDark, p.bloom),
+      ],
+    ],
+    pricklyPear: [[1440, pricklyPear(1360, 1440, 0.85, p.pear, p.pearDark, p.pearFruit, p.spine)]],
+    barrelCacti: [
+      [1540, barrelCactus(760, 1540, 1.1, p.cactus, p.cactusDark, p.bloom)],
+      [1560, barrelCactus(835, 1560, 0.7, p.cactus, p.cactusDark, p.bloomOrange)],
+    ],
+    tumbleweed: [[1590, tumbleweed(1250, 1600, 1.35, p.tumble, p.tumbleDark)]],
+  };
+}
+
+function scenery(p: Palette): Layer[] {
+  return [
+    ...oasis(p),
+    [1372, bloomPatch(540, 1380, 1.5, p.bloomYellow, p.bloomOrange, p.cactusDark)],
+    [1344, bloomPatch(3240, 1350, 1.4, p.flower, p.flowerCenter, p.cactusDark)],
+    [1700, bloomPatch(2200, 1700, 1.3, p.bloomOrange, p.bloomYellow, p.cactusDark)],
+    [1500, bloomPatch(600, 1500, 1.2, p.flower, p.flowerCenter, p.cactusDark)],
+    [1650, barrelCactus(1990, 1650, 0.95, p.cactus, p.cactusDark, p.bloomYellow)],
+    [1560, barrelCactus(2930, 1560, 1.05, p.cactus, p.cactusDark, p.bloom)],
+    [1410, rock(2060, 1430, 1.2, p.rock, p.rockShade, p.rockLight)],
+    [1440, rock(2160, 1440, 0.7, p.rock, p.rockShade, p.rockLight)],
+    [1780, rock(3400, 1780, 1, p.rock, p.rockShade, p.rockLight)],
+    [1395, burrow(3020, 1395, 1, p.burrow, p.hole)],
+    [1590, tumbleTrail(1250, 1600, 1.35, p.tumbleDark)],
+    ...scatterAround(31, 16, 0, W, 1260, 1880, AVOID, (x, y, rr) =>
+      sandRipples(x, y, 0.8 + rr() * 0.6, p.ripple),
+    ),
+    ...scatterAround(43, 30, 0, W, 1220, 1900, AVOID, (x, y, rr) =>
+      grassTuft(x, y, 0.7 + rr() * 0.5, rr() < 0.5 ? p.dryGrass : p.dryGrassDark),
+    ),
+    ...scatterAround(57, 12, 0, W, 1260, 1880, AVOID, (x, y, rr) =>
+      pebbles(x, y, 0.8 + rr() * 0.6, p.rockLight, p.rock),
+    ),
+  ];
+}
+
+const shapes = (svg: string): Bounds[] =>
+  [...svg.matchAll(/ d="([^"]+)"/g)].map((m) => pathBounds(m[1]));
+
+const touches = (a: Bounds[], b: Bounds[]): boolean =>
+  a.some((r) =>
+    b.some((q) => r.minX < q.maxX && q.minX < r.maxX && r.minY < q.maxY && q.minY < r.maxY),
+  );
+
+type Split = { props: Record<string, Layer[]>; loose: Layer[] };
+
+let lastSplit: { p: Palette; mode: Mode; split: Split } | undefined;
+
+function desertLayers(p: Palette, mode: Mode): Split {
+  if (lastSplit?.p !== p || lastSplit.mode !== mode) {
+    lastSplit = { p, mode, split: splitLayers(p, mode) };
+  }
+  return lastSplit.split;
+}
+
+function splitLayers(p: Palette, mode: Mode): Split {
+  const props = tappables(p, mode);
+  const outlines = Object.entries(props)
+    .reverse()
+    .map(([id, layers]) => ({ id, parts: layers.map(([k, svg]) => [k, shapes(svg)] as const) }));
+  const loose: Layer[] = [];
+  for (const item of scenery(p)) {
+    const s = shapes(item[1]);
+    const owner = outlines.find(({ parts }) =>
+      parts.some(([k, b]) => k < item[0] && touches(s, b)),
+    );
+    if (owner) props[owner.id].push(item);
+    else loose.push(item);
+  }
+  return { props, loose };
+}
+
+const drawProp =
+  (id: string) =>
+  (p: Palette, mode: Mode): string =>
+    layered(desertLayers(p, mode).props[id]);
+
 const dusk = (hex: string): string => mix(nightColor(hex), '#8e62b8', 0.22);
 
 const desert: SceneDef = {
@@ -508,6 +637,10 @@ const desert: SceneDef = {
     { animal: 'snake', x: 2420, y: 1600, flip: true },
     { animal: 'tortoise', x: 1560, y: 1700 },
     { animal: 'scorpion', x: 3180, y: 1730, flip: true },
+    { animal: 'vulture', x: 1900, y: 380 },
+    { animal: 'oryx', x: 1960, y: 1200, flip: true },
+    { animal: 'roadrunner', x: 1700, y: 1450 },
+    { animal: 'jackrabbit', x: 2000, y: 1720, flip: true },
   ],
   day,
   night: {
@@ -536,12 +669,7 @@ const desert: SceneDef = {
   },
   back: (p, mode) => {
     let out = skyBand(p);
-    out +=
-      mode === 'day'
-        ? sun(2980, 300, 108, p.sun, p.sunRay, p.face)
-        : milkyWay() +
-          starField(17, 150, 40, 30, W - 40, 900, '#fff6d6') +
-          moon(2980, 300, 98, p.sun, p.sunRay, p.face);
+    if (mode === 'night') out += milkyWay() + starField(17, 150, 40, 30, W - 40, 900, '#fff6d6');
     out += cliff('m1', 420, 965, 700, 210, p.mesaFar, p.mesaFarShade, p.mesaFarStripe);
     out += cliff('m2', 2130, 965, 210, 330, p.mesaFar, p.mesaFarShade, p.mesaFarStripe);
     out += cliff('m3', 3260, 965, 720, 240, p.mesaFar, p.mesaFarShade, p.mesaFarStripe);
@@ -565,45 +693,7 @@ const desert: SceneDef = {
         ' opacity=".7"',
       );
     }
-    out += layered([
-      ...oasis(p, mode),
-      [
-        1360,
-        shadow(460, 1360, 70, p.shadow) + cactus(460, 1360, 1.25, p.cactus, p.cactusDark, p.bloom),
-      ],
-      [1372, bloomPatch(540, 1380, 1.5, p.bloomYellow, p.bloomOrange, p.cactusDark)],
-      [
-        1250,
-        shadow(1700, 1250, 54, p.shadow) +
-          cactus(1700, 1250, 0.95, p.cactus, p.cactusDark, p.bloomYellow),
-      ],
-      [
-        1330,
-        shadow(3330, 1330, 64, p.shadow) + cactus(3330, 1330, 1.1, p.cactus, p.cactusDark, p.bloom),
-      ],
-      [1344, bloomPatch(3240, 1350, 1.4, p.flower, p.flowerCenter, p.cactusDark)],
-      [1700, bloomPatch(2200, 1700, 1.3, p.bloomOrange, p.bloomYellow, p.cactusDark)],
-      [1500, bloomPatch(600, 1500, 1.2, p.flower, p.flowerCenter, p.cactusDark)],
-      [1540, barrelCactus(760, 1540, 1.1, p.cactus, p.cactusDark, p.bloom)],
-      [1560, barrelCactus(835, 1560, 0.7, p.cactus, p.cactusDark, p.bloomOrange)],
-      [1650, barrelCactus(1990, 1650, 0.95, p.cactus, p.cactusDark, p.bloomYellow)],
-      [1560, barrelCactus(2930, 1560, 1.05, p.cactus, p.cactusDark, p.bloom)],
-      [1440, pricklyPear(1360, 1440, 0.85, p.pear, p.pearDark, p.pearFruit, p.spine)],
-      [1410, rock(2060, 1430, 1.2, p.rock, p.rockShade, p.rockLight)],
-      [1440, rock(2160, 1440, 0.7, p.rock, p.rockShade, p.rockLight)],
-      [1780, rock(3400, 1780, 1, p.rock, p.rockShade, p.rockLight)],
-      [1395, burrow(3020, 1395, 1, p.burrow, p.hole)],
-      [1590, tumbleweed(1250, 1600, 1.35, p.tumble, p.tumbleDark)],
-      ...scatterAround(31, 16, 0, W, 1260, 1880, AVOID, (x, y, rr) =>
-        sandRipples(x, y, 0.8 + rr() * 0.6, p.ripple),
-      ),
-      ...scatterAround(43, 30, 0, W, 1220, 1900, AVOID, (x, y, rr) =>
-        grassTuft(x, y, 0.7 + rr() * 0.5, rr() < 0.5 ? p.dryGrass : p.dryGrassDark),
-      ),
-      ...scatterAround(57, 12, 0, W, 1260, 1880, AVOID, (x, y, rr) =>
-        pebbles(x, y, 0.8 + rr() * 0.6, p.rockLight, p.rock),
-      ),
-    ]);
+    out += layered(desertLayers(p, mode).loose);
     return out;
   },
   front: (p) =>
@@ -614,6 +704,94 @@ const desert: SceneDef = {
     grassTuft(2600, 2004, 2, p.dryGrassDark) +
     rock(2700, 2036, 1.1, p.rock, p.rockShade, p.rockLight) +
     pricklyPear(3420, 2016, 1.25, p.pear, p.pearDark, p.pearFruit, p.spine),
+  interactives: [
+    {
+      id: 'sun',
+      box: [2701, 21, 558, 558],
+      kind: 'spin',
+      origin: [2980, 300],
+      effect: 'sparkle',
+      sound: 'shine',
+      night: { kind: 'rock', effect: 'stars', sound: 'twinkle' },
+      render: (p, mode) =>
+        mode === 'day'
+          ? sun(2980, 300, 108, p.sun, p.sunRay, p.face)
+          : moon(2980, 300, 98, p.sun, p.sunRay, p.face),
+    },
+    {
+      id: 'palms',
+      box: [2118, 633, 948, 641],
+      kind: 'shake',
+      effect: 'leaves',
+      sound: 'rustle',
+      render: drawProp('palms'),
+    },
+    {
+      id: 'saguaroMid',
+      box: [1596, 951, 204, 338],
+      kind: 'wiggle',
+      origin: [1700, 1250],
+      effect: 'petals',
+      effectAt: [1700, 986],
+      sound: 'giggle',
+      render: drawProp('saguaroMid'),
+    },
+    {
+      id: 'oasis',
+      box: [2222, 1137, 680, 233],
+      kind: 'pulse',
+      origin: [2560, 1262],
+      effect: 'splash',
+      effectAt: [2560, 1255],
+      sound: 'splash',
+      render: drawProp('oasis'),
+    },
+    {
+      id: 'saguaroEast',
+      box: [3174, 987, 269, 390],
+      kind: 'wiggle',
+      origin: [3330, 1330],
+      effect: 'petals',
+      effectAt: [3330, 1024],
+      sound: 'giggle',
+      render: drawProp('saguaroEast'),
+    },
+    {
+      id: 'saguaroWest',
+      box: [330, 974, 286, 433],
+      kind: 'wiggle',
+      origin: [460, 1360],
+      effect: 'petals',
+      effectAt: [460, 1013],
+      sound: 'giggle',
+      render: drawProp('saguaroWest'),
+    },
+    {
+      id: 'pricklyPear',
+      box: [1258, 1189, 203, 278],
+      kind: 'bounce',
+      effect: 'fruit',
+      sound: 'pop',
+      render: drawProp('pricklyPear'),
+    },
+    {
+      id: 'barrelCacti',
+      box: [689, 1411, 199, 172],
+      kind: 'bounce',
+      effect: 'petals',
+      sound: 'boing',
+      render: drawProp('barrelCacti'),
+    },
+    {
+      id: 'tumbleweed',
+      box: [1148, 1420, 204, 204],
+      kind: 'spin',
+      origin: [1250, 1521.7],
+      effect: 'smoke',
+      sound: 'boing',
+      render: drawProp('tumbleweed'),
+    },
+  ],
 };
 
 export default desert;

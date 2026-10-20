@@ -142,9 +142,9 @@ export function starField(
         ? path(
             spiky(x, y, s * 1.8, s * 0.45, 4, 45, 0.35),
             color,
-            ` opacity="${f(range(r, 0.6, 1))}"`,
+            ` fill-opacity="${f(range(r, 0.6, 1))}"`,
           )
-        : path(circle(x, y, s * 0.45), color, ` opacity="${f(range(r, 0.4, 0.9))}"`);
+        : path(circle(x, y, s * 0.45), color, ` fill-opacity="${f(range(r, 0.4, 0.9))}"`);
   }
   return out;
 }

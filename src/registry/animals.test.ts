@@ -42,3 +42,42 @@ describe('search ranking', () => {
     if (cow >= 0 && lion >= 0) expect(lion).toBeLessThan(cow);
   });
 });
+
+describe('localized search', () => {
+  it('matches names in other scripts', () => {
+    const korean = searchAnimals('사자', (def) => (def.id === 'lion' ? ['사자'] : []));
+    expect(korean[0]?.id).toBe('lion');
+    const partial = searchAnimals('사', (def) => (def.id === 'lion' ? ['사자'] : []));
+    expect(partial.map((d) => d.id)).toContain('lion');
+    const japanese = searchAnimals('ライオン', (def) => (def.id === 'lion' ? ['ライオン'] : []));
+    expect(japanese[0]?.id).toBe('lion');
+  });
+});
+
+describe('normalize', () => {
+  it('folds Latin accents but keeps other scripts intact', async () => {
+    const { normalize } = await import('./animals');
+    expect(normalize('Éléphant')).toBe('elephant');
+    expect(normalize('Đà điểu')).toBe('da dieu');
+    expect(normalize('が')).toBe('が');
+    expect(normalize('หมูเด้ง')).toBe('หมูเด้ง');
+    expect(normalize('사자!')).toBe('사자');
+  });
+});
+
+describe('normalize folds common typing variants', () => {
+  it('handles Cyrillic and Arabic letter variants', async () => {
+    const { normalize } = await import('./animals');
+    expect(normalize('Ёжик')).toBe('ежик');
+    expect(normalize('أسد')).toBe('اسد');
+    expect(normalize('زرافة')).toBe('زرافه');
+    expect(normalize('مُوسَى')).toBe('موسي');
+  });
+
+  it('lets an exact nickname beat a partial name match', () => {
+    const results = searchAnimals('mono', (def) =>
+      def.id === 'monkey' ? ['Mono'] : def.id === 'gibbon' ? ['Gibón', 'monogibbon'] : [],
+    );
+    expect(results[0]?.id).toBe('monkey');
+  });
+});

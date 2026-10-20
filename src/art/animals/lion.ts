@@ -22,7 +22,7 @@ const lion: AnimalDef = {
   name: 'Lion',
   aliases: ['king', 'big cat', 'simba', 'lioness'],
   group: 'mammal',
-  habitats: ['safari'],
+  habitats: ['safari', 'bible'],
   box: [380, 290],
   size: 230,
   locomotion: 'walk4',

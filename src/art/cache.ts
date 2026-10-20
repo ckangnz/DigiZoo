@@ -1,7 +1,7 @@
 import { renderAnimal } from './core/render';
 import type { AnimalDef, StyleId } from './core/types';
 import { cloud } from './scenes/props';
-import { renderScene } from './scenes/render';
+import { paletteFor, renderScene } from './scenes/render';
 import type { Mode, SceneDef } from './scenes/types';
 
 const toUrl = (svg: string) => URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
@@ -31,6 +31,29 @@ export function sceneUrls(def: SceneDef, mode: Mode): { back: string; front: str
   return urls;
 }
 
+const thumbs = new Map<string, string>();
+
+const strip = (svg: string) => svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+
+export function sceneThumbUrl(def: SceneDef): string {
+  let url = thumbs.get(def.id);
+  if (!url) {
+    const { back, front } = renderScene(def, 'day');
+    const p = paletteFor(def, 'day');
+    const layer = (inFront: boolean) =>
+      (def.interactives ?? [])
+        .filter((i) => !!i.front === inFront)
+        .map((i) => i.render(p, 'day'))
+        .join('');
+    const [w, h] = def.world;
+    url = toUrl(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w / 6}" height="${h / 6}">${strip(back)}${layer(false)}${strip(front)}${layer(true)}</svg>`,
+    );
+    thumbs.set(def.id, url);
+  }
+  return url;
+}
+
 export function releaseScenesExcept(themeId: string): void {
   for (const [key, urls] of scenes) {
     if (key.startsWith(`${themeId}:`)) continue;
@@ -45,9 +68,9 @@ let cloudSpriteUrl: string | null = null;
 export function cloudSprite(): string {
   if (!cloudSpriteUrl) {
     cloudSpriteUrl = toUrl(
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 130" width="260" height="130">${cloud(
-        124,
-        74,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" width="260" height="150">${cloud(
+        130,
+        96,
         1,
         '#ffffff',
         '#dbeaf7',

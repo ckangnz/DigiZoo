@@ -23,13 +23,27 @@ const GROUP_WORDS: Record<AnimalGroup, string[]> = {
   fish: ['fish', 'fishes', 'swim', 'swimming'],
   bug: ['bug', 'bugs', 'insect', 'insects', 'creepy'],
   sea: ['sea', 'ocean', 'water', 'swim'],
+  dinosaur: ['dinosaur', 'dinosaurs', 'dino', 'dinos', 'prehistoric'],
+  spooky: ['spooky', 'halloween', 'scary', 'monster', 'monsters'],
+  space: ['space', 'planet', 'planets', 'star', 'stars', 'galaxy'],
+  body: ['body', 'organ', 'organs', 'anatomy', 'inside'],
+  bible: ['bible', 'church', 'christian', 'sunday school', 'story', 'stories'],
 };
 
-function normalize(text: string): string {
+export function normalize(text: string): string {
   return text
-    .toLowerCase()
     .normalize('NFKD')
-    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/(\p{Script=Latin})\p{M}+/gu, '$1')
+    .normalize('NFC')
+    .toLowerCase()
+    .replace(/đ/g, 'd')
+    .replace(/ё/g, 'е')
+    .replace(/[أإآ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/ى/g, 'ي')
+    .replace(/[\u064B-\u0652\u0670]/g, '')
+    .replace(/[^\p{L}\p{N}\p{M} ]/gu, '')
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -39,7 +53,15 @@ function singular(word: string): string {
   return word;
 }
 
-function score(def: AnimalDef, q: string): number {
+function score(def: AnimalDef, q: string, extra: string[]): number {
+  let localBest = 0;
+  for (const term of extra.map(normalize)) {
+    if (!term) continue;
+    if (term === q) localBest = Math.max(localBest, 11);
+    else if (term.startsWith(q)) localBest = Math.max(localBest, 9);
+    else if (q.length >= 2 && term.includes(q)) localBest = Math.max(localBest, 6);
+  }
+  if (localBest) return localBest;
   const name = normalize(def.name);
   const id = def.id.replace(/-/g, ' ');
   const aliases = (def.aliases ?? []).map(normalize);
@@ -64,10 +86,13 @@ function score(def: AnimalDef, q: string): number {
   return best;
 }
 
-export function searchAnimals(query: string): AnimalDef[] {
+export function searchAnimals(
+  query: string,
+  localTerms: (def: AnimalDef) => string[] = () => [],
+): AnimalDef[] {
   const q = normalize(query);
   if (!q) return ANIMALS;
-  return ANIMALS.map((def) => ({ def, s: score(def, q) }))
+  return ANIMALS.map((def) => ({ def, s: score(def, q, localTerms(def)) }))
     .filter((r) => r.s > 0)
     .sort((a, b) => b.s - a.s || a.def.name.localeCompare(b.def.name))
     .map((r) => r.def);

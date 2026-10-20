@@ -5,12 +5,14 @@ import {
   ellipse,
   f,
   leaf,
+  pathBounds,
   poly,
   roundRect,
   scallop,
   smooth,
   translatePath,
   tube,
+  type Bounds,
   type Pt,
 } from '../core/paths';
 import {
@@ -36,7 +38,7 @@ import {
   sunflower,
 } from './props';
 import { range, rng } from './rng';
-import type { Palette, SceneDef } from './types';
+import type { Mode, Palette, SceneDef } from './types';
 
 const W = 3600;
 const H = 2000;
@@ -151,8 +153,15 @@ function windmill(
     ) +
     path(roundRect(x - 13 * s, y - 46 * s, 26 * s, 48 * s, 13 * s), spar) +
     path(circle(x, y - 120 * s, 11 * s), spar) +
-    blades +
+    `<g data-spin="" data-idle="spin" style="transform-origin: ${f(x)}px ${f(hubY)}px">${blades}</g>` +
     path(circle(x, hubY, 13 * s), cap)
+  );
+}
+
+function behindHill(id: string, hill: string, content: string): string {
+  return (
+    `<defs><clipPath id="${id}"><path d="M-300 -300H${W + 300}V${H + 300}H-300Z${hill}" clip-rule="evenodd"/></clipPath></defs>` +
+    group(content, '', ` clip-path="url(#${id})"`)
   );
 }
 
@@ -482,6 +491,127 @@ function daisy(
   );
 }
 
+type Layer = [number, string];
+
+function tappables(p: Palette, mode: Mode): Record<string, Layer[]> {
+  return {
+    barn: [
+      [
+        1110,
+        barn(1250, 1110, 1.35, p.barnWall, p.barnRoof, p.barnTrim, p.barnGlass) +
+          barnTrim(1250, 1110, 1.35, p.barnTrim) +
+          (mode === 'day' ? loftHay(1250, 1110, 1.35, p.hay) : barnGlow(1250, 1110, 1.35)),
+      ],
+    ],
+    haystack: [
+      [1140, haystack(1790, 1150, 0.85, p.hay, p.hayDark)],
+      [1180, hayBale(1700, 1190, 0.75, p.hay, p.hayDark)],
+    ],
+    sunflowersWest: [870, 930, 990].map((x, i): Layer => [
+      1160 + i * 4,
+      sunflower(x, 1160 + i * 4, 1 + (i % 2) * 0.15, p.sunPetal, p.sunCenter, p.stem),
+    ]),
+    sunflowersEast: [1960, 2040, 2115].map((x, i): Layer => [
+      1225 + i * 3,
+      sunflower(x, 1225 + i * 3, 0.95 + (i % 2) * 0.2, p.sunPetal, p.sunCenter, p.stem),
+    ]),
+    appleTree: [
+      [
+        1300,
+        roundTree(3170, 1300, 1.4, p.trunk, p.leaves, p.leavesDark) +
+          (
+            [
+              [3040, 1040],
+              [3110, 960],
+              [3200, 1010],
+              [3290, 950],
+              [3330, 1060],
+              [3160, 1120],
+              [3060, 1150],
+              [3250, 1140],
+              [3010, 1240, 1],
+              [3280, 1250, 1],
+            ] as [number, number, number?][]
+          )
+            .map(([ax, ay, ground]) => apple(ax, ay + (ground ? 60 : 0), 1, p.apple, p.stem))
+            .join(''),
+      ],
+    ],
+    pond: [
+      [
+        1490,
+        pond(2520, 1490, 380, 100, p.water, p.waterLight, p.waterRim) +
+          (mode === 'night'
+            ? stroke(curve(2400, 1476, 2560, 1476, -4), p.sun, 10, ' stroke-opacity=".5"') +
+              stroke(curve(2440, 1500, 2530, 1500, -3), p.sun, 8, ' stroke-opacity=".35"')
+            : '') +
+          lilyPad(2290, 1512, 42, 16, p.lily, -30) +
+          lilyPad(2350, 1536, 28, 10, p.lilyDark, 200) +
+          lilyPad(2620, 1548, 34, 12, p.lily, 160) +
+          flower(2294, 1504, 0.8, p.pink, p.center) +
+          duckHouse(2780, 1486, 0.95, p.duckHouse, p.duckRoof, p.hole, p.fencePost),
+      ],
+      [1540, reeds(2900, 1540, 1, p.reed, p.reedDark, p.cattail)],
+      [1590, rock(2420, 1596, 0.5, p.rock, p.rockShade, p.rockLight)],
+      [1594, rock(2490, 1594, 0.32, p.rock, p.rockShade, p.rockLight)],
+    ],
+    mud: [[1700, mudPuddle(810, 1700, 240, 62, p.mud, p.mudDark, p.mudLight)]],
+  };
+}
+
+function meadow(p: Palette): Layer[] {
+  return [
+    ...scatterAround(21, 70, 0, W, 1160, 1950, AVOID, (x, y, rr) =>
+      grassTuft(x, y, 0.8 + rr() * 0.6, rr() < 0.5 ? p.grassDark : p.stem),
+    ),
+    ...scatterAround(33, 30, 0, W, 1240, 1900, AVOID, (x, y, rr) => {
+      const c = [p.white, p.pink, p.purple, p.yellow][Math.floor(rr() * 4)];
+      return daisy(x, y, 1 + rr() * 0.4, c, c === p.yellow ? p.white : p.center, p.stem);
+    }),
+  ];
+}
+
+const shapes = (svg: string): Bounds[] =>
+  [...svg.matchAll(/ d="([^"]+)"/g)].map((m) => pathBounds(m[1]));
+
+const touches = (a: Bounds[], b: Bounds[]): boolean =>
+  a.some((r) =>
+    b.some((q) => r.minX < q.maxX && q.minX < r.maxX && r.minY < q.maxY && q.minY < r.maxY),
+  );
+
+type Split = { props: Record<string, Layer[]>; loose: Layer[] };
+
+let lastSplit: { p: Palette; mode: Mode; split: Split } | undefined;
+
+function farmLayers(p: Palette, mode: Mode): Split {
+  if (lastSplit?.p !== p || lastSplit.mode !== mode) {
+    lastSplit = { p, mode, split: splitLayers(p, mode) };
+  }
+  return lastSplit.split;
+}
+
+function splitLayers(p: Palette, mode: Mode): Split {
+  const props = tappables(p, mode);
+  const outlines = Object.entries(props)
+    .reverse()
+    .map(([id, layers]) => ({ id, parts: layers.map(([k, svg]) => [k, shapes(svg)] as const) }));
+  const loose: Layer[] = [];
+  for (const item of meadow(p)) {
+    const s = shapes(item[1]);
+    const owner = outlines.find(({ parts }) =>
+      parts.some(([k, b]) => k < item[0] && touches(s, b)),
+    );
+    if (owner) props[owner.id].push(item);
+    else loose.push(item);
+  }
+  return { props, loose };
+}
+
+const drawProp =
+  (id: string) =>
+  (p: Palette, mode: Mode): string =>
+    layered(farmLayers(p, mode).props[id]);
+
 const farm: SceneDef = {
   id: 'farm',
   world: [W, H],
@@ -497,6 +627,9 @@ const farm: SceneDef = {
     { animal: 'pig', x: 810, y: 1650 },
     { animal: 'cat', x: 1980, y: 1660, flip: true },
     { animal: 'dog', x: 1340, y: 1745 },
+    { animal: 'rabbit', x: 1700, y: 1530 },
+    { animal: 'donkey', x: 3360, y: 1180, flip: true },
+    { animal: 'goose', x: 2880, y: 1420, flip: true },
   ],
   day: {
     skyTop: '#6cc3f2',
@@ -598,11 +731,7 @@ const farm: SceneDef = {
   },
   back: (p, mode) => {
     let out = sky(W, H, p.skyTop, p.skyBottom);
-    out +=
-      mode === 'day'
-        ? sun(640, 290, 104, p.sun, p.sunRay, p.face)
-        : starField(29, 80, 40, 40, W - 40, 800, '#fff6d6') +
-          moon(640, 290, 96, p.sun, p.sunRay, p.face);
+    if (mode === 'night') out += starField(29, 80, 40, 40, W - 40, 800, '#fff6d6');
     out += patchworkHill(
       'far1',
       3,
@@ -616,7 +745,6 @@ const farm: SceneDef = {
     out += [420, 600, 1900, 2050, 3300]
       .map((x, i) => lollipopTree(x, 868 + (i % 2) * 14, 0.7, p.trunkFar, p.treeFar))
       .join('');
-    out += windmill(2560, 960, 0.95, p.mill, p.millRoof, p.millBlade, p.millSpar);
     out += patchworkHill(
       'far2',
       11,
@@ -669,80 +797,18 @@ const farm: SceneDef = {
       tube(lane, (u) => 36 + 176 * u),
       p.dirt,
     );
-    const barnX = 1250;
-    const barnY = 1110;
-    const barnS = 1.35;
     out += layered([
       [
         1072,
         silo(1585, 1092, 1.3, p.siloWall, p.siloRoof, p.siloBand) +
           ladder(1630, 1092, 330, p.siloBand),
       ],
-      [
-        barnY,
-        barn(barnX, barnY, barnS, p.barnWall, p.barnRoof, p.barnTrim, p.barnGlass) +
-          barnTrim(barnX, barnY, barnS, p.barnTrim) +
-          (mode === 'day' ? loftHay(barnX, barnY, barnS, p.hay) : barnGlow(barnX, barnY, barnS)),
-      ],
       [1150, fence(-40, 760, 1170, p.fencePost, p.fenceRail)],
       [1185, fence(1960, 3640, 1205, p.fencePost, p.fenceRail)],
-      [1140, haystack(1790, 1150, 0.85, p.hay, p.hayDark)],
-      [1180, hayBale(1700, 1190, 0.75, p.hay, p.hayDark)],
       [1140, bush(820, 1140, 0.5, p.bush, p.bushDark, p.bushDot)],
-      ...[870, 930, 990].map((x, i): [number, string] => [
-        1160 + i * 4,
-        sunflower(x, 1160 + i * 4, 1 + (i % 2) * 0.15, p.sunPetal, p.sunCenter, p.stem),
-      ]),
-      ...[1960, 2040, 2115].map((x, i): [number, string] => [
-        1225 + i * 3,
-        sunflower(x, 1225 + i * 3, 0.95 + (i % 2) * 0.2, p.sunPetal, p.sunCenter, p.stem),
-      ]),
-      [
-        1300,
-        roundTree(3170, 1300, 1.4, p.trunk, p.leaves, p.leavesDark) +
-          (
-            [
-              [3040, 1040],
-              [3110, 960],
-              [3200, 1010],
-              [3290, 950],
-              [3330, 1060],
-              [3160, 1120],
-              [3060, 1150],
-              [3250, 1140],
-              [3010, 1240, 1],
-              [3280, 1250, 1],
-            ] as [number, number, number?][]
-          )
-            .map(([ax, ay, ground]) => apple(ax, ay + (ground ? 60 : 0), 1, p.apple, p.stem))
-            .join(''),
-      ],
       [1400, veggiePatch(470, 1400, 560, 170, p)],
-      [
-        1490,
-        pond(2520, 1490, 380, 100, p.water, p.waterLight, p.waterRim) +
-          (mode === 'night'
-            ? stroke(curve(2400, 1476, 2560, 1476, -4), p.sun, 10, ' stroke-opacity=".5"') +
-              stroke(curve(2440, 1500, 2530, 1500, -3), p.sun, 8, ' stroke-opacity=".35"')
-            : '') +
-          lilyPad(2290, 1512, 42, 16, p.lily, -30) +
-          lilyPad(2350, 1536, 28, 10, p.lilyDark, 200) +
-          lilyPad(2620, 1548, 34, 12, p.lily, 160) +
-          flower(2294, 1504, 0.8, p.pink, p.center) +
-          duckHouse(2780, 1486, 0.95, p.duckHouse, p.duckRoof, p.hole, p.fencePost),
-      ],
       [1462, reeds(2170, 1478, 1.1, p.reed, p.reedDark, p.cattail)],
-      [1540, reeds(2900, 1540, 1, p.reed, p.reedDark, p.cattail)],
-      [1590, rock(2420, 1596, 0.5, p.rock, p.rockShade, p.rockLight)],
-      [1594, rock(2490, 1594, 0.32, p.rock, p.rockShade, p.rockLight)],
-      [1700, mudPuddle(810, 1700, 240, 62, p.mud, p.mudDark, p.mudLight)],
-      ...scatterAround(21, 70, 0, W, 1160, 1950, AVOID, (x, y, rr) =>
-        grassTuft(x, y, 0.8 + rr() * 0.6, rr() < 0.5 ? p.grassDark : p.stem),
-      ),
-      ...scatterAround(33, 30, 0, W, 1240, 1900, AVOID, (x, y, rr) => {
-        const c = [p.white, p.pink, p.purple, p.yellow][Math.floor(rr() * 4)];
-        return daisy(x, y, 1 + rr() * 0.4, c, c === p.yellow ? p.white : p.center, p.stem);
-      }),
+      ...farmLayers(p, mode).loose,
     ]);
     return out;
   },
@@ -756,6 +822,98 @@ const farm: SceneDef = {
     bush(2600, 2030, 1.4, p.bush, p.bushDark) +
     daisy(3000, 1970, 1.5, p.yellow, p.white, p.stem) +
     bush(3480, 2010, 1.8, p.bush, p.bushDark, p.bushDot),
+  interactives: [
+    {
+      id: 'sun',
+      box: [370, 20, 540, 540],
+      kind: 'spin',
+      origin: [640, 290],
+      effect: 'sparkle',
+      sound: 'shine',
+      night: { kind: 'rock', effect: 'stars', sound: 'twinkle' },
+      render: (p, mode) =>
+        mode === 'day'
+          ? sun(640, 290, 104, p.sun, p.sunRay, p.face)
+          : moon(640, 290, 96, p.sun, p.sunRay, p.face),
+    },
+    {
+      id: 'windmill',
+      box: [2403, 600, 314, 372],
+      kind: 'pulse',
+      origin: [2560, 950],
+      effect: 'sparkle',
+      effectAt: [2560, 757],
+      sound: 'whirr',
+      render: (p) =>
+        behindHill(
+          'millHill',
+          hillParts(11, 1000, 120, 5).d,
+          windmill(2560, 960, 0.95, p.mill, p.millRoof, p.millBlade, p.millSpar),
+        ),
+    },
+    {
+      id: 'barn',
+      box: [936, 579, 628, 558],
+      kind: 'wiggle',
+      origin: [1250, 1110],
+      effect: 'stars',
+      effectAt: [1250, 760],
+      sound: 'creak',
+      render: drawProp('barn'),
+    },
+    {
+      id: 'haystack',
+      box: [1619, 1041, 285, 180],
+      kind: 'bounce',
+      effect: 'smoke',
+      sound: 'thump',
+      render: drawProp('haystack'),
+    },
+    {
+      id: 'sunflowersWest',
+      box: [804, 897, 252, 296],
+      kind: 'bounce',
+      effect: 'petals',
+      sound: 'pop',
+      render: drawProp('sunflowersWest'),
+    },
+    {
+      id: 'sunflowersEast',
+      box: [1896, 961, 283, 312],
+      kind: 'bounce',
+      effect: 'petals',
+      sound: 'pop',
+      render: drawProp('sunflowersEast'),
+    },
+    {
+      id: 'appleTree',
+      box: [2951, 816, 427, 539],
+      kind: 'shake',
+      effect: 'fruit',
+      sound: 'rustle',
+      render: drawProp('appleTree'),
+    },
+    {
+      id: 'pond',
+      box: [2097, 1355, 859, 307],
+      kind: 'pulse',
+      origin: [2520, 1490],
+      effect: 'splash',
+      effectAt: [2520, 1480],
+      sound: 'splash',
+      render: drawProp('pond'),
+    },
+    {
+      id: 'mud',
+      box: [483, 1619, 629, 178],
+      kind: 'pulse',
+      origin: [810, 1700],
+      effect: 'splash',
+      effectAt: [810, 1690],
+      sound: 'splash',
+      render: drawProp('mud'),
+    },
+  ],
 };
 
 export default farm;

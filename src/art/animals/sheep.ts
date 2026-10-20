@@ -35,7 +35,7 @@ const sheep: AnimalDef = {
   name: 'Sheep',
   aliases: ['lamb', 'baa', 'ewe', 'ram', 'baa baa'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'bible'],
   box: [330, 250],
   size: 170,
   locomotion: 'walk4',

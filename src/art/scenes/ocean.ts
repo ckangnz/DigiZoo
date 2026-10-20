@@ -5,10 +5,12 @@ import {
   ellipse,
   f,
   leaf,
+  pathBounds,
   roundRect,
   smooth,
   spiky,
   tube,
+  type Bounds,
   type Pt,
 } from '../core/paths';
 import {
@@ -29,7 +31,7 @@ import {
   sun,
 } from './props';
 import { range, rng } from './rng';
-import type { Palette, SceneDef } from './types';
+import type { Mode, Palette, SceneDef } from './types';
 
 const W = 3600;
 const H = 2000;
@@ -41,6 +43,27 @@ function waveLine(y: number, amp: number, step: number): string {
     d += `Q${f(x + step / 2)} ${f(y - amp)} ${f(x + step)} ${f(y)}`;
   }
   return d;
+}
+
+const SEA = `${waveLine(SURFACE, 16, 120)}L${W + 60} ${H + 60}L-60 ${H + 60}Z`;
+
+function aboveWater(id: string, content: string): string {
+  return (
+    `<defs><clipPath id="${id}"><path d="M-300 -300H${W + 300}V${H + 300}H-300Z${SEA}" clip-rule="evenodd"/></clipPath></defs>` +
+    group(content, '', ` clip-path="url(#${id})"`)
+  );
+}
+
+function surfaceTint(p: Palette): string {
+  return (
+    path(
+      `${waveLine(SURFACE, 16, 120)}L${W + 60} ${SURFACE + 90}L-60 ${SURFACE + 90}Z`,
+      p.waterTop,
+      ' opacity=".6"',
+    ) +
+    stroke(waveLine(SURFACE + 16, 10, 120), p.surfaceLight, 10, ' stroke-opacity=".8"') +
+    group(lightRays(-200, W, 1500, p.ray, 10, 5), `translate(0 ${SURFACE})`)
+  );
 }
 
 function floorD(seed: number, baseY: number, amp: number, bumps: number): string {
@@ -56,13 +79,23 @@ function floorD(seed: number, baseY: number, amp: number, bumps: number): string
   return `${smooth(pts, false)}L${W + 200} ${H + 50}L-200 ${H + 50}Z`;
 }
 
-function island(x: number, p: Palette): string {
+function islandSand(x: number, p: Palette): string {
   return (
     path(ellipse(x, SURFACE + 6, 170, 46), p.islandDark) +
-    path(ellipse(x - 10, SURFACE + 2, 150, 40), p.island) +
+    path(ellipse(x - 10, SURFACE + 2, 150, 40), p.island)
+  );
+}
+
+function islandPalms(x: number, p: Palette): string {
+  return (
     palm(x + 20, SURFACE - 22, 0.42, 34, p.trunk, p.trunkDark, p.frond, p.frondDark, p.coconut) +
     palm(x - 50, SURFACE - 16, 0.3, -30, p.trunk, p.trunkDark, p.frond, p.frondDark)
   );
+}
+
+function hullPath(x: number): string {
+  const y = SURFACE + 4;
+  return `M${f(x - 120)} ${f(y - 40)}L${f(x + 130)} ${f(y - 40)}Q${f(x + 110)} ${f(y + 16)} ${f(x + 60)} ${f(y + 20)}L${f(x - 70)} ${f(y + 20)}Q${f(x - 110)} ${f(y + 16)} ${f(x - 120)} ${f(y - 40)}Z`;
 }
 
 function sailboat(x: number, p: Palette, lit: boolean): string {
@@ -75,10 +108,7 @@ function sailboat(x: number, p: Palette, lit: boolean): string {
       p.sail2,
     ) +
     path(`M${f(x)} ${f(y - 190)}L${f(x + 34)} ${f(y - 180)}L${f(x)} ${f(y - 168)}Z`, p.flag) +
-    path(
-      `M${f(x - 120)} ${f(y - 40)}L${f(x + 130)} ${f(y - 40)}Q${f(x + 110)} ${f(y + 16)} ${f(x + 60)} ${f(y + 20)}L${f(x - 70)} ${f(y + 20)}Q${f(x - 110)} ${f(y + 16)} ${f(x - 120)} ${f(y - 40)}Z`,
-      p.hull,
-    ) +
+    path(hullPath(x), p.hull) +
     path(roundRect(x - 112, y - 40, 236, 12, 6), p.hullStripe) +
     path(circle(x - 50, y - 10, 9), p.hullStripe) +
     path(circle(x + 10, y - 10, 9), p.hullStripe) +
@@ -307,23 +337,113 @@ function bubbles(x: number, y: number, s: number, color: string): string {
     .join('');
 }
 
-function glowDots(seed: number, count: number): string {
-  const colors = ['#7ff6ff', '#a6ffbf', '#d2b0ff'];
-  let defs = '';
-  colors.forEach((c, i) => (defs += radialGlow(`bio${i}`, c, 0.75)));
+const BIO = ['#7ff6ff', '#a6ffbf', '#d2b0ff'];
+
+type Dot = { box: Bounds; svg: string };
+
+function plankton(seed: number, count: number): Dot[] {
   const r = rng(seed);
-  let out = '';
+  const out: Dot[] = [];
   for (let i = 0; i < count; i++) {
     const x = range(r, 30, W - 30);
     const y = range(r, SURFACE + 120, 1880);
-    const k = Math.floor(r() * colors.length);
+    const k = Math.floor(r() * BIO.length);
     const rr = range(r, 4, 9);
-    out +=
-      `<circle cx="${f(x)}" cy="${f(y)}" r="${f(rr * 5)}" fill="url(#bio${k})"/>` +
-      path(circle(x, y, rr * 0.8), colors[k]);
+    const halo = rr * 5 + 6;
+    out.push({
+      box: { minX: x - halo, minY: y - halo, maxX: x + halo, maxY: y + halo },
+      svg:
+        `<circle cx="${f(x)}" cy="${f(y)}" r="${f(rr * 5)}" fill="url(#bio${k})"/>` +
+        path(circle(x, y, rr * 0.8), BIO[k]),
+    });
   }
-  return `<defs>${defs}</defs>` + out;
+  return out;
 }
+
+function glowDots(dots: Dot[]): string {
+  if (!dots.length) return '';
+  return (
+    `<defs>${BIO.map((c, i) => radialGlow(`bio${i}`, c, 0.75)).join('')}</defs>` +
+    dots.map((d) => d.svg).join('')
+  );
+}
+
+type ReefArt = [art: string, cover?: string];
+
+function reef(p: Palette, mode: Mode): Record<string, ReefArt> {
+  const bigRock = rock(820, 1702, 2.3, p.rock, p.rockShade, p.rockLight);
+  return {
+    kelp: [
+      kelp(3630, 1740, 1150, 1.1, p.kelp, p.kelpDark, 5) +
+        kelp(3480, 1730, 1380, 1.25, p.kelp, p.kelpDark, 9) +
+        kelp(3330, 1750, 1100, 1.05, p.kelp, p.kelpDark, 6) +
+        seaweed(3240, 1780, 330, 1.1, p.weed, 3),
+    ],
+    octopusRock: [
+      bigRock,
+      `<defs><clipPath id="octopusRock">${bigRock}</clipPath></defs>` +
+        group(
+          rock(1060, 1722, 1.2, p.rock, p.rockShade, p.rockLight),
+          '',
+          ' clip-path="url(#octopusRock)"',
+        ),
+    ],
+    coralOrange: [branchCoral(2680, 1716, 1.7, p.coralOrange, p.coralOrangeTip)],
+    coralRed: [branchCoral(1660, 1802, 0.85, p.coralRed, p.coralRedTip)],
+    chest: [
+      chest(2140, 1812, 1.05, p) +
+        (mode === 'night'
+          ? `<defs>${radialGlow('chestGlow', '#ffd36b', 0.5)}</defs>` +
+            path(ellipse(2140, 1700, 170, 120), 'url(#chestGlow)')
+          : ''),
+    ],
+    starfish: [
+      `<g data-spin="" style="transform-origin: 1800px 1866px">${starfish(1800, 1866, 1.4, 10, p.star, p.starDot)}</g>`,
+    ],
+  };
+}
+
+const shapes = (svg: string): Bounds[] =>
+  [...svg.matchAll(/ d="([^"]+)"/g)].map((m) => pathBounds(m[1]));
+
+const touches = (a: Bounds[], b: Bounds[]): boolean =>
+  a.some((r) =>
+    b.some((q) => r.minX < q.maxX && q.minX < r.maxX && r.minY < q.maxY && q.minY < r.maxY),
+  );
+
+type Reef = { props: Record<string, ReefArt>; dots: Record<string, Dot[]>; loose: Dot[] };
+
+let lastReef: { p: Palette; mode: Mode; reef: Reef } | undefined;
+
+function reefLayers(p: Palette, mode: Mode): Reef {
+  if (lastReef?.p !== p || lastReef.mode !== mode) {
+    lastReef = { p, mode, reef: splitReef(p, mode) };
+  }
+  return lastReef.reef;
+}
+
+function splitReef(p: Palette, mode: Mode): Reef {
+  const props = reef(p, mode);
+  const outlines = Object.entries(props)
+    .reverse()
+    .map(([id, [art]]) => ({ id, b: shapes(art) }));
+  const dots: Record<string, Dot[]> = {};
+  const loose: Dot[] = [];
+  for (const d of plankton(61, 60)) {
+    const owner = outlines.find(({ b }) => touches([d.box], b));
+    if (owner) (dots[owner.id] ??= []).push(d);
+    else loose.push(d);
+  }
+  return { props, dots, loose };
+}
+
+const drawReef =
+  (id: string) =>
+  (p: Palette, mode: Mode): string => {
+    const { props, dots } = reefLayers(p, mode);
+    const [art, cover = ''] = props[id];
+    return art + cover + (mode === 'night' ? glowDots(dots[id] ?? []) : '');
+  };
 
 const ocean: SceneDef = {
   id: 'ocean',
@@ -340,6 +460,10 @@ const ocean: SceneDef = {
     { animal: 'fish', x: 1450, y: 1300, flip: true },
     { animal: 'octopus', x: 860, y: 1530 },
     { animal: 'crab', x: 1900, y: 1785 },
+    { animal: 'orca', x: 2900, y: 520, flip: true },
+    { animal: 'stingray', x: 1250, y: 1150 },
+    { animal: 'pufferfish', x: 2700, y: 1060 },
+    { animal: 'seahorse', x: 3110, y: 1300, flip: true },
   ],
   day: {
     skyTop: '#8cd6fb',
@@ -449,22 +573,10 @@ const ocean: SceneDef = {
         [0.45, p.waterMid],
         [1, p.waterBottom],
       ])}</defs>` + `<rect width="${W}" height="${SURFACE + 40}" fill="url(#oceanSky)"/>`;
-    out +=
-      mode === 'day'
-        ? sun(2980, 118, 78, p.sun, p.sunRay, p.face)
-        : starField(37, 40, 30, 20, W - 30, SURFACE - 40, '#fff6d6') +
-          moon(2980, 118, 72, p.sun, p.sunRay, p.face);
-    out += island(560, p);
-    const surf = waveLine(SURFACE, 16, 120);
-    out += path(`${surf}L${W + 60} ${H + 60}L-60 ${H + 60}Z`, 'url(#oceanWater)');
-    out += sailboat(1900, p, mode === 'night');
-    out += path(
-      `${surf}L${W + 60} ${SURFACE + 90}L-60 ${SURFACE + 90}Z`,
-      p.waterTop,
-      ' opacity=".6"',
-    );
-    out += stroke(waveLine(SURFACE + 16, 10, 120), p.surfaceLight, 10, ' stroke-opacity=".8"');
-    out += group(lightRays(-200, W, 1500, p.ray, 10, 5), `translate(0 ${SURFACE})`);
+    if (mode === 'night') out += starField(37, 40, 30, 20, W - 30, SURFACE - 40, '#fff6d6');
+    out += islandSand(560, p);
+    out += path(SEA, 'url(#oceanWater)');
+    out += surfaceTint(p);
     out += path(floorD(4, 1560, 90, 8), p.farReef2);
     out += [
       [300, 1500, 0.9],
@@ -518,11 +630,7 @@ const ocean: SceneDef = {
       [1540, kelp(-30, 1740, 1150, 1.1, p.kelp, p.kelpDark, 2)],
       [1560, kelp(110, 1730, 1350, 1.2, p.kelp, p.kelpDark, 1)],
       [1590, kelp(270, 1760, 950, 1, p.kelp, p.kelpDark, 4)],
-      [1600, kelp(3330, 1750, 1100, 1.05, p.kelp, p.kelpDark, 6)],
-      [1570, kelp(3480, 1730, 1380, 1.25, p.kelp, p.kelpDark, 9)],
-      [1550, kelp(3630, 1740, 1150, 1.1, p.kelp, p.kelpDark, 5)],
       [1640, fanCoral(990, 1650, 1.25, p.coralPurple, p.fanVein)],
-      [1700, rock(820, 1702, 2.3, p.rock, p.rockShade, p.rockLight)],
       [1712, rock(1060, 1722, 1.2, p.rock, p.rockShade, p.rockLight)],
       [1715, branchCoral(560, 1716, 1.6, p.coralPink, p.coralPinkTip)],
       [1745, brainCoral(1170, 1748, 1.2, p.brain, p.brainDark)],
@@ -532,28 +640,18 @@ const ocean: SceneDef = {
       [1778, seaweed(1350, 1782, 220, 0.9, p.weedDark, 5)],
       [1650, fanCoral(3060, 1660, 1.3, p.coralPurple, p.fanVein)],
       [1700, rock(2860, 1704, 2, p.rock, p.rockShade, p.rockLight)],
-      [1716, branchCoral(2680, 1716, 1.7, p.coralOrange, p.coralOrangeTip)],
       [1750, brainCoral(2545, 1752, 1.05, p.brain, p.brainDark)],
       [1764, anemone(3150, 1766, 1.1, p.coralRed, p.anemoneTip)],
       [1772, sponges(2440, 1774, 0.9, p.coralPink, p.coralRed)],
-      [1776, seaweed(3240, 1780, 330, 1.1, p.weed, 3)],
       [1786, seaweed(2985, 1790, 200, 0.9, p.weedDark, 8)],
-      [1810, chest(2140, 1812, 1.05, p)],
-      [1800, branchCoral(1660, 1802, 0.85, p.coralRed, p.coralRedTip)],
       [1836, shell(1500, 1836, 1.2, p.shell, p.shellRidge)],
       [1880, shell(2460, 1880, 1.3, p.shell2, p.shellRidge2)],
-      [1866, starfish(1800, 1866, 1.4, 10, p.star, p.starDot)],
       [1900, starfish(2900, 1902, 1.3, -14, p.star2, p.star2Dot)],
       [1890, shell(740, 1892, 1.1, p.shell2, p.shellRidge2)],
       [1620, bubbles(2170, 1660, 1, p.bubble)],
       [1500, bubbles(610, 1500, 0.8, p.bubble)],
     ]);
-    if (mode === 'night') {
-      out +=
-        `<defs>${radialGlow('chestGlow', '#ffd36b', 0.5)}</defs>` +
-        `<ellipse cx="2140" cy="1700" rx="170" ry="120" fill="url(#chestGlow)"/>` +
-        glowDots(61, 60);
-    }
+    if (mode === 'night') out += glowDots(reefLayers(p, mode).loose);
     return out;
   },
   front: (p) =>
@@ -564,6 +662,99 @@ const ocean: SceneDef = {
     rock(2620, 2040, 1.3, p.rock, p.rockShade, p.rockLight) +
     branchCoral(3360, 2036, 1.5, p.coralOrange, p.coralOrangeTip) +
     seaweed(3520, 2040, 320, 1.4, p.weedDark, 13),
+  interactives: [
+    {
+      id: 'sun',
+      box: [2773, 0, 414, 270],
+      kind: 'spin',
+      origin: [2980, 118],
+      effect: 'sparkle',
+      sound: 'shine',
+      night: { kind: 'rock', effect: 'stars', sound: 'twinkle' },
+      render: (p, mode) =>
+        aboveWater(
+          'sunSea',
+          mode === 'day'
+            ? sun(2980, 118, 78, p.sun, p.sunRay, p.face)
+            : moon(2980, 118, 72, p.sun, p.sunRay, p.face),
+        ),
+    },
+    {
+      id: 'island',
+      box: [438, 7, 240, 257],
+      kind: 'shake',
+      origin: [545, 238],
+      effect: 'leaves',
+      sound: 'rustle',
+      render: (p) => islandPalms(560, p),
+    },
+    {
+      id: 'sailboat',
+      box: [1760, 0, 290, 294],
+      kind: 'rock',
+      origin: [1900, 250],
+      effect: 'splash',
+      effectAt: [1900, 262],
+      sound: 'honk',
+      render: (p, mode) =>
+        sailboat(1900, p, mode === 'night') +
+        `<defs><clipPath id="hull"><path d="${hullPath(1900)}"/></clipPath></defs>` +
+        group(surfaceTint(p), '', ' clip-path="url(#hull)"'),
+    },
+    {
+      id: 'kelp',
+      box: [3181, 209, 419, 1609],
+      kind: 'wiggle',
+      origin: [3435, 1750],
+      effect: 'bubbles',
+      sound: 'swoosh',
+      render: drawReef('kelp'),
+    },
+    {
+      id: 'octopusRock',
+      box: [615, 1496, 467, 292],
+      kind: 'wiggle',
+      effect: 'bubbles',
+      sound: 'bubble',
+      render: drawReef('octopusRock'),
+    },
+    {
+      id: 'coralOrange',
+      box: [2534, 1361, 287, 432],
+      kind: 'wiggle',
+      origin: [2680, 1716],
+      effect: 'bubbles',
+      sound: 'bubble',
+      render: drawReef('coralOrange'),
+    },
+    {
+      id: 'coralRed',
+      box: [1581, 1614, 160, 227],
+      kind: 'wiggle',
+      origin: [1660, 1802],
+      effect: 'bubbles',
+      sound: 'bubble',
+      render: drawReef('coralRed'),
+    },
+    {
+      id: 'chest',
+      box: [1951, 1560, 378, 280],
+      kind: 'bounce',
+      origin: [2140, 1816],
+      effect: 'coins',
+      effectAt: [2130, 1700],
+      sound: 'coins',
+      render: drawReef('chest'),
+    },
+    {
+      id: 'starfish',
+      box: [1729, 1785, 142, 152],
+      kind: 'bounce',
+      effect: 'stars',
+      sound: 'twinkle',
+      render: drawReef('starfish'),
+    },
+  ],
 };
 
 export default ocean;

@@ -156,10 +156,14 @@ export function partDefs(ctx: Ctx, part: PartNode, shapes: Shape[]): string {
   if (spec.shade !== 'soft') {
     out += `<mask id="${P}m-${id}" maskUnits="userSpaceOnUse" x="${n2(b.minX - 20 * u)}" y="${n2(b.minY - 20 * u)}" width="${n2(bw + 40 * u)}" height="${n2(bh + 40 * u)}">${white}${dark(-0.55 * shift, -0.85 * shift)}</mask>`;
   } else {
+    const base = resolveColor(ctx.def, bases[0].fill, '#ffffff');
+    const light = base.startsWith('#') ? luminance(base) : 0.3;
+    const shadow = light > 0.7 ? '#6a6fa0' : '#2a1838';
+    const depth = light > 0.7 ? 0.15 : light > 0.5 ? 0.21 : 0.26;
     out +=
       `<linearGradient id="${P}g-${id}" gradientUnits="userSpaceOnUse" x1="${n2(b.minX + bw * 0.3)}" y1="${n2(b.minY)}" x2="${n2(b.minX + bw * 0.6)}" y2="${n2(b.maxY)}">` +
       `<stop offset="0" stop-color="#fff8e8" stop-opacity=".34"/><stop offset=".4" stop-color="#fff8e8" stop-opacity="0"/>` +
-      `<stop offset=".55" stop-color="#2a1838" stop-opacity="0"/><stop offset="1" stop-color="#2a1838" stop-opacity=".26"/></linearGradient>`;
+      `<stop offset=".55" stop-color="${shadow}" stop-opacity="0"/><stop offset="1" stop-color="${shadow}" stop-opacity="${depth}"/></linearGradient>`;
   }
   if (spec.shine > 0 && Math.min(bw, bh) > 14 * u) {
     out += `<mask id="${P}r-${id}" maskUnits="userSpaceOnUse" x="${n2(b.minX - 20 * u)}" y="${n2(b.minY - 20 * u)}" width="${n2(bw + 40 * u)}" height="${n2(bh + 40 * u)}">${white}${dark(0.35 * shift, 0.5 * shift)}</mask>`;

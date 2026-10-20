@@ -176,6 +176,51 @@ const PRESETS: Record<Locomotion, Record<string, Spec>> = {
     head: { rotate: 2, phase: 0.2 },
     antenna: { rotate: 8, phase: 0.1, freq: 2 },
   },
+  float: {
+    root: (phi, def) => ({
+      ty: 0.05 * height(def) * Math.sin(Math.PI * phi),
+      rot: 4 * Math.sin(Math.PI * phi + 1),
+    }),
+    arm: { rotate: 10, phase: 0.2 },
+    tail: { rotate: 6, phase: 0.3 },
+    head: { rotate: 2, phase: 0.1 },
+    wingN: { rotate: 18 },
+    wingF: { rotate: 18, phase: 0.1 },
+    legN: { rotate: 8, phase: 0.5 },
+    legF: { rotate: 8 },
+  },
+  beat: {
+    root: (phi) => {
+      const p = phi - Math.floor(phi);
+      const lub = Math.exp(-((p - 0.08) ** 2) / 0.0025);
+      const dub = 0.65 * Math.exp(-((p - 0.32) ** 2) / 0.0025);
+      const k = 1 + 0.08 * (lub + dub);
+      return { sx: k, sy: k };
+    },
+    arm: { rotate: 6, phase: 0.1 },
+  },
+  breathe: {
+    root: (phi) => {
+      const k = 0.5 - 0.5 * Math.cos(TAU * phi);
+      return { sx: 1 + 0.045 * k, sy: 1 + 0.07 * k };
+    },
+    arm: { rotate: 5 },
+  },
+  wobble: {
+    root: (phi) => ({
+      rot: 5 * Math.sin(TAU * phi),
+      sx: 1 + 0.04 * Math.sin(TAU * 2 * phi),
+      sy: 1 - 0.04 * Math.sin(TAU * 2 * phi),
+    }),
+    arm: { rotate: 10, phase: 0.25 },
+    head: { rotate: 3 },
+  },
+  roll: {
+    root: (phi, def) => {
+      const diameter = 0.9 * Math.min(def.box[0], def.box[1]);
+      return { rot: (360 * gaitStride(def) * phi) / (Math.PI * diameter) };
+    },
+  },
   pulse: {
     root: (phi, def) => ({ ty: -0.05 * height(def) * Math.sin(TAU * (phi - 0.15)) }),
     bell: (phi) => {
@@ -196,11 +241,23 @@ const PRESETS: Record<Locomotion, Record<string, Spec>> = {
   },
 };
 
+const blink = (phi: number) => {
+  const p = phi - Math.floor(phi);
+  return Math.max(0, 1 - Math.abs(p - 0.86) / 0.05);
+};
+
+const SHARED: Record<string, Spec> = {
+  spinner: (phi) => ({ rot: 360 * (phi - Math.floor(phi)) }),
+  lid: (phi) => ({ sy: 1 - 0.92 * blink(phi) }),
+  flame: { scaleY: 0.22, scaleX: -0.06, freq: 4 },
+  sparkle: { scaleX: 0.25, scaleY: 0.25, freq: 2, wave: 'abs' },
+};
+
 function lookup(loco: Locomotion, role: string): Spec | undefined {
   const table = PRESETS[loco];
   if (table[role]) return table[role];
   const generic = role.replace(/(N|F|\d+[NF]?|\d+)$/, '');
-  return table[generic];
+  return table[generic] ?? SHARED[role] ?? SHARED[generic];
 }
 
 export function partPose(def: AnimalDef, part: PartNode, phi: number): Pose {
@@ -228,6 +285,11 @@ export function rootPivot(def: AnimalDef): [number, number] {
     case 'flutter':
     case 'swim':
     case 'pulse':
+    case 'float':
+    case 'beat':
+    case 'breathe':
+    case 'wobble':
+    case 'roll':
       return [w / 2, h / 2];
     default:
       return [w / 2, h];
@@ -251,6 +313,11 @@ const DEFAULT_PERIOD: Record<Locomotion, number> = {
   slither: 1.2,
   crawl: 0.9,
   pulse: 1.4,
+  float: 1.8,
+  beat: 0.9,
+  breathe: 2.6,
+  wobble: 1.2,
+  roll: 1.2,
 };
 
 const DEFAULT_STRIDE: Record<Locomotion, number> = {
@@ -264,6 +331,11 @@ const DEFAULT_STRIDE: Record<Locomotion, number> = {
   slither: 0.22,
   crawl: 0.14,
   pulse: 0.12,
+  float: 0.12,
+  beat: 0,
+  breathe: 0,
+  wobble: 0,
+  roll: 0.5,
 };
 
 export function gaitPeriod(def: AnimalDef): number {

@@ -44,7 +44,7 @@ const camel: AnimalDef = {
   name: 'Camel',
   aliases: ['dromedary', 'hump', 'humpy'],
   group: 'mammal',
-  habitats: ['desert'],
+  habitats: ['desert', 'bible'],
   box: [356, 298],
   size: 320,
   locomotion: 'walk4',

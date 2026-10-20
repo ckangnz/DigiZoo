@@ -9,6 +9,11 @@ const scenes = import.meta.glob<SceneDef>(
     '../art/scenes/desert.ts',
     '../art/scenes/farm.ts',
     '../art/scenes/ocean.ts',
+    '../art/scenes/dinosaur.ts',
+    '../art/scenes/halloween.ts',
+    '../art/scenes/space.ts',
+    '../art/scenes/body.ts',
+    '../art/scenes/bible.ts',
   ],
   { eager: true, import: 'default' },
 );
@@ -27,6 +32,11 @@ const META: Omit<ThemeMeta, 'scene'>[] = [
   { id: 'desert', name: 'Desert', accent: '#ee8848' },
   { id: 'farm', name: 'Farm', accent: '#e6574e' },
   { id: 'ocean', name: 'Ocean', accent: '#2f9fdd' },
+  { id: 'dinosaur', name: 'Dinosaurs', accent: '#6aa832' },
+  { id: 'halloween', name: 'Halloween', accent: '#f08a24' },
+  { id: 'space', name: 'Space', accent: '#6b63e0' },
+  { id: 'body', name: 'My Body', accent: '#ec6a8c' },
+  { id: 'bible', name: 'Bible', accent: '#9a62c9' },
 ];
 
 const sceneById = new Map(Object.values(scenes).map((s) => [s.id, s]));
