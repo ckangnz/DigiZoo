@@ -1,0 +1,13 @@
+node_modules
+dist
+dev-dist
+coverage
+test-results
+playwright-report
+.playwright-browsers
+*.local
+.DS_Store
+.claude/.cc-writes/
+.claude/settings.local.json
+.art-preview
+.audio-preview
