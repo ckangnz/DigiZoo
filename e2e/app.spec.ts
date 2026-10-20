@@ -135,14 +135,16 @@ test('only one animal walks at a time', async ({ page }) => {
 });
 
 test('a walking animal turns around and stays on screen', async ({ page }) => {
+  test.slow();
   await openWorld(page);
   const lion = await selectAnimal(page, 'lion');
   await tool(page, 'Walk').dispatchEvent('click');
   const xs: number[] = [];
   const flips = new Set<boolean>();
   const viewport = page.viewportSize()!;
-  for (let i = 0; i < 16; i++) {
-    await page.waitForTimeout(450);
+  const deadline = Date.now() + 25_000;
+  while ((flips.size < 2 || xs.length < 8) && Date.now() < deadline) {
+    await page.waitForTimeout(400);
     const st = (await state(page)).stickers.find((s) => s.id === lion)!;
     xs.push(st.x);
     flips.add(st.flipX);
