@@ -2998,3 +2998,27 @@ body.dragging-sticker * {
   opacity: 0;
   pointer-events: none;
 }
+
+.shadows {
+  z-index: 2;
+}
+
+.sticker-shadow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(52, 36, 16, 0.52),
+    rgba(52, 36, 16, 0.3) 55%,
+    rgba(52, 36, 16, 0)
+  );
+}
+
+.world.night .sticker-shadow {
+  background: radial-gradient(
+    closest-side,
+    rgba(6, 8, 32, 0.56),
+    rgba(6, 8, 32, 0.3) 55%,
+    rgba(6, 8, 32, 0)
+  );
+}

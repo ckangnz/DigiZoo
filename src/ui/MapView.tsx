@@ -8,6 +8,7 @@ import { EffectsLayer } from './EffectsLayer';
 import { InteractiveLayer } from './Interactives';
 import { SceneBack, SceneFront } from './SceneLayers';
 import { SelectionOverlay, Toolbar } from './Selection';
+import { ShadowLayer } from './Shadows';
 import { StickerLayer } from './Stickers';
 
 const World = memo(function World({ theme, night }: { theme: ThemeMeta; night: boolean }) {
@@ -32,6 +33,7 @@ const World = memo(function World({ theme, night }: { theme: ThemeMeta; night: b
       <Ambient scene={theme.scene} night={night} sky />
       <InteractiveLayer scene={theme.scene} night={night} front={false} />
       <Ambient scene={theme.scene} night={night} sky={false} />
+      <ShadowLayer />
       <StickerLayer />
       <EffectsLayer />
       <SceneFront scene={theme.scene} night={night} />

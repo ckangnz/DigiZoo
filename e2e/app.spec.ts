@@ -232,6 +232,13 @@ test('day and night toggle is remembered', async ({ page }) => {
   expect((await state(page)).night).toBe(true);
 });
 
+test('animals standing on the ground cast a soft shadow', async ({ page }) => {
+  await openWorld(page);
+  const shadows = page.locator('.sticker-shadow');
+  await expect(shadows.first()).toBeAttached();
+  expect(await shadows.count()).toBeLessThanOrEqual((await state(page)).stickers.length);
+});
+
 test('zoom buttons zoom in, out and back to the whole map', async ({ page }) => {
   await openWorld(page);
   const base = await cameraScale(page);

@@ -26,16 +26,16 @@ export interface ThemeMeta {
 }
 
 const META: Omit<ThemeMeta, 'scene'>[] = [
+  { id: 'farm', name: 'Farm', accent: '#e6574e' },
   { id: 'safari', name: 'Safari', accent: '#f2a93b' },
   { id: 'jungle', name: 'Jungle', accent: '#6fb83a' },
   { id: 'rainforest', name: 'Rainforest', accent: '#22a38a' },
   { id: 'desert', name: 'Desert', accent: '#ee8848' },
-  { id: 'farm', name: 'Farm', accent: '#e6574e' },
   { id: 'ocean', name: 'Ocean', accent: '#2f9fdd' },
   { id: 'dinosaur', name: 'Dinosaurs', accent: '#6aa832' },
-  { id: 'halloween', name: 'Halloween', accent: '#f08a24' },
   { id: 'space', name: 'Space', accent: '#6b63e0' },
   { id: 'body', name: 'My Body', accent: '#ec6a8c' },
+  { id: 'halloween', name: 'Halloween', accent: '#f08a24' },
   { id: 'bible', name: 'Bible', accent: '#9a62c9' },
 ];
 
