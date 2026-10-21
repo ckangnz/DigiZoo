@@ -315,7 +315,11 @@ test('feeding makes meat-eaters happy with meat and sad with carrots', async ({ 
   await page.locator('.food-btn[aria-label="Feed Meat"]').dispatchEvent('click');
   await expect(page.locator('.fx-feed.happy')).toHaveCount(1);
   await expect(page.locator('.sticker-body.anim-happy')).toHaveCount(1);
+  await expect(page.locator('.food-tray')).toHaveCount(0);
+  await expect(page.locator('.toolbar.resting')).toHaveCount(1);
   await page.waitForTimeout(2600);
+  await expect(page.locator('.toolbar.resting')).toHaveCount(0);
+  await tool(page, 'Feed').dispatchEvent('click');
   await page.locator('.food-btn[aria-label="Feed Carrot"]').dispatchEvent('click');
   await expect(page.locator('.fx-feed.sad')).toHaveCount(1);
   await expect(page.locator('.sticker-body.anim-sad')).toHaveCount(1);

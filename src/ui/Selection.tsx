@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { create } from 'zustand';
 import { playSfx } from '../audio/engine';
 import { useCamera } from '../engine/camera';
 import { frameOf, type Frame } from '../engine/geometry';
@@ -63,6 +64,9 @@ function useSelected(): Selected | null {
   };
 }
 
+const useFeedingView = create<{ resting: boolean }>(() => ({ resting: false }));
+const setResting = (resting: boolean) => useFeedingView.setState({ resting });
+
 function screenBox(frame: Frame, t: Transform) {
   const [cx, cy] = worldToScreen(t, frame.cx, frame.cy);
   const w = frame.w * t.s;
@@ -76,12 +80,13 @@ function screenBox(frame: Frame, t: Transform) {
 export function SelectionOverlay() {
   const sel = useSelected();
   const t = useCamera((s) => s.t);
+  const resting = useFeedingView((s) => s.resting);
   const tr = useT();
   if (!sel) return null;
   const { cx, cy, w, h } = screenBox(sel.frame, t);
   return (
     <div
-      className="selection"
+      className={`selection${resting ? ' resting' : ''}`}
       style={{
         width: w,
         height: h,
@@ -99,7 +104,7 @@ export function SelectionOverlay() {
   );
 }
 
-function FoodTray({ stickerId }: { stickerId: string }) {
+function FoodTray({ stickerId, onFed }: { stickerId: string; onFed: () => void }) {
   const tr = useT();
   const icons = useMemo(() => FOOD_IDS.map((id) => [id, foodSvg(id, 44)] as const), []);
   return (
@@ -111,7 +116,10 @@ function FoodTray({ stickerId }: { stickerId: string }) {
             key={id}
             className="food-btn"
             aria-label={tr.t('feedFood', { food: tr.food(id as FoodId) })}
-            onClick={() => feedSticker(stickerId, id)}
+            onClick={() => {
+              feedSticker(stickerId, id);
+              onFed();
+            }}
           >
             <span dangerouslySetInnerHTML={{ __html: svg }} />
             <span dir="auto">{tr.food(id)}</span>
@@ -133,6 +141,8 @@ export function Toolbar() {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const [trayFor, setTrayFor] = useState<string | null>(null);
+  const resting = useFeedingView((s) => s.resting);
+  const restTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const selected = !!sel;
   const selectedId = sel?.id ?? null;
 
@@ -149,6 +159,20 @@ export function Toolbar() {
   useEffect(() => {
     if (trayFor && trayFor !== selectedId) setTrayFor(null);
   }, [selectedId, trayFor]);
+
+  useEffect(() => {
+    clearTimeout(restTimer.current);
+    setResting(false);
+  }, [selectedId]);
+
+  useEffect(() => () => clearTimeout(restTimer.current), []);
+
+  const watchFeeding = () => {
+    setTrayFor(null);
+    setResting(true);
+    clearTimeout(restTimer.current);
+    restTimer.current = setTimeout(() => setResting(false), 2000);
+  };
 
   if (!sel) return null;
   const docked = vp.w < 560;
@@ -174,7 +198,7 @@ export function Toolbar() {
   return (
     <div
       ref={ref}
-      className={`toolbar${docked ? ' docked' : ''}${trayBelow ? ' tray-below' : ''}`}
+      className={`toolbar${docked ? ' docked' : ''}${trayBelow ? ' tray-below' : ''}${resting ? ' resting' : ''}`}
       data-ui
       style={style}
     >
@@ -249,7 +273,7 @@ export function Toolbar() {
       >
         <TrashIcon />
       </button>
-      {trayOpen && <FoodTray stickerId={id} />}
+      {trayOpen && <FoodTray stickerId={id} onFed={watchFeeding} />}
     </div>
   );
 }

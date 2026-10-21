@@ -2980,3 +2980,21 @@ body.dragging-sticker * {
 .world.moving [data-idle] {
   animation-play-state: paused;
 }
+
+.toolbar {
+  transition: opacity 180ms;
+}
+
+.toolbar.resting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.selection .handle {
+  transition: opacity 180ms;
+}
+
+.selection.resting .handle {
+  opacity: 0;
+  pointer-events: none;
+}
