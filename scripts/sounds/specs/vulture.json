@@ -1,12 +1,7 @@
 {
   "id": "vulture",
-  "layers": [
-    {
-      "file": "File:Turkey Vulture.ogg",
-      "start": 18.45,
-      "end": 19.78
-    }
-  ],
-  "highpass": 0,
-  "species": "Turkey vulture (Cathartes aura) hisses"
+  "layers": [{ "file": "File:Buitre leonado (Gyps fulvus).wav", "start": 1.5, "end": 4.3 }],
+  "highpass": 100,
+  "species": "Griffon vulture (Gyps fulvus) cackling and hissing, a field recording from France shared through Xeno-canto (XC917400)",
+  "note": "The high-pass is set to 100 Hz because the field recording has wind rumble below 100 Hz that is as loud as the calls; the calls themselves are above 800 Hz."
 }

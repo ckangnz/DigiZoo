@@ -2,11 +2,19 @@
   "id": "river-dolphin",
   "layers": [
     {
-      "file": "File:161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
-      "start": 7.65,
-      "end": 10.2
+      "url": "https://cdn.freesound.org/previews/408/408555_1661766-hq.mp3",
+      "credit": {
+        "title": "Amazonian Dolphins",
+        "author": "Felix Blume",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/felix.blume/sounds/408555/"
+      },
+      "start": 1.55,
+      "end": 4.45
     }
   ],
   "highpass": 0,
-  "species": "Recording of wild dolphins calling underwater in the Caribbean, close relatives of the Amazon river dolphin"
+  "species": "Amazon river dolphins calling underwater, recorded with a hydrophone in the Rio Tefé, Brazil (tagged by the recordist as boto, Inia geoffrensis)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
 }

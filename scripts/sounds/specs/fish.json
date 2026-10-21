@@ -2,10 +2,12 @@
   "id": "fish",
   "layers": [
     {
-      "file": "File:Het borrelen van water - SoundCloud - Beeld en Geluid.ogg",
-      "start": 10.6,
-      "end": 12.6
+      "file": "File:Amphiprion frenatus aggressive sounds - journal.pone.0049179.s001.ogv",
+      "start": 1.15,
+      "end": 2.42
     }
   ],
-  "species": "Real recording of water bubbling, used for the clownfish (no clean free clownfish recording without heavy background hiss was found)"
+  "highpass": 0,
+  "species": "Tomato clownfish (Amphiprion frenatus), a close relative of the orange clownfish, making a series of popping sounds while chasing another clownfish, recorded underwater in the wild by researchers",
+  "note": "Audio track of the video; a steady background hum stays about 20 dB below the pops."
 }

@@ -2,10 +2,19 @@
   "id": "warthog",
   "layers": [
     {
-      "file": "File:20200322 warthog screeching.ogg",
-      "start": 0.0,
-      "end": 2.68
+      "url": "https://cdn.freesound.org/previews/850/850012_15895934-hq.mp3",
+      "credit": {
+        "title": "Swine - Warthog; Grunting and Squealing",
+        "author": "TheKingOfGeeks360",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/TheKingOfGeeks360/sounds/850012/"
+      },
+      "start": 0.05,
+      "end": 2.97
     }
   ],
-  "highpass": 0
+  "highpass": 0,
+  "species": "Common warthog (Phacochoerus africanus) grunting and squealing at a zoo",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
 }

@@ -2,11 +2,12 @@
   "id": "cheetah",
   "layers": [
     {
-      "file": "File:Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-(Acinonyx-pone.0158546.s001.oga",
-      "start": 16.02,
-      "end": 17.66
+      "file": "File:Cheetah (Acinonyx jubatus) purring and calling its brother from a road marker.webm",
+      "start": 13.6,
+      "end": 16.52
     }
   ],
   "highpass": 0,
-  "note": "A meow followed by two chirps."
+  "species": "Wild cheetah (Acinonyx jubatus) in Kruger National Park calling its brother: a stuttering purr followed by two bird-like chirps",
+  "note": "Audio track of the video."
 }

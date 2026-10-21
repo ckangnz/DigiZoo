@@ -1,11 +1,11 @@
 {
   "id": "warthog",
   "file": "warthog.mp3",
-  "duration": 2.72,
-  "title": "20200322 warthog screeching",
-  "author": "AGOoiu",
-  "license": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "source": "https://commons.wikimedia.org/wiki/File:20200322_warthog_screeching.ogg",
-  "changes": "Trimmed to 0.00–2.68 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+  "duration": 2.95,
+  "title": "Swine - Warthog; Grunting and Squealing",
+  "author": "TheKingOfGeeks360",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/TheKingOfGeeks360/sounds/850012/",
+  "changes": "Common warthog (Phacochoerus africanus) grunting and squealing at a zoo. Trimmed to 0.05–2.97 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.7 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording."
 }

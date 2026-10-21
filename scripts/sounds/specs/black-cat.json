@@ -3,9 +3,10 @@
   "layers": [
     {
       "file": "File:Weibliche Britisch Kurzhaar will Futter C1277 MIAUEN.wav",
-      "start": 2.0,
-      "end": 4.2
+      "start": 7.4,
+      "end": 9.4
     }
   ],
+  "highpass": 0,
   "species": "Domestic cat (British Shorthair) meowing"
 }

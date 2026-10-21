@@ -1,0 +1,20 @@
+{
+  "id": "rhino",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/535/535810_9159316-hq.mp3",
+      "credit": {
+        "title": "Indian rhinoceros (Rhinoceros unicornis)",
+        "author": "Breviceps",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Breviceps/sounds/535810/"
+      },
+      "start": 0,
+      "end": 1.98
+    }
+  ],
+  "highpass": 0,
+  "species": "Indian rhinoceros (Rhinoceros unicornis), two calls recorded on a mobile phone",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
+}

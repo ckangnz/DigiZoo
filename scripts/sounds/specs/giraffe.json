@@ -1,12 +1,7 @@
 {
   "id": "giraffe",
-  "layers": [
-    {
-      "file": "File:Giraffe bursts.oga",
-      "start": 0.0,
-      "end": 1.5,
-      "highpass": 80
-    }
-  ],
-  "highpass": 0
+  "layers": [{ "file": "File:Giraffe snort.oga", "start": 0.1, "end": 0.92 }],
+  "highpass": 80,
+  "species": "Giraffe (Giraffa camelopardalis) snort, a burst of air through the nostrils; giraffes are nearly silent and the snort is the sound people hear from them most often",
+  "note": "The high-pass is set to 80 Hz because the original has strong rumble below 80 Hz that is just as loud before and after the snort; the snort itself is above 100 Hz."
 }

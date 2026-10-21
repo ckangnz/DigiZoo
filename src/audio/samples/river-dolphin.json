@@ -1,11 +1,11 @@
 {
   "id": "river-dolphin",
   "file": "river-dolphin.mp3",
-  "duration": 2.59,
-  "title": "161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico",
-  "author": "The user Felix.Blume https://freesound.org/people/felix.blume/",
-  "license": "CC0",
-  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-  "source": "https://commons.wikimedia.org/wiki/File:161691_felixblume_dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
-  "changes": "Recording of wild dolphins calling underwater in the Caribbean, close relatives of the Amazon river dolphin. Trimmed to 7.65–10.20 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.8 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+  "duration": 2.95,
+  "title": "Amazonian Dolphins",
+  "author": "Felix Blume",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/felix.blume/sounds/408555/",
+  "changes": "Amazon river dolphins calling underwater, recorded with a hydrophone in the Rio Tefé, Brazil (tagged by the recordist as boto, Inia geoffrensis). Trimmed to 1.55–4.45 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording."
 }

@@ -40,7 +40,8 @@ const out = `# Credits
 
 All artwork in DigiZoo is drawn in code (no image files). Real animal sounds are recordings shared by
 the people below under free licences (CC0, public domain, CC BY, CC BY-SA), mostly via
-[Wikimedia Commons](https://commons.wikimedia.org/). Each clip was trimmed, loudness-normalised and
+[Wikimedia Commons](https://commons.wikimedia.org/), [Freesound](https://freesound.org/) and the US
+National Park Service. Each clip was trimmed, loudness-normalised and
 converted to mono MP3; clips derived from CC BY-SA recordings are shared under the same licence.
 Sounds not listed here are synthesised in the app.
 

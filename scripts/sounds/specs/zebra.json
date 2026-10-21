@@ -2,11 +2,19 @@
   "id": "zebra",
   "layers": [
     {
-      "file": "File:A Zebra at the Oribi Gorge Nature reserve.webm",
-      "start": 3.4,
-      "end": 4.42
+      "url": "https://cdn.freesound.org/previews/850/850661_15895934-hq.mp3",
+      "credit": {
+        "title": "Zebras - Grant's Zebra Braying",
+        "author": "TheKingOfGeeks360",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/TheKingOfGeeks360/sounds/850661/"
+      },
+      "start": 0.22,
+      "end": 3.12
     }
   ],
   "highpass": 0,
-  "note": "Audio track of the video."
+  "species": "Grant's zebra (Equus quagga boehmi), a plains zebra, giving its barking 'kwa-ha' bray at a zoo",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
 }
