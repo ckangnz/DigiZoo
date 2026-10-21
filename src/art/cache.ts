@@ -54,6 +54,53 @@ export function sceneThumbUrl(def: SceneDef): string {
   return url;
 }
 
+const rasters = new Map<string, string>();
+const rastering = new Map<string, Promise<string>>();
+let rasterQueue: Promise<unknown> = Promise.resolve();
+const THUMB_WIDTH = 720;
+
+async function rasterize(def: SceneDef): Promise<string> {
+  const svgUrl = sceneThumbUrl(def);
+  const img = new Image();
+  img.src = svgUrl;
+  await img.decode();
+  const [w, h] = def.world;
+  const canvas = document.createElement('canvas');
+  canvas.width = THUMB_WIDTH;
+  canvas.height = Math.round((THUMB_WIDTH * h) / w);
+  canvas.getContext('2d')?.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, 'image/webp', 0.88),
+  );
+  canvas.width = 0;
+  canvas.height = 0;
+  if (!blob) return svgUrl;
+  const url = URL.createObjectURL(blob);
+  rasters.set(def.id, url);
+  setTimeout(() => {
+    URL.revokeObjectURL(svgUrl);
+    thumbs.delete(def.id);
+  }, 0);
+  return url;
+}
+
+export function sceneThumbSrc(def: SceneDef): string {
+  return rasters.get(def.id) ?? sceneThumbUrl(def);
+}
+
+export function rasterizeSceneThumb(def: SceneDef): Promise<string> {
+  const ready = rasters.get(def.id);
+  if (ready) return Promise.resolve(ready);
+  let pending = rastering.get(def.id);
+  if (!pending) {
+    const job = rasterQueue.then(() => rasterize(def));
+    rasterQueue = job.catch(() => undefined);
+    pending = job.catch(() => sceneThumbUrl(def));
+    rastering.set(def.id, pending);
+  }
+  return pending;
+}
+
 export function releaseScenesExcept(themeId: string): void {
   for (const [key, urls] of scenes) {
     if (key.startsWith(`${themeId}:`)) continue;

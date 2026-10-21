@@ -88,6 +88,23 @@ export interface UiStrings {
   voice: string;
   automaticVoice: string;
   voiceTip: string;
+  installApp: string;
+  installTitle: string;
+  installIntro: string;
+  installNow: string;
+  installed: string;
+  installHint: string;
+  installIphone: string;
+  installAndroid: string;
+  installComputer: string;
+  iosStep1: string;
+  iosStep2: string;
+  iosStep3: string;
+  androidStep1: string;
+  androidStep2: string;
+  androidStep3: string;
+  computerStep1: string;
+  computerStep2: string;
 }
 
 export interface LocaleMessages {

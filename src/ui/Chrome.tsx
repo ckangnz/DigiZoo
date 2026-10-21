@@ -7,6 +7,7 @@ import { LANGUAGE_BY_CODE } from '../i18n/languages';
 import { getTheme } from '../registry/themes';
 import { useStore } from '../store/store';
 import { HoldButton } from './HoldButton';
+import { openInstallGuide } from './InstallGuide';
 import { openGame } from './MatchGame';
 import {
   BroomIcon,
@@ -16,6 +17,7 @@ import {
   GearIcon,
   GlobeIcon,
   InfoIcon,
+  InstallIcon,
   LanguageIcon,
   MinusIcon,
   MoonIcon,
@@ -311,6 +313,17 @@ function Settings() {
           >
             <InfoIcon />
             <span>{tr.t('credits')}</span>
+          </button>
+          <button
+            className="toggle-row"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              openInstallGuide();
+            }}
+          >
+            <InstallIcon />
+            <span>{tr.t('installApp')}</span>
           </button>
         </div>
       )}

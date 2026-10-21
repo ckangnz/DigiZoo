@@ -72,6 +72,27 @@ const it: LocaleMessages = {
     automaticVoice: 'Automatica',
     voiceTip:
       'Consiglio: puoi scaricare voci più naturali nelle impostazioni vocali del dispositivo.',
+    installApp: 'Installa app',
+    installTitle: 'Metti DigiZoo sul telefono',
+    installIntro:
+      'Installa DigiZoo come un’app: si apre a schermo intero dalla schermata Home e funziona anche senza internet.',
+    installNow: 'Installa ora',
+    installed: 'DigiZoo è installato su questo dispositivo. Buon divertimento!',
+    installHint: 'Installa sul telefono',
+    installIphone: 'iPhone e iPad',
+    installAndroid: 'Android',
+    installComputer: 'Computer',
+    iosStep1: 'Apri questa pagina in Safari.',
+    iosStep2:
+      'Tocca il pulsante Condividi (il quadrato con la freccia). Se non lo vedi, tocca prima ⋯.',
+    iosStep3: 'Tocca “Aggiungi a Home”, poi tocca “Aggiungi”.',
+    androidStep1: 'Apri questa pagina in Chrome.',
+    androidStep2: 'Tocca il pulsante del menu ⋮ in alto.',
+    androidStep3:
+      'Tocca “Installa app”, “Aggiungi a schermata Home” o “Installa e crea scorciatoia”, poi tocca “Installa”.',
+    computerStep1: 'Apri questa pagina in Chrome o Edge.',
+    computerStep2:
+      'Fai clic sul pulsante di installazione nella barra degli indirizzi oppure apri il menu e scegli “Installa DigiZoo”.',
   },
   worlds: {
     safari: 'Safari',

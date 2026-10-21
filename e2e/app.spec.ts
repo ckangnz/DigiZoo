@@ -30,6 +30,17 @@ declare global {
   }
 }
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    const spoken: string[] = [];
+    Object.assign(window, { __DIGIZOO_SILENT__: true, __spoken: spoken });
+    if ('speechSynthesis' in window)
+      speechSynthesis.speak = (u: SpeechSynthesisUtterance) => {
+        if (u.text.trim()) spoken.push(u.text);
+      };
+  });
+});
+
 const state = (page: Page) => page.evaluate(() => window.__digizoo.useStore.getState());
 const cameraScale = (page: Page) => page.evaluate(() => window.__digizoo.useCamera.getState().t.s);
 
@@ -379,13 +390,6 @@ test('the matching game can be played to the end', async ({ page }) => {
 
 test('names are still spoken when sounds are off', async ({ page, browserName }) => {
   test.skip(browserName !== 'chromium', 'needs speechSynthesis');
-  await page.addInitScript(() => {
-    const spoken: string[] = [];
-    Object.assign(window, { __spoken: spoken });
-    speechSynthesis.speak = (u: SpeechSynthesisUtterance) => {
-      if (u.text.trim()) spoken.push(u.text);
-    };
-  });
   await openWorld(page);
   await page.locator('[aria-label="Settings"]').click();
   await page.locator('.toggle-row', { hasText: 'Sounds' }).click();
@@ -395,4 +399,17 @@ test('names are still spoken when sounds are off', async ({ page, browserName })
   await expect
     .poll(() => page.evaluate(() => (window as unknown as { __spoken: string[] }).__spoken))
     .toContain('Lion');
+});
+
+test('the install guide shows steps for this device', async ({ page }) => {
+  await page.goto('/?debug');
+  await page.locator('.picker-install').click();
+  const card = page.locator('.install-card');
+  await expect(card).toBeVisible();
+  await expect(card.locator('.install-tabs button.on')).toHaveCount(1);
+  expect(await card.locator('.install-steps li').count()).toBeGreaterThanOrEqual(2);
+  await card.locator('.install-tabs button', { hasText: 'Android' }).click();
+  await expect(card.locator('.install-steps li').nth(1)).toContainText('⋮');
+  await card.locator('.dialog-close').click();
+  await expect(card).toHaveCount(0);
 });

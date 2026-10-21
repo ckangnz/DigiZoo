@@ -70,6 +70,26 @@ const en: Messages = {
     voice: 'Voice',
     automaticVoice: 'Automatic',
     voiceTip: 'Tip: you can download nicer voices in your device’s speech settings.',
+    installApp: 'Install app',
+    installTitle: 'Put DigiZoo on your phone',
+    installIntro:
+      'Install DigiZoo like an app: it opens full screen from your home screen and works without internet.',
+    installNow: 'Install now',
+    installed: 'DigiZoo is installed on this device. Have fun!',
+    installHint: 'Install on your phone',
+    installIphone: 'iPhone & iPad',
+    installAndroid: 'Android',
+    installComputer: 'Computer',
+    iosStep1: 'Open this page in Safari.',
+    iosStep2: 'Tap the Share button (the square with an arrow). If you can’t see it, tap ⋯ first.',
+    iosStep3: 'Tap “Add to Home Screen”, then tap “Add”.',
+    androidStep1: 'Open this page in Chrome.',
+    androidStep2: 'Tap the menu button ⋮ at the top.',
+    androidStep3:
+      'Tap “Install app”, “Add to Home screen” or “Install and create shortcut”, then tap “Install”.',
+    computerStep1: 'Open this page in Chrome or Edge.',
+    computerStep2:
+      'Click the install button in the address bar, or open the menu and choose “Install DigiZoo”.',
   },
   worlds: {
     safari: 'Safari',

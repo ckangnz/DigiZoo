@@ -273,3 +273,32 @@ export const RefreshIcon = (p: IconProps) => (
     <path d="M20 4.5V11h-6.5" />
   </Icon>
 );
+
+export const ShareIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M8 9H6.5A1.5 1.5 0 0 0 5 10.5v9A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 17.5 9H16" />
+    <path d="M12 14V3M8.5 6.5 12 3l3.5 3.5" />
+  </Icon>
+);
+
+export const DotsIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle cx="12" cy="5.5" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="18.5" r="1.6" fill="currentColor" stroke="none" />
+  </Icon>
+);
+
+export const AddSquareIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect x="4" y="4" width="16" height="16" rx="4" />
+    <path d="M12 8.5v7M8.5 12h7" />
+  </Icon>
+);
+
+export const InstallIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect x="6.5" y="2.5" width="11" height="19" rx="2.8" />
+    <path d="M12 7v7M9 11.5l3 3 3-3M10.5 18.5h3" />
+  </Icon>
+);

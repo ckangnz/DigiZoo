@@ -11,6 +11,33 @@ day and night, zoom and pan around, switch between 16 languages (names and facts
 chosen language), and start over whenever you like. Everything is saved on the device and works
 offline once installed.
 
+## Install it on a phone or tablet
+
+DigiZoo is a Progressive Web App: open **https://ckangnz.github.io/DigiZoo/** once and add it to your
+home screen. It then opens full screen like a normal app and works without internet. The app also has a
+step-by-step guide under **Settings → Install app** (and on the world picker).
+
+**iPhone and iPad (Safari)**
+
+1. Open the link in **Safari**.
+2. Tap the **Share** button (the square with an arrow).
+3. Tap **Add to Home Screen**, then **Add**.
+
+**Android (Chrome)**
+
+1. Open the link in **Chrome**.
+2. Tap the menu **⋮** at the top right.
+3. Tap **Install app** (or **Add to Home screen**), then **Install**.
+
+**Computer (Chrome or Edge)**
+
+1. Open the link in **Chrome** or **Edge**.
+2. Click the install button at the right of the address bar, or open the menu and choose
+   **Install DigiZoo**.
+
+Updates arrive automatically: when a new version is published, the app picks it up the next time it is
+opened (close it and open it again if you still see the old one).
+
 ## Run it
 
 ```sh

@@ -72,6 +72,27 @@ const fr: LocaleMessages = {
     automaticVoice: 'Automatique',
     voiceTip:
       'Astuce\u00a0: tu peux télécharger des voix plus naturelles dans les réglages vocaux de ton appareil.',
+    installApp: 'Installer l’application',
+    installTitle: 'Mets DigiZoo sur ton téléphone',
+    installIntro:
+      'Installe DigiZoo comme une application\u00a0: il s’ouvre en plein écran depuis l’écran d’accueil et fonctionne même sans Internet.',
+    installNow: 'Installer maintenant',
+    installed: 'DigiZoo est installé sur cet appareil. Amuse-toi bien\u00a0!',
+    installHint: 'Installer sur ton téléphone',
+    installIphone: 'iPhone et iPad',
+    installAndroid: 'Android',
+    installComputer: 'Ordinateur',
+    iosStep1: 'Ouvre cette page dans Safari.',
+    iosStep2:
+      'Touche le bouton Partager (le carré avec une flèche). Si tu ne le vois pas, touche d’abord ⋯.',
+    iosStep3: 'Touche «\u00a0Sur l’écran d’accueil\u00a0», puis touche «\u00a0Ajouter\u00a0».',
+    androidStep1: 'Ouvre cette page dans Chrome.',
+    androidStep2: 'Appuie sur le bouton de menu ⋮ en haut.',
+    androidStep3:
+      'Appuie sur «\u00a0Installer l’application\u00a0», «\u00a0Ajouter à l’écran d’accueil\u00a0» ou «\u00a0Installer et créer un raccourci\u00a0», puis sur «\u00a0Installer\u00a0».',
+    computerStep1: 'Ouvre cette page dans Chrome ou Edge.',
+    computerStep2:
+      'Clique sur le bouton d’installation dans la barre d’adresse, ou ouvre le menu et choisis «\u00a0Installer DigiZoo\u00a0».',
   },
   worlds: {
     safari: 'Safari',

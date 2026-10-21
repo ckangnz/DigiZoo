@@ -71,6 +71,27 @@ const ja: LocaleMessages = {
     voice: '声',
     automaticVoice: '自動',
     voiceTip: 'ヒント:端末の読み上げ設定から、もっと自然な声をダウンロードできます。',
+    installApp: 'アプリをインストール',
+    installTitle: 'DigiZooをスマホに入れましょう',
+    installIntro:
+      'DigiZooをアプリのようにインストールできます。ホーム画面から全画面で開き、インターネットがなくても使えます。',
+    installNow: '今すぐインストール',
+    installed: 'DigiZooはこの端末にインストール済みです。楽しんでくださいね!',
+    installHint: 'スマホにインストール',
+    installIphone: 'iPhone・iPad',
+    installAndroid: 'Android',
+    installComputer: 'パソコン',
+    iosStep1: 'このページをSafariで開いてください。',
+    iosStep2:
+      '共有ボタン(四角に矢印のアイコン)をタップしてください。見当たらない場合は、先に⋯をタップしてください。',
+    iosStep3: '「ホーム画面に追加」をタップして、「追加」をタップしてください。',
+    androidStep1: 'このページをChromeで開いてください。',
+    androidStep2: '画面上部のメニューボタン(⋮)をタップしてください。',
+    androidStep3:
+      '「アプリをインストール」または「ホーム画面に追加」をタップして、「インストール」をタップしてください。',
+    computerStep1: 'このページをChromeかEdgeで開いてください。',
+    computerStep2:
+      'アドレスバーのインストールボタンをクリックするか、メニューを開いて「DigiZoo をインストール」を選んでください。',
   },
   worlds: {
     safari: 'サファリ',

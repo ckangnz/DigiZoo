@@ -72,6 +72,26 @@ const vi: LocaleMessages = {
     automaticVoice: 'Tự động',
     voiceTip:
       'Mẹo: bạn có thể tải giọng đọc tự nhiên hơn trong phần cài đặt giọng nói của thiết bị.',
+    installApp: 'Cài đặt ứng dụng',
+    installTitle: 'Đưa DigiZoo lên điện thoại của bạn',
+    installIntro:
+      'Cài DigiZoo như một ứng dụng: mở toàn màn hình ngay từ màn hình chính và dùng được cả khi không có Internet.',
+    installNow: 'Cài đặt ngay',
+    installed: 'DigiZoo đã được cài trên thiết bị này. Chúc bạn chơi vui!',
+    installHint: 'Cài lên điện thoại',
+    installIphone: 'iPhone và iPad',
+    installAndroid: 'Android',
+    installComputer: 'Máy tính',
+    iosStep1: 'Mở trang này bằng Safari.',
+    iosStep2: 'Chạm vào nút Chia sẻ (hình vuông có mũi tên). Nếu không thấy, hãy chạm vào ⋯ trước.',
+    iosStep3: 'Chạm vào “Thêm vào Màn hình chính”, rồi chạm vào “Thêm”.',
+    androidStep1: 'Mở trang này bằng Chrome.',
+    androidStep2: 'Nhấn vào nút trình đơn ⋮ ở phía trên.',
+    androidStep3:
+      'Nhấn vào “Cài đặt ứng dụng”, “Thêm vào Màn hình chính” hoặc “Cài đặt và tạo lối tắt”, rồi nhấn vào “Cài đặt”.',
+    computerStep1: 'Mở trang này bằng Chrome hoặc Edge.',
+    computerStep2:
+      'Nhấp vào nút cài đặt trên thanh địa chỉ, hoặc mở trình đơn và chọn “Cài đặt DigiZoo”.',
   },
   worlds: {
     safari: 'Thảo nguyên',

@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { playSfx } from '../audio/engine';
-import { sceneThumbUrl, stickerUrl } from '../art/cache';
+import { rasterizeSceneThumb, sceneThumbSrc, stickerUrl } from '../art/cache';
 import { useT } from '../i18n';
 import { animalsIn, getAnimal } from '../registry/animals';
 import { THEMES } from '../registry/themes';
+import { useInstall } from '../pwa';
 import { useStore } from '../store/store';
-import { CloseIcon, PawsIcon } from './icons';
+import { openInstallGuide } from './InstallGuide';
+import { CloseIcon, InstallIcon, PawsIcon } from './icons';
 
 const LETTERS = ['D', 'i', 'g', 'i', 'Z', 'o', 'o'];
 const LETTER_COLORS = ['#f2a93b', '#6fb83a', '#22a38a', '#2f9fdd', '#e6574e', '#ee8848', '#9b6be0'];
@@ -13,10 +15,7 @@ const LETTER_COLORS = ['#f2a93b', '#6fb83a', '#22a38a', '#2f9fdd', '#e6574e', '#
 export function ThemePicker() {
   const open = useStore((s) => s.pickerOpen);
   const firstRun = useStore((s) => s.firstRun);
-  const themeId = useStore((s) => s.themeId);
-  const openTheme = useStore((s) => s.openTheme);
   const close = useStore((s) => s.setPickerOpen);
-  const tr = useT();
 
   useEffect(() => {
     if (!open || firstRun) return;
@@ -28,6 +27,35 @@ export function ThemePicker() {
   }, [open, firstRun, close]);
 
   if (!open) return null;
+  return <PickerContent />;
+}
+
+function useThumbs(): Record<string, string> {
+  const [srcs, setSrcs] = useState<Record<string, string>>(() =>
+    Object.fromEntries(THEMES.map((t) => [t.id, sceneThumbSrc(t.scene)])),
+  );
+  useEffect(() => {
+    let live = true;
+    for (const t of THEMES) {
+      void rasterizeSceneThumb(t.scene).then((url) => {
+        if (live) setSrcs((prev) => ({ ...prev, [t.id]: url }));
+      });
+    }
+    return () => {
+      live = false;
+    };
+  }, []);
+  return srcs;
+}
+
+function PickerContent() {
+  const firstRun = useStore((s) => s.firstRun);
+  const themeId = useStore((s) => s.themeId);
+  const openTheme = useStore((s) => s.openTheme);
+  const close = useStore((s) => s.setPickerOpen);
+  const installed = useInstall((s) => s.installed);
+  const thumbs = useThumbs();
+  const tr = useT();
   const mascot = getAnimal('lion');
   return (
     <div className="picker" data-ui>
@@ -68,7 +96,7 @@ export function ThemePicker() {
               }}
             >
               <span className="world-thumb">
-                <img src={sceneThumbUrl(t.scene)} alt="" draggable={false} />
+                <img src={thumbs[t.id]} alt="" draggable={false} />
               </span>
               <span className="world-name" dir="auto">
                 {tr.world(t.id)}
@@ -80,6 +108,12 @@ export function ThemePicker() {
             </button>
           ))}
         </div>
+        {!installed && (
+          <button className="pill picker-install" onClick={openInstallGuide}>
+            <InstallIcon />
+            <span dir="auto">{tr.t('installHint')}</span>
+          </button>
+        )}
       </div>
     </div>
   );

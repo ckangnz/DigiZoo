@@ -93,8 +93,13 @@ let speakTimer: ReturnType<typeof setTimeout> | undefined;
 
 const MASTER_LEVEL = 0.9;
 
+const silent =
+  typeof window !== 'undefined' &&
+  ((window as unknown as { __DIGIZOO_SILENT__?: boolean }).__DIGIZOO_SILENT__ === true ||
+    new URLSearchParams(window.location.search).has('silent'));
+
 function ensure(): AudioContext | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined' || silent) return null;
   if (!ctx) {
     const AC =
       window.AudioContext ??
@@ -170,6 +175,8 @@ let wanted: string[] = [];
 
 export function preloadSounds(ids: string[]): void {
   wanted = ids;
+  const keep = new Set(ids);
+  for (const id of [...buffers.keys()]) if (!keep.has(id)) buffers.delete(id);
   if (!ctx) return;
   for (const id of ids) void loadBuffer(ctx, id)?.catch(() => undefined);
 }

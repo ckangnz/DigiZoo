@@ -71,6 +71,26 @@ const id: LocaleMessages = {
     voice: 'Suara',
     automaticVoice: 'Otomatis',
     voiceTip: 'Tips: kamu bisa mengunduh suara yang lebih alami di pengaturan suara perangkatmu.',
+    installApp: 'Instal aplikasi',
+    installTitle: 'Pasang DigiZoo di ponselmu',
+    installIntro:
+      'Instal DigiZoo seperti aplikasi: langsung terbuka layar penuh dari layar utama dan tetap bisa dipakai tanpa internet.',
+    installNow: 'Instal sekarang',
+    installed: 'DigiZoo sudah terpasang di perangkat ini. Selamat bersenang-senang!',
+    installHint: 'Pasang di ponselmu',
+    installIphone: 'iPhone dan iPad',
+    installAndroid: 'Android',
+    installComputer: 'Komputer',
+    iosStep1: 'Buka halaman ini di Safari.',
+    iosStep2:
+      'Ketuk tombol Bagikan (kotak dengan tanda panah). Jika tidak terlihat, ketuk ⋯ terlebih dahulu.',
+    iosStep3: 'Ketuk “Tambah ke Layar Utama”, lalu ketuk “Tambah”.',
+    androidStep1: 'Buka halaman ini di Chrome.',
+    androidStep2: 'Ketuk tombol menu ⋮ di bagian atas.',
+    androidStep3:
+      'Ketuk “Instal aplikasi”, “Tambahkan ke Layar Utama”, atau “Instal dan buat pintasan”, lalu ketuk “Instal”.',
+    computerStep1: 'Buka halaman ini di Chrome atau Edge.',
+    computerStep2: 'Klik tombol instal di bilah alamat, atau buka menu dan pilih “Instal DigiZoo”.',
   },
   worlds: {
     safari: 'Safari',

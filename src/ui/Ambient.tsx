@@ -5,10 +5,34 @@ import type { SceneDef } from '../art/scenes/types';
 
 type Item = { key: string; className: string; style: CSSProperties; src?: string; sky?: boolean };
 
+function density(): number {
+  if (typeof window === 'undefined') return 1;
+  const memory = (navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 8;
+  return Math.min(window.innerWidth, window.innerHeight) < 600 || memory <= 4 ? 0.55 : 1;
+}
+
+function thinned(a: SceneDef['ambient']): SceneDef['ambient'] {
+  const k = density();
+  if (k === 1) return a;
+  const scale = (n?: number) => (n ? Math.max(1, Math.round(n * k)) : n);
+  return {
+    ...a,
+    stars: scale(a.stars),
+    twinkles: scale(a.twinkles),
+    fireflies: scale(a.fireflies),
+    sparkles: scale(a.sparkles),
+    leaves: scale(a.leaves),
+    bubbles: scale(a.bubbles),
+    cells: scale(a.cells),
+    bats: scale(a.bats),
+    birds: scale(a.birds),
+  };
+}
+
 function build(scene: SceneDef, night: boolean): Item[] {
   const [w, h] = scene.world;
   const horizon = scene.horizon;
-  const a = scene.ambient;
+  const a = thinned(scene.ambient);
   const r = rng(scene.id.length * 977 + (night ? 13 : 7));
   const between = (min: number, max: number) => min + (max - min) * r();
   const items: Item[] = [];

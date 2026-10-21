@@ -19,6 +19,7 @@ import {
 } from './ui/actions';
 import { StartOverDialog, TopBar, ZoomControls } from './ui/Chrome';
 import { InfoCard, closeInfo, openInfo, useInfoCard } from './ui/InfoCard';
+import { InstallGuide } from './ui/InstallGuide';
 import { MatchGame, closeGame, useGame } from './ui/MatchGame';
 import { MapView } from './ui/MapView';
 import { SidePanel } from './ui/SidePanel';
@@ -158,6 +159,7 @@ export function App() {
       {startOver && <StartOverDialog onClose={closeStartOver} />}
       <InfoCard />
       <MatchGame />
+      <InstallGuide />
       <ThemePicker />
     </div>
   );
