@@ -1,0 +1,11 @@
+{
+  "id": "grasshopper",
+  "file": "grasshopper.mp3",
+  "duration": 2.46,
+  "title": "Chorthippus biguttulus - sound",
+  "author": "Baudewijn Odé",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Chorthippus_biguttulus_-_sound.oga",
+  "changes": "Bow-winged grasshopper (Chorthippus biguttulus) stridulating: one rising song phrase, made by rubbing its hind legs against its wings. Trimmed to 20.60–23.10 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.7 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. From the Odé collection 'Sounds of grasshoppers and crickets of Northwestern Europe'. No high-pass: the clip has no measurable low-frequency rumble."
+}

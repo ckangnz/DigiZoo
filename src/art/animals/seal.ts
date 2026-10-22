@@ -110,7 +110,7 @@ const seal: AnimalDef = {
   kind: 'animal',
   aliases: ['harbor seal', 'harbour seal', 'spotted seal', 'sea lion'],
   group: 'mammal',
-  habitats: ['ocean'],
+  habitats: ['ocean', 'polar'],
   box: [360, 184],
   size: 160,
   locomotion: 'swim',

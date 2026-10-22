@@ -51,7 +51,7 @@ const hummingbird: AnimalDef = {
   kind: 'animal',
   aliases: ['humming bird', 'ruby-throated hummingbird', 'tiny bird', 'bird'],
   group: 'bird',
-  habitats: ['rainforest'],
+  habitats: ['rainforest', 'birds'],
   box: [266, 250],
   size: 70,
   locomotion: 'fly',

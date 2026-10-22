@@ -56,7 +56,7 @@ const cat: AnimalDef = {
   name: 'Cat',
   aliases: ['kitty', 'kitten', 'pussycat', 'kitty cat', 'meow'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'pets'],
   box: [320, 268],
   size: 120,
   locomotion: 'walk4',

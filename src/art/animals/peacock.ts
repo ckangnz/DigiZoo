@@ -83,7 +83,7 @@ const peacock: AnimalDef = {
   name: 'Peacock',
   aliases: ['peafowl', 'peahen', 'bird'],
   group: 'bird',
-  habitats: ['jungle'],
+  habitats: ['jungle', 'birds'],
   box: [300, 260],
   size: 170,
   locomotion: 'walk2',

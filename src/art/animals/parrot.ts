@@ -104,7 +104,7 @@ const parrot: AnimalDef = {
   name: 'Parrot',
   aliases: ['macaw', 'scarlet macaw', 'polly', 'bird'],
   group: 'bird',
-  habitats: ['jungle', 'rainforest'],
+  habitats: ['jungle', 'rainforest', 'birds', 'pets'],
   box: [322, 258],
   size: 120,
   locomotion: 'fly',

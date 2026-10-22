@@ -94,7 +94,7 @@ const hornbill: AnimalDef = {
   kind: 'animal',
   aliases: ['great hornbill', 'great indian hornbill', 'bird'],
   group: 'bird',
-  habitats: ['jungle'],
+  habitats: ['jungle', 'birds'],
   box: [406, 236],
   size: 120,
   locomotion: 'fly',

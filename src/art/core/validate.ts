@@ -18,9 +18,19 @@ const REQUIRED_ROLES: Record<Locomotion, string[][]> = {
   breathe: [],
   wobble: [],
   roll: [],
+  drive: [],
 };
 
-const GROUNDED: Locomotion[] = ['walk4', 'walk2', 'waddle', 'hop', 'crawl', 'slither', 'roll'];
+const GROUNDED: Locomotion[] = [
+  'walk4',
+  'walk2',
+  'waddle',
+  'hop',
+  'crawl',
+  'slither',
+  'roll',
+  'drive',
+];
 
 export function validateAnimal(def: AnimalDef): string[] {
   const issues: string[] = [];

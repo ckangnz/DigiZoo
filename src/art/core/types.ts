@@ -17,7 +17,8 @@ export type Locomotion =
   | 'beat'
   | 'breathe'
   | 'wobble'
-  | 'roll';
+  | 'roll'
+  | 'drive';
 
 export type HabitatId =
   | 'safari'
@@ -30,7 +31,15 @@ export type HabitatId =
   | 'halloween'
   | 'space'
   | 'body'
-  | 'bible';
+  | 'bible'
+  | 'birds'
+  | 'vehicles'
+  | 'polar'
+  | 'aussie'
+  | 'cave'
+  | 'bugs'
+  | 'forest'
+  | 'pets';
 
 export type AnimalGroup =
   | 'mammal'
@@ -44,7 +53,9 @@ export type AnimalGroup =
   | 'spooky'
   | 'space'
   | 'body'
-  | 'bible';
+  | 'bible'
+  | 'vehicle'
+  | 'nature';
 
 export type StickerKind = 'animal' | 'character' | 'object';
 

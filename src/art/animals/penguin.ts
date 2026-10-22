@@ -60,7 +60,7 @@ const penguin: AnimalDef = {
   kind: 'animal',
   aliases: ['emperor penguin', 'king penguin', 'pingu', 'bird'],
   group: 'bird',
-  habitats: ['ocean'],
+  habitats: ['ocean', 'polar'],
   box: [214, 280],
   size: 150,
   locomotion: 'waddle',

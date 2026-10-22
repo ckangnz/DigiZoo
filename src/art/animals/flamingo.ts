@@ -77,7 +77,7 @@ const flamingo: AnimalDef = {
   kind: 'animal',
   aliases: ['pink bird', 'flemingo', 'bird'],
   group: 'bird',
-  habitats: ['safari'],
+  habitats: ['safari', 'birds'],
   box: [266, 360],
   size: 260,
   locomotion: 'walk2',

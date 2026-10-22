@@ -80,7 +80,7 @@ test('first launch shows the world picker, then opens a world with starter anima
 }) => {
   await page.goto('/?debug');
   await expect(page.locator('.picker')).toBeVisible();
-  await expect(page.locator('.world-card')).toHaveCount(11);
+  await expect(page.locator('.world-card')).toHaveCount(19);
   await page.locator('.world-card', { hasText: 'Farm' }).click();
   const s = await state(page);
   expect(s.themeId).toBe('farm');

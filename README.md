@@ -1,12 +1,13 @@
 # DigiZoo
 
-A sticker-book PWA for babies and kids. Pick a world — Safari, Jungle, Rainforest, Desert, Farm,
-Ocean, Dinosaurs, Halloween, Space, My Body or Bible — then play with 160+ cute stickers: drag, pinch
-to scale and rotate, flip, duplicate, layer, delete, tap ▶ to hear a real animal sound, 🐾 to make it
-walk, swim, hop or fly a few steps (it turns around before leaving the screen), 🍽 to feed it — meat
-makes the lion happy, carrots make it sad — and ⓘ to read (or hear) what it is, three fun facts and
-what it likes to eat. Tap the sun, clouds, trees, the windmill and other things in the background
-and they react. Play the matching-card game (3×3, 4×4 or 5×5) with the stickers of a world. Toggle
+A sticker-book PWA for babies and kids. Pick a world — Pets, Farm, Forest, Bugs, Birds, Safari,
+Jungle, Rainforest, Desert, Australia & NZ, Arctic & Antarctic, Ocean, Cave, Dinosaurs,
+Transportation, Space, My Body, Halloween or Bible — then play with 250 cute stickers: drag, pinch
+to scale and rotate, flip, duplicate, layer, delete, tap ▶ to hear its real sound, 🐾 to make it
+walk, swim, hop, fly or drive a few steps (it turns around before leaving the screen), 🍽 to feed it
+— meat makes the lion happy, carrots make it sad — and ⓘ to read (or hear) what it is, three fun
+facts and what it likes to eat. Tap the sun, clouds, trees, the windmill, the traffic lights and
+other things in the background and they react. Play the matching-card game (3×3, 4×4 or 5×5) with the stickers of a world. Toggle
 day and night, zoom and pan around, switch between 16 languages (names and facts are spoken in the
 chosen language), and start over whenever you like. Everything is saved on the device and works
 offline once installed.

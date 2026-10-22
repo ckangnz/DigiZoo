@@ -52,6 +52,13 @@ describe('localized search', () => {
     const japanese = searchAnimals('ライオン', (def) => (def.id === 'lion' ? ['ライオン'] : []));
     expect(japanese[0]?.id).toBe('lion');
   });
+
+  it("ranks a sticker's own name above another sticker's alias", () => {
+    const terms = (def: { id: string }) =>
+      def.id === 'cat' ? ['고양이'] : def.id === 'black-cat' ? ['검은 고양이', '고양이'] : [];
+    expect(searchAnimals('고양이', terms)[0]?.id).toBe('cat');
+    expect(searchAnimals('고양', terms)[0]?.id).toBe('cat');
+  });
 });
 
 describe('normalize', () => {

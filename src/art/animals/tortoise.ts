@@ -75,7 +75,7 @@ const tortoise: AnimalDef = {
   name: 'Tortoise',
   aliases: ['turtle', 'terrapin'],
   group: 'reptile',
-  habitats: ['desert'],
+  habitats: ['desert', 'pets'],
   box: [334, 200],
   size: 100,
   locomotion: 'walk4',

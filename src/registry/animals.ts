@@ -28,6 +28,8 @@ const GROUP_WORDS: Record<AnimalGroup, string[]> = {
   space: ['space', 'planet', 'planets', 'star', 'stars', 'galaxy'],
   body: ['body', 'organ', 'organs', 'anatomy', 'inside'],
   bible: ['bible', 'church', 'christian', 'sunday school', 'story', 'stories'],
+  vehicle: ['vehicle', 'vehicles', 'car', 'cars', 'truck', 'trucks', 'transport', 'things that go'],
+  nature: ['nature', 'rock', 'rocks', 'stone', 'stones', 'gem', 'gems'],
 };
 
 export function normalize(text: string): string {
@@ -55,12 +57,13 @@ function singular(word: string): string {
 
 function score(def: AnimalDef, q: string, extra: string[]): number {
   let localBest = 0;
-  for (const term of extra.map(normalize)) {
-    if (!term) continue;
-    if (term === q) localBest = Math.max(localBest, 11);
-    else if (term.startsWith(q)) localBest = Math.max(localBest, 9);
+  extra.map(normalize).forEach((term, i) => {
+    if (!term) return;
+    const ownName = i === 0 ? 1 : 0;
+    if (term === q) localBest = Math.max(localBest, 11 + ownName);
+    else if (term.startsWith(q)) localBest = Math.max(localBest, 9 + ownName);
     else if (q.length >= 2 && term.includes(q)) localBest = Math.max(localBest, 6);
-  }
+  });
   if (localBest) return localBest;
   const name = normalize(def.name);
   const id = def.id.replace(/-/g, ' ');

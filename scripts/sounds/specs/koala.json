@@ -1,0 +1,13 @@
+{
+  "id": "koala",
+  "layers": [
+    {
+      "file": "File:Perception-of-Male-Caller-Identity-in-Koalas-(Phascolarctos-cinereus)-Acoustic-Analysis-and-pone.0020329.s001.ogv",
+      "start": 14.48,
+      "end": 17.4
+    }
+  ],
+  "highpass": 0,
+  "species": "Male koala (Phascolarctos cinereus) named Andy bellowing at Lone Pine Koala Sanctuary: the deep snoring and belching mating call",
+  "note": "Audio track of Movie S1 from Charlton et al., 'Perception of Male Caller Identity in Koalas', PLOS ONE (2011), doi:10.1371/journal.pone.0020329."
+}

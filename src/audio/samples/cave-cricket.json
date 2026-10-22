@@ -1,0 +1,11 @@
+{
+  "id": "cave-cricket",
+  "file": "cave-cricket.mp3",
+  "duration": 1.49,
+  "title": "Gryllus campestris 02 (HS)",
+  "author": "Harald Süpfle",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Gryllus_campestris_02_(HS).ogg",
+  "changes": "Real recording of a European field cricket (Gryllus campestris) chirping, used for the cave cricket (cave crickets have no wings and cannot chirp). Trimmed to 3.62–5.30 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

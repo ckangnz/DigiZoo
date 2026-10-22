@@ -1261,6 +1261,40 @@ body.dragging-sticker * {
   }
 }
 
+.snow {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 40%, rgba(255, 255, 255, 0) 72%);
+  animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  25% {
+    transform: translate(30px, calc(var(--fall) * 0.25));
+  }
+  50% {
+    transform: translate(-16px, calc(var(--fall) * 0.5));
+  }
+  75% {
+    transform: translate(26px, calc(var(--fall) * 0.75));
+  }
+  92% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(0, var(--fall));
+    opacity: 0;
+  }
+}
+
 .bubble {
   width: var(--size);
   height: var(--size);
@@ -1427,6 +1461,7 @@ body.dragging-sticker * {
   .amb.cloud,
   .amb.bird,
   .amb.leaf,
+  .amb.snow,
   .amb.bubble {
     display: none;
   }

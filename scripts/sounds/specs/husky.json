@@ -1,0 +1,19 @@
+{
+  "id": "husky",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/115/115357_2024015-hq.mp3",
+      "credit": {
+        "title": "dog howling",
+        "author": "simcotter",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/simcotter/sounds/115357/"
+      },
+      "start": 9.12,
+      "end": 11.5
+    }
+  ],
+  "species": "Husky (Canis familiaris) giving one long howl, described by the recordist as a recording of a husky dog howling",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The 70 Hz high-pass removes measured low-frequency rumble; the howl itself sits at about 250 Hz and above."
+}

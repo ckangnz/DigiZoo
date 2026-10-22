@@ -1,0 +1,11 @@
+{
+  "id": "kookaburra",
+  "file": "kookaburra.mp3",
+  "duration": 2.95,
+  "title": "Cucaburra",
+  "author": "Wilfredo Cox",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cucaburra.ogg",
+  "changes": "Laughing kookaburra (Dacelo novaeguineae) in full laughing call: a fast run of loud, rolling 'koo-koo-ka-ka-ka' notes. Trimmed to 5.42–8.34 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

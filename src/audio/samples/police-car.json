@@ -1,0 +1,11 @@
+{
+  "id": "police-car",
+  "file": "police-car.mp3",
+  "duration": 2.64,
+  "title": "AMB_Siren_Police_Pass_004",
+  "author": "conleec",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/conleec/sounds/159744/",
+  "changes": "A real police car approaching from a distance with its siren on the fast 'yelp' setting. Trimmed to 12.40–15.00 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording (Fostex FR2-LE recorder, BP4025 stereo microphone)."
+}

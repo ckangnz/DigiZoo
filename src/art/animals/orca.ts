@@ -15,7 +15,7 @@ const orca: AnimalDef = {
   kind: 'animal',
   aliases: ['killer whale', 'orca whale', 'blackfish'],
   group: 'mammal',
-  habitats: ['ocean'],
+  habitats: ['ocean', 'polar'],
   box: [384, 244],
   size: 280,
   locomotion: 'swim',

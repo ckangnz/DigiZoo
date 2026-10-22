@@ -40,7 +40,7 @@ const mouse: AnimalDef = {
   kind: 'animal',
   aliases: ['mice', 'mousey', 'little mouse', 'squeak'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'pets'],
   box: [290, 178],
   size: 60,
   locomotion: 'walk4',

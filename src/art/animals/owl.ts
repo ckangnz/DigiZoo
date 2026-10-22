@@ -90,7 +90,7 @@ const owl: AnimalDef = {
   name: 'Owl',
   aliases: ['owlet', 'hoot', 'hooty', 'night owl', 'bird'],
   group: 'bird',
-  habitats: ['halloween'],
+  habitats: ['halloween', 'birds', 'forest'],
   box: [W, 236],
   size: 130,
   locomotion: 'fly',

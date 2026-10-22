@@ -77,7 +77,7 @@ const spider: AnimalDef = {
   name: 'Spider',
   aliases: ['itsy bitsy spider', 'incy wincy spider', 'spidey', 'spooky spider', 'bug'],
   group: 'bug',
-  habitats: ['halloween'],
+  habitats: ['halloween', 'cave', 'bugs'],
   box: [W, 178],
   size: 80,
   locomotion: 'crawl',

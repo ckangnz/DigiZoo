@@ -73,7 +73,7 @@ const bee: AnimalDef = {
   kind: 'animal',
   aliases: ['bumblebee', 'bumble bee', 'honeybee', 'honey bee', 'buzz', 'bug'],
   group: 'bug',
-  habitats: ['farm'],
+  habitats: ['farm', 'bugs'],
   box: [196, 204],
   size: 50,
   locomotion: 'flutter',

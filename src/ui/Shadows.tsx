@@ -13,6 +13,7 @@ const GROUNDED = new Set<Locomotion>([
   'crawl',
   'slither',
   'roll',
+  'drive',
   'wobble',
 ]);
 
@@ -22,7 +23,8 @@ export const ShadowLayer = memo(function ShadowLayer() {
   const themeId = useStore((s) => s.themeId);
   const stickers = useStore((s) => s.stickers);
   if (NO_GROUND.has(themeId)) return null;
-  const horizon = getTheme(themeId).scene.horizon;
+  const scene = getTheme(themeId).scene;
+  const groundTop = scene.groundTop ?? scene.horizon;
   return (
     <div className="layer shadows" aria-hidden="true">
       {stickers.map((st) => {
@@ -35,7 +37,7 @@ export const ShadowLayer = memo(function ShadowLayer() {
         const width = (cos * f.w + sin * f.h) * 0.68;
         const height = Math.max(8, Math.min(width * 0.2, f.h * 0.26));
         const bottom = f.cy + (sin * f.w + cos * f.h) / 2;
-        if (bottom < horizon) return null;
+        if (bottom < groundTop) return null;
         return (
           <div
             key={st.id}

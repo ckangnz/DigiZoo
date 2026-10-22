@@ -1,0 +1,20 @@
+{
+  "id": "dragonfly",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/240/240549_4337854-hq.mp3",
+      "credit": {
+        "title": "Creature, Insect - Dragonfly, Caught in Net (Wing Movement)",
+        "author": "jaegrover",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/jaegrover/sounds/240549/"
+      },
+      "start": 9.6,
+      "end": 11.98
+    }
+  ],
+  "highpass": 200,
+  "species": "Real recording of a dragonfly's wings buzzing and fluttering, made as it beat its wings in a mist net at a bird-banding station",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The 200 Hz high-pass removes measured low-frequency rumble and a 100 Hz hum in the background; the wing buzz itself sits above 1 kHz."
+}

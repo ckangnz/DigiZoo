@@ -1,0 +1,21 @@
+{
+  "id": "wolf",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/500/500646_339183-hq.mp3",
+      "credit": {
+        "title": "Cooper Creek 20160313_014852 solitary wolf howl very clear",
+        "author": "betchkal",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/betchkal/sounds/500646/"
+      },
+      "start": 1.75,
+      "end": 4.67,
+      "fadeOut": 0.6
+    }
+  ],
+  "highpass": 0,
+  "species": "A wild grey wolf (Canis lupus) howling alone in Wrangell-St. Elias National Park, Alaska: the rising start of one long howl",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The last 0.6 s is faded out because the howl carries on for several more seconds."
+}

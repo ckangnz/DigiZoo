@@ -215,6 +215,13 @@ const PRESETS: Record<Locomotion, Record<string, Spec>> = {
     arm: { rotate: 10, phase: 0.25 },
     head: { rotate: 3 },
   },
+  drive: {
+    root: (phi, def) => ({
+      ty: -0.012 * height(def) * Math.abs(Math.sin(TAU * phi)),
+      rot: 0.5 * Math.sin(TAU * phi),
+    }),
+    head: { rotate: 1.5 },
+  },
   roll: {
     root: (phi, def) => {
       const diameter = 0.9 * Math.min(def.box[0], def.box[1]);
@@ -318,6 +325,7 @@ const DEFAULT_PERIOD: Record<Locomotion, number> = {
   breathe: 2.6,
   wobble: 1.2,
   roll: 1.2,
+  drive: 0.8,
 };
 
 const DEFAULT_STRIDE: Record<Locomotion, number> = {
@@ -336,6 +344,7 @@ const DEFAULT_STRIDE: Record<Locomotion, number> = {
   breathe: 0,
   wobble: 0,
   roll: 0.5,
+  drive: 0.35,
 };
 
 export function gaitPeriod(def: AnimalDef): number {

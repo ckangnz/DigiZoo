@@ -85,7 +85,7 @@ const dove: AnimalDef = {
   kind: 'animal',
   aliases: ['bird', 'peace', 'olive branch', 'white dove'],
   group: 'bird',
-  habitats: ['bible'],
+  habitats: ['bible', 'birds'],
   box: [298, 218],
   size: 70,
   locomotion: 'fly',

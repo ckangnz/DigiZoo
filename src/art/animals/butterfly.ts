@@ -77,7 +77,7 @@ const butterfly: AnimalDef = {
   name: 'Butterfly',
   aliases: ['blue morpho', 'morpho'],
   group: 'bug',
-  habitats: ['rainforest'],
+  habitats: ['rainforest', 'bugs'],
   box: [300, 240],
   size: 70,
   locomotion: 'flutter',

@@ -1,0 +1,11 @@
+{
+  "id": "kakapo",
+  "file": "kakapo.mp3",
+  "duration": 1.75,
+  "title": "Kakapo-26",
+  "author": "Department of Conservation (NZ)",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Kakapo-26.wav",
+  "changes": "Adult female kakapo (Strigops habroptilus) giving two harsh 'skraark' calls. Trimmed to 2.25–3.97 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Crown Copyright recording ('Kakapo female song') from the Department of Conservation (NZ) bird songs and calls collection (doc.govt.nz), reused under CC BY 4.0."
+}

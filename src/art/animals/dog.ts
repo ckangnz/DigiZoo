@@ -34,7 +34,7 @@ const dog: AnimalDef = {
   name: 'Dog',
   aliases: ['puppy', 'doggy', 'pup', 'doggie', 'puppy dog', 'woof'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'pets'],
   box: [340, 274],
   size: 150,
   locomotion: 'walk4',

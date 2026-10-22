@@ -1,0 +1,19 @@
+{
+  "id": "glowworm",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/402/402929_270868-hq.mp3",
+      "credit": {
+        "title": "Drops in the small cave",
+        "author": "Selector",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Selector/sounds/402929/"
+      },
+      "start": 71.9,
+      "end": 74.75
+    }
+  ],
+  "species": "Real recording of water drops falling and echoing inside the Ledyanaya cave near Staritsa, Russia, used for the glowworm (glowworms make no sound)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording; the recordist notes a limiter and light denoising were applied to the original. The 70 Hz high-pass removes measured low-frequency rumble."
+}

@@ -83,7 +83,7 @@ const toucan: AnimalDef = {
   name: 'Toucan',
   aliases: ['toco', 'toco toucan', 'bird'],
   group: 'bird',
-  habitats: ['rainforest'],
+  habitats: ['rainforest', 'birds'],
   box: [356, 226],
   size: 110,
   locomotion: 'fly',

@@ -77,7 +77,7 @@ const bat: AnimalDef = {
   kind: 'animal',
   aliases: ['fruit bat', 'flying fox', 'vampire bat', 'spooky bat', 'halloween bat', 'batty'],
   group: 'mammal',
-  habitats: ['jungle', 'halloween'],
+  habitats: ['jungle', 'halloween', 'cave'],
   box: [348, 216],
   size: 90,
   locomotion: 'fly',

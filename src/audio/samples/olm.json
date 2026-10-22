@@ -1,0 +1,11 @@
+{
+  "id": "olm",
+  "file": "olm.mp3",
+  "duration": 2.74,
+  "title": "Small cave river flow",
+  "author": "Duasun",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/Duasun/sounds/462661/",
+  "changes": "Real recording of a small stream of water gurgling and bubbling inside a cave, used for the olm (a blind salamander that lives in underground cave waters and makes no well-known call). Trimmed to 0.25–2.95 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

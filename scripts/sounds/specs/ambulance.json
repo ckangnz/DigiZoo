@@ -1,0 +1,13 @@
+{
+  "id": "ambulance",
+  "layers": [
+    {
+      "file": "File:Het voorbijrijden van een ambulance met sirene - SoundCloud - Beeld en Geluid.ogg",
+      "start": 32.9,
+      "end": 35.82
+    }
+  ],
+  "highpass": 0,
+  "species": "A real Dutch ambulance driving away just after passing, its siren switching between high and low notes ('nee-naw')",
+  "note": "Field recording ('An ambulance passing with its siren', recorded at Crailo, the Netherlands) from the Netherlands Institute for Sound and Vision's Geluid van Nederland collection."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "police-car",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/159/159744_221578-hq.mp3",
+      "credit": {
+        "title": "AMB_Siren_Police_Pass_004",
+        "author": "conleec",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/conleec/sounds/159744/"
+      },
+      "start": 12.4,
+      "end": 15.0
+    }
+  ],
+  "highpass": 0,
+  "species": "A real police car approaching from a distance with its siren on the fast 'yelp' setting",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (Fostex FR2-LE recorder, BP4025 stereo microphone)."
+}

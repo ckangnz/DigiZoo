@@ -1,0 +1,11 @@
+{
+  "id": "kiwi",
+  "file": "kiwi.mp3",
+  "duration": 2.3,
+  "title": "Male-ni-brown-kiwi",
+  "author": "Department of Conservation (NZ)",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Male-ni-brown-kiwi.wav",
+  "changes": "Male North Island brown kiwi (Apteryx mantelli) calling his mate: two shrill, rising 'kee-wee' whistles. Trimmed to 16.05–18.32 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Crown Copyright recording from the Department of Conservation (NZ) bird songs and calls collection (doc.govt.nz), reused under CC BY 4.0. Left channel used because the stereo channels partly cancel when mixed."
+}

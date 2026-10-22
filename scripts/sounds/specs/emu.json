@@ -1,0 +1,8 @@
+{
+  "id": "emu",
+  "layers": [
+    { "file": "File:Dromaius novaehollandiae Lue0043 03.wav", "start": 15.5, "end": 17.96 }
+  ],
+  "species": "Female emu (Dromaius novaehollandiae) drumming: a rolling series of deep booms made with her inflatable throat pouch, recorded at the Ruhr Zoo in Germany in 1984",
+  "note": "From the Animal Sound Archive (Tierstimmenarchiv) of the Museum für Naturkunde Berlin. The 70 Hz high-pass removes measured low-frequency rumble and 50 Hz mains hum between the booms."
+}

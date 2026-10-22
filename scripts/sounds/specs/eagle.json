@@ -1,0 +1,14 @@
+{
+  "id": "eagle",
+  "layers": [
+    {
+      "file": "File:Yellowstone sound library - Bald Eagle - 002.mp3",
+      "start": 24.8,
+      "end": 27.35,
+      "channel": "left"
+    }
+  ],
+  "highpass": 0,
+  "species": "Bald eagle (Haliaeetus leucocephalus) calling from a tree near Yellowstone Lake: a series of four high, chattering whistles",
+  "note": "Public-domain field recording from the Yellowstone National Park sound library (National Park Service & MSU Acoustic Atlas). Left channel used because the stereo channels partly cancel when mixed."
+}

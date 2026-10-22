@@ -22,6 +22,7 @@ function thinned(a: SceneDef['ambient']): SceneDef['ambient'] {
     fireflies: scale(a.fireflies),
     sparkles: scale(a.sparkles),
     leaves: scale(a.leaves),
+    snow: scale(a.snow),
     bubbles: scale(a.bubbles),
     cells: scale(a.cells),
     bats: scale(a.bats),
@@ -114,6 +115,23 @@ function build(scene: SceneDef, night: boolean): Item[] {
           animationDelay: `${-between(0, duration)}s`,
           ['--fall' as string]: `${between(900, 1500)}px`,
           ['--hue' as string]: `${between(70, 130)}`,
+        },
+      });
+    }
+  }
+  if (a.snow) {
+    for (let i = 0; i < a.snow; i++) {
+      const duration = between(16, 30);
+      items.push({
+        key: `w${i}`,
+        className: 'amb snow',
+        style: {
+          left: between(20, w - 20),
+          top: between(-20, 260),
+          animationDuration: `${duration}s`,
+          animationDelay: `${-between(0, duration)}s`,
+          ['--fall' as string]: `${between(h * 0.6, h)}px`,
+          ['--size' as string]: `${between(10, 24)}px`,
         },
       });
     }

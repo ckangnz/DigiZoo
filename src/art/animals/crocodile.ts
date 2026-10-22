@@ -132,7 +132,7 @@ const crocodile: AnimalDef = {
   name: 'Crocodile',
   aliases: ['croc', 'alligator', 'gator'],
   group: 'reptile',
-  habitats: ['jungle', 'rainforest', 'safari'],
+  habitats: ['jungle', 'rainforest', 'safari', 'aussie'],
   box: [460, 190],
   size: 150,
   locomotion: 'walk4',

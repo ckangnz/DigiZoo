@@ -70,7 +70,7 @@ const rabbit: AnimalDef = {
   kind: 'animal',
   aliases: ['bunny', 'bunnies', 'bunny rabbit', 'easter bunny'],
   group: 'mammal',
-  habitats: ['farm'],
+  habitats: ['farm', 'forest', 'pets'],
   box: [224, 260],
   size: 100,
   locomotion: 'hop',

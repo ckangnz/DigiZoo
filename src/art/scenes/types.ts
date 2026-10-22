@@ -12,6 +12,7 @@ export interface Ambient {
   bubbles?: number;
   birds?: number;
   leaves?: number;
+  snow?: number;
   sparkles?: number;
   twinkles?: number;
   meteors?: number;
@@ -78,5 +79,7 @@ export interface SceneDef {
   front: (p: Palette, mode: Mode) => string;
   ambient: Ambient;
   defaults: Placement[];
+  stickerScale?: number;
+  groundTop?: number;
   interactives?: Interactive[];
 }

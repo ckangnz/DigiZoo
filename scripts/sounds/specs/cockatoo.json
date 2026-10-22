@@ -1,0 +1,20 @@
+{
+  "id": "cockatoo",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/818/818532_16449895-hq.mp3",
+      "credit": {
+        "title": "BIRDMisc 32bF Cockatoo",
+        "author": "dhi67540",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://freesound.org/people/dhi67540/sounds/818532/"
+      },
+      "start": 16.75,
+      "end": 19.3
+    }
+  ],
+  "highpass": 0,
+  "species": "Sulphur-crested cockatoo (Cacatua galerita) giving two raucous screeches as it moves away from the recordist",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The more distant calls near the end of the recording were chosen because they are softer than the close-up screeches."
+}

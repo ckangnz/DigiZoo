@@ -55,7 +55,7 @@ const rocket: AnimalDef = {
   kind: 'object',
   aliases: ['rocket ship', 'spaceship', 'space ship', 'spacecraft', 'blast off'],
   group: 'space',
-  habitats: ['space'],
+  habitats: ['space', 'vehicles'],
   box: [224, 224],
   size: 260,
   locomotion: 'float',
