@@ -1,0 +1,11 @@
+{
+  "id": "snowy-owl",
+  "file": "snowy-owl.mp3",
+  "duration": 2.85,
+  "title": "Bubo scandiacus (Schneeeule), call, Zoo Nürnberg (TSA:Bubo_scandiacus_Lue_57_3_1)",
+  "author": "Hans Lütgens / Tierstimmenarchiv, Museum für Naturkunde Berlin",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://www.gbif.org/occurrence/1229650145",
+  "changes": "Snowy owl (Bubo scandiacus), a male at Zoo Nürnberg giving its low barking hoots while carrying a mouse. Trimmed to 1.00–3.80 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. From the Animal Sound Archive (Tierstimmenarchiv) of the Museum für Naturkunde Berlin; licence as published for this recording on GBIF and the archive's search site. The 70 Hz high-pass removes measured low-frequency rumble; the hoots sit at about 200 Hz and above."
+}

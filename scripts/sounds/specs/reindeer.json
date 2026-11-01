@@ -1,0 +1,9 @@
+{
+  "id": "reindeer",
+  "layers": [
+    { "file": "File:Reindeer (Rangifer tarandus) in Avon Valley.webm", "start": 9.42, "end": 11.47 }
+  ],
+  "highpass": 0,
+  "species": "Reindeer (Rangifer tarandus) grunting three times at Avon Valley wildlife park, Bristol, UK; audio track of a video, taken from inside one continuous shot",
+  "note": "No high-pass: the excerpt has no measured low-frequency rumble."
+}

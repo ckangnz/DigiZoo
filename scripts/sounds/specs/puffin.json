@@ -1,0 +1,20 @@
+{
+  "id": "puffin",
+  "layers": [
+    {
+      "url": "https://xeno-canto.org/sounds/uploaded/UJAPFMKMKT/XC821150-Soundscape.wav",
+      "credit": {
+        "title": "XC821150 Atlantic Puffin (Fratercula arctica)",
+        "author": "Killian Sullivan",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://xeno-canto.org/821150"
+      },
+      "start": 11.9,
+      "end": 14.3
+    }
+  ],
+  "highpass": 200,
+  "species": "Atlantic puffin (Fratercula arctica) giving its low groaning growl call at a colony off Grand Manan (Machias Seal Island area), recorded on a phone; terns can be heard faintly in the background",
+  "note": "The high-pass is set to 200 Hz because over half of the excerpt's energy is wind rumble below 150 Hz; the groan itself sits at about 400 Hz and above."
+}

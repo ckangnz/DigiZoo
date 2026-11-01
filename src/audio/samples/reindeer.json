@@ -1,0 +1,11 @@
+{
+  "id": "reindeer",
+  "file": "reindeer.mp3",
+  "duration": 2.09,
+  "title": "Reindeer (Rangifer tarandus) in Avon Valley",
+  "author": "The Nature Box",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Reindeer_(Rangifer_tarandus)_in_Avon_Valley.webm",
+  "changes": "Reindeer (Rangifer tarandus) grunting three times at Avon Valley wildlife park, Bristol, UK; audio track of a video, taken from inside one continuous shot. Trimmed to 9.42–11.47 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.7 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. No high-pass: the excerpt has no measured low-frequency rumble."
+}

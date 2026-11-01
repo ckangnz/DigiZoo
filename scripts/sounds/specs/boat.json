@@ -1,0 +1,20 @@
+{
+  "id": "boat",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/208/208714_1756543-hq.mp3",
+      "credit": {
+        "title": "ship horn",
+        "author": "monotraum",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/monotraum/sounds/208714/"
+      },
+      "start": 3.0,
+      "end": 5.9
+    }
+  ],
+  "highpass": 0,
+  "species": "A real ship's horn going 'toot… toooot' across a seaport (no tugboat recording was available, so the closest genuine boat horn)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
+}
