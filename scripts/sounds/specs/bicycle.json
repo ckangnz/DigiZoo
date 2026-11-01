@@ -1,0 +1,20 @@
+{
+  "id": "bicycle",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/485/485072_9616576-hq.mp3",
+      "credit": {
+        "title": "Bicycle Bell",
+        "author": "IENBA",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/IENBA/sounds/485072/"
+      },
+      "start": 0.0,
+      "end": 2.9
+    }
+  ],
+  "highpass": 0,
+  "species": "A real bicycle bell going 'ring-ring, ring-ring'",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (Zoom H4n, Sennheiser MKE 600)."
+}

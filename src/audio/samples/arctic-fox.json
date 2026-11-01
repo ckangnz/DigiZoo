@@ -1,0 +1,11 @@
+{
+  "id": "arctic-fox",
+  "file": "arctic-fox.mp3",
+  "duration": 0.99,
+  "title": "Bellender Fuchs",
+  "author": "Jugrü",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Bellender_Fuchs.ogg",
+  "changes": "Red fox (Vulpes vulpes) giving one bark. Used for the arctic fox because no arctic fox recording under an allowed licence with a clearly audible call was found; the red fox is a close relative in the same genus. Trimmed to 0.45–1.40 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. No high-pass: the excerpt has no measured low-frequency rumble."
+}

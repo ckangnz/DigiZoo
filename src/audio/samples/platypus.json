@@ -1,0 +1,11 @@
+{
+  "id": "platypus",
+  "file": "platypus.mp3",
+  "duration": 2.95,
+  "title": "20100627.creek.paddling.wav",
+  "author": "dobroide",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/dobroide/sounds/100390/",
+  "changes": "Real recording of splashing and paddling through a small babbling creek near Aznalcóllar, Spain, used for the platypus: platypuses are almost silent, and the sound most tied to them is water splashing in the creeks where they paddle and dive (no free recording of a platypus itself was found; the paddler here is a person wading). Trimmed to 0.70–3.60 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.6 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording."
+}

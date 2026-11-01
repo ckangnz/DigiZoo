@@ -1,0 +1,19 @@
+{
+  "id": "helicopter",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/156/156906_981371-hq.mp3",
+      "credit": {
+        "title": "UH-1 helicopter",
+        "author": "Rmutt",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Rmutt/sounds/156906/"
+      },
+      "start": 9.8,
+      "end": 12.7
+    }
+  ],
+  "species": "A real UH-1 'Huey' helicopter flying by, its two big rotor blades going 'chop-chop-chop'",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (Sony PCM-D50). The 70 Hz high-pass trims measured low-frequency wind and rotor rumble."
+}

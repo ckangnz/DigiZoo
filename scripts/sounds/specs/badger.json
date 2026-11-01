@@ -1,0 +1,19 @@
+{
+  "id": "badger",
+  "layers": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/European_Badger_%28Meles_meles%29_%28W1CDR0001490_BD4%29.ogg",
+      "credit": {
+        "title": "European Badger (Meles meles) (W1CDR0001490 BD4)",
+        "author": "Aubrey John Williams / The British Library",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:European_Badger_(Meles_meles)_(W1CDR0001490_BD4).ogg"
+      },
+      "start": 3.4,
+      "end": 6.3
+    }
+  ],
+  "species": "A European badger (Meles meles) calling with short grunts, recorded at Chobham Place, Surrey, England, on 24 February 1975",
+  "note": "British Library wildlife recording; copyright holder The British Library Board, licensed CC BY-SA 4.0 (Wikimedia permission ticket 2015111010010706)."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "walrus",
+  "file": "walrus.mp3",
+  "duration": 2.3,
+  "title": "svalbard_phippsoya_20060829",
+  "author": "jeo",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/jeo/sounds/103115/",
+  "changes": "Atlantic walrus (Odobenus rosmarus rosmarus) bellowing in a group resting on the beach of Phippsøya, Svalbard. Trimmed to 604.70–606.95 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. No high-pass so the low bellow (about 150–300 Hz) keeps its depth."
+}

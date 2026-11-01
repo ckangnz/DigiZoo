@@ -1,0 +1,11 @@
+{
+  "id": "echidna",
+  "file": "echidna.mp3",
+  "duration": 2.95,
+  "title": "Echidna eating ants",
+  "author": "Cazz",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Echidna_eating_ants.webm",
+  "changes": "Wild short-beaked echidna (Tachyglossus aculeatus) snuffling and digging into an ant nest at Mulligans Flat, Canberra: soft crackles and snuffles of soil and leaf litter (echidnas have no real call). Trimmed to 1.00–3.90 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 150 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video. The 150 Hz high-pass removes measured wind rumble, which made up most of the low-frequency energy."
+}

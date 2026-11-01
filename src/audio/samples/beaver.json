@@ -1,0 +1,11 @@
+{
+  "id": "beaver",
+  "file": "beaver.mp3",
+  "duration": 2.95,
+  "title": "Beaver chomping on a log (3.33m)",
+  "author": "Mobius_Play109",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/Mobius_Play109/sounds/685527/",
+  "changes": "A beaver gnawing (chomping) on a log; a run of repeated bites into the wood (the Freesound page does not name the species). Trimmed to 101.40–104.30 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 250 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. The high-pass removes measured low-frequency background noise below about 300 Hz."
+}

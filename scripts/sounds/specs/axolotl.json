@@ -1,0 +1,20 @@
+{
+  "id": "axolotl",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/271/271673_1708550-hq.mp3",
+      "credit": {
+        "title": "garden pond hydrophone",
+        "author": "odilonmarcenaro",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/odilonmarcenaro/sounds/271673/"
+      },
+      "start": 4.0,
+      "end": 6.9
+    }
+  ],
+  "highpass": 0,
+  "species": "Real underwater (hydrophone) recording of a small weedy garden pond where newts, tadpoles and goldfish live, with soft ticks from raindrops and water insects, used for the axolotl (a salamander that makes no well-known call)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "goldfish",
+  "file": "goldfish.mp3",
+  "duration": 1.46,
+  "title": "AlexandreJourdan_2013_s3",
+  "author": "iut_Paris8",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/iut_Paris8/sounds/166886/",
+  "changes": "Real recording of air bubbling up through the water of an aquarium, used for the goldfish (goldfish make no well-known call). Trimmed to 0.00–1.51 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording, described by the recordist as a bubble in the water of an aquarium. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

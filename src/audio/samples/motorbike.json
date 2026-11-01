@@ -1,0 +1,11 @@
+{
+  "id": "motorbike",
+  "file": "motorbike.mp3",
+  "duration": 2.95,
+  "title": "motorcycle, bmw, engine rev, underground, garage",
+  "author": "golovlev.sound",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/golovlev.sound/sounds/632218/",
+  "changes": "A real BMW motorbike revving its engine twice, 'vroom… vroom!', in an echoey underground car park. Trimmed to 0.00–2.90 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 1.4 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. The 70 Hz high-pass trims the car park's measured low hum."
+}

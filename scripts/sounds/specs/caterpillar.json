@@ -1,0 +1,20 @@
+{
+  "id": "caterpillar",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/420/420463_8180400-hq.mp3",
+      "credit": {
+        "title": "crunch munch.WAV",
+        "author": "daustin13",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/daustin13/sounds/420463/"
+      },
+      "start": 0.05,
+      "end": 2.4
+    }
+  ],
+  "highpass": 0,
+  "species": "Real close-up recording of a leaf being crunched by hand to sound like chewing, used for the caterpillar (a caterpillar's own leaf-munching is too quiet to record clearly)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass: the clip has no measurable low-frequency rumble."
+}

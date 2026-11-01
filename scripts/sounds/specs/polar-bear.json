@@ -1,0 +1,20 @@
+{
+  "id": "polar-bear",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-BearwithCubsDENA.mp3",
+      "credit": {
+        "title": "Bear with Cubs, Denali National Park and Preserve",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-bearcubs.htm"
+      },
+      "start": 0.35,
+      "end": 2.95
+    }
+  ],
+  "highpass": 0,
+  "species": "Brown bear (Ursus arctos) cubs mewling beside their mother in Denali National Park, Alaska. Used for the polar bear because no polar bear recording under an allowed licence was found; brown bears are the polar bear's closest relative",
+  "note": "US government work (NPS Natural Sounds gallery). Excerpt stops before a clipped transient at 3.2 s in the source. No high-pass: no measured low-frequency rumble."
+}

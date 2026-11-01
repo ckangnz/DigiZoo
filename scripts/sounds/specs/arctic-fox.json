@@ -1,0 +1,8 @@
+{
+  "id": "arctic-fox",
+  "layers": [{ "file": "File:Bellender Fuchs.ogg", "start": 0.45, "end": 1.4 }],
+  "highpass": 0,
+  "trimDb": 50,
+  "species": "Red fox (Vulpes vulpes) giving one bark. Used for the arctic fox because no arctic fox recording under an allowed licence with a clearly audible call was found; the red fox is a close relative in the same genus",
+  "note": "No high-pass: the excerpt has no measured low-frequency rumble."
+}

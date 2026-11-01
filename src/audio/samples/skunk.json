@@ -1,0 +1,11 @@
+{
+  "id": "skunk",
+  "file": "skunk.mp3",
+  "duration": 2.85,
+  "title": "Streifenskunk (Tiergarten Delitzsch) (7)",
+  "author": "Fiver, der Hellseher",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Streifenskunk_(Tiergarten_Delitzsch)_(7).webm",
+  "changes": "The sound track of a video of a striped skunk (Mephitis mephitis) at Tiergarten Delitzsch zoo, Germany: the skunk rustling, scrabbling and snuffling about in its enclosure (no vocal call; skunks are mostly quiet). Trimmed to 0.10–3.00 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

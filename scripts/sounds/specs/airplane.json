@@ -1,0 +1,20 @@
+{
+  "id": "airplane",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/63/63260_21830-hq.mp3",
+      "credit": {
+        "title": "airshow_3",
+        "author": "Heigh-hoo",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Heigh-hoo/sounds/63260/"
+      },
+      "start": 9.0,
+      "end": 11.9
+    }
+  ],
+  "highpass": 0,
+  "species": "A real single-engine propeller plane (an Extra 300 sport plane at an air show) buzzing past overhead, its engine note dropping as it flies away",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (AT835ST microphone, Korg MR-1)."
+}

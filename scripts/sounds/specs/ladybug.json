@@ -1,0 +1,20 @@
+{
+  "id": "ladybug",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/770/770112_13973196-hq.mp3",
+      "credit": {
+        "title": "Plants or ferns - Manipulation & Hit",
+        "author": "Vrymaa",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Vrymaa/sounds/770112/"
+      },
+      "start": 1.6,
+      "end": 4.3
+    }
+  ],
+  "highpass": 0,
+  "species": "Real close-up recording of fern and herb leaves rustling as they are gathered by hand, used for the ladybug (ladybugs make no sound we can hear; this is the leafy rustle of the plants they live on)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass: the clip has no measurable low-frequency rumble."
+}

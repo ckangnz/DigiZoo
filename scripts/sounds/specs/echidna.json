@@ -1,0 +1,7 @@
+{
+  "id": "echidna",
+  "layers": [{ "file": "File:Echidna eating ants.webm", "start": 1.0, "end": 3.9 }],
+  "highpass": 150,
+  "species": "Wild short-beaked echidna (Tachyglossus aculeatus) snuffling and digging into an ant nest at Mulligans Flat, Canberra: soft crackles and snuffles of soil and leaf litter (echidnas have no real call)",
+  "note": "Audio track of the video. The 150 Hz high-pass removes measured wind rumble, which made up most of the low-frequency energy."
+}
