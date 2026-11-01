@@ -1,0 +1,11 @@
+{
+  "id": "deer",
+  "file": "deer.mp3",
+  "duration": 1.33,
+  "title": "Male roe deer growl",
+  "author": "1bumer",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Male_roe_deer_growl.ogg",
+  "changes": "A male European roe deer (Capreolus capreolus) giving one short alarm bark (the Polish description on the file page reads 'Szczekanie samca sarny', barking of a male roe deer). Trimmed to 1.05–2.35 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

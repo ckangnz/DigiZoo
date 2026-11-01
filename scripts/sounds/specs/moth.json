@@ -1,0 +1,13 @@
+{
+  "id": "moth",
+  "layers": [
+    {
+      "file": "File:Acherontia atropos 2019 09 29 DTestaert Albussac.ogg",
+      "start": 4.7,
+      "end": 7.6
+    }
+  ],
+  "highpass": 300,
+  "species": "Death's-head hawkmoth (Acherontia atropos) squeaking: the rapid chirping squeaks this big moth makes when disturbed, by pushing air through its mouthparts",
+  "note": "The 300 Hz high-pass removes measured low-frequency rumble from handling; the squeaks themselves sit above 2 kHz."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "raccoon",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/717/717839_97550-hq.mp3",
+      "credit": {
+        "title": "230127 Raccoon calls, noisy world, EMT272s, roof, Toronto 10pm",
+        "author": "TRP",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/TRP/sounds/717839/"
+      },
+      "start": 1.2,
+      "end": 4.1
+    }
+  ],
+  "highpass": 150,
+  "species": "A wild common raccoon (Procyon lotor) giving trilling, chittering calls at night in Toronto",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The high-pass removes measured city traffic rumble below 200 Hz."
+}

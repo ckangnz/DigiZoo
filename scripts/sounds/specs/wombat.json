@@ -1,0 +1,20 @@
+{
+  "id": "wombat",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/435/435645_4955305-hq.mp3",
+      "credit": {
+        "title": "wombat.WAV",
+        "author": "samarobryn",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/samarobryn/sounds/435645/"
+      },
+      "start": 67.3,
+      "end": 70.25
+    }
+  ],
+  "highpass": 120,
+  "species": "Real recording of a wild common wombat (Vombatus ursinus) munching grass: a steady run of crunchy bites, recorded at the Bundanon Estate, New South Wales (no free recording of a wombat hiss or grunt was found)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The 120 Hz high-pass removes measured low-frequency background rumble and hum below the chewing sounds."
+}

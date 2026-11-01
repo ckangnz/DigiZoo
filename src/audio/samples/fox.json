@@ -1,0 +1,11 @@
+{
+  "id": "fox",
+  "file": "fox.mp3",
+  "duration": 1.93,
+  "title": "Red Fox (Vulpes vulpes) (W1CDR0001529 BD12)",
+  "author": "Aubrey John Williams / The British Library",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(W1CDR0001529_BD12).ogg",
+  "changes": "A red fox (Vulpes vulpes) giving a double bark, recorded at Pinbury Park, Gloucestershire, England, on 9 January 1977. Trimmed to 1.90–3.80 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. British Library wildlife recording; copyright holder The British Library Board, licensed CC BY-SA 4.0 (Wikimedia permission ticket 2015111010010706)."
+}

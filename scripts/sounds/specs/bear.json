@@ -1,0 +1,19 @@
+{
+  "id": "bear",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-BearwithCubsDENA.mp3",
+      "credit": {
+        "title": "Sound Gallery - Bear with cubs (Natural Sounds)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-bearcubs.htm"
+      },
+      "start": 0.3,
+      "end": 3.2
+    }
+  ],
+  "species": "Bear cubs (most likely brown bears, Ursus arctos; the NPS page does not name the species) making their mewling, whining calls next to their mother in Denali National Park, Alaska",
+  "note": "US National Park Service recording (public domain)."
+}

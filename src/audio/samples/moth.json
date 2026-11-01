@@ -1,0 +1,11 @@
+{
+  "id": "moth",
+  "file": "moth.mp3",
+  "duration": 2.95,
+  "title": "Acherontia atropos 2019 09 29 DTestaert Albussac",
+  "author": "Dominique Testart",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Acherontia_atropos_2019_09_29_DTestaert_Albussac.ogg",
+  "changes": "Death's-head hawkmoth (Acherontia atropos) squeaking: the rapid chirping squeaks this big moth makes when disturbed, by pushing air through its mouthparts. Trimmed to 4.70–7.60 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 300 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.3 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The 300 Hz high-pass removes measured low-frequency rumble from handling; the squeaks themselves sit above 2 kHz."
+}

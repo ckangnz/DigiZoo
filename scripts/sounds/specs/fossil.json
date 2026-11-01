@@ -1,0 +1,20 @@
+{
+  "id": "fossil",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/812/812116_3388239-hq.mp3",
+      "credit": {
+        "title": "Stonemason",
+        "author": "achats57",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/achats57/sounds/812116/"
+      },
+      "start": 18.5,
+      "end": 19.85
+    }
+  ],
+  "highpass": 0,
+  "species": "Real recording of a stonemason tapping a chisel into stone with a hammer (four taps), used for the fossil because it sounds like a fossil dig",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording, made outdoors in rural Wales. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

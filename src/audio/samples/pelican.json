@@ -1,0 +1,11 @@
+{
+  "id": "pelican",
+  "file": "pelican.mp3",
+  "duration": 2.59,
+  "title": "Great White Pelican (Pelecanus onocrotalus) sounds",
+  "author": "Marco Dragonetti",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Great_White_Pelican_(Pelecanus_onocrotalus)_sounds.ogg",
+  "changes": "Great white pelicans (Pelecanus onocrotalus) giving low grunting calls while feeding together in the Danube Delta (adult pelicans are mostly silent away from their flocks and colonies). Trimmed to 0.80–3.35 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

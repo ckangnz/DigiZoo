@@ -1,0 +1,20 @@
+{
+  "id": "taxi",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/457/457425_5613947-hq.mp3",
+      "credit": {
+        "title": "boedie_alfa_romeo_MiTo_honking_car_horn",
+        "author": "boedie",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/boedie/sounds/457425/"
+      },
+      "start": 2.75,
+      "end": 5.4
+    }
+  ],
+  "highpass": 0,
+  "species": "A real car horn going 'beep-beep… beep-beep-beep' (an Alfa Romeo MiTo honked in a forest car park; no taxi recording, so the closest genuine car-horn beeps)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
+}

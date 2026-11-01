@@ -1,0 +1,19 @@
+{
+  "id": "fox",
+  "layers": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Red_Fox_%28Vulpes_vulpes%29_%28W1CDR0001529_BD12%29.ogg",
+      "credit": {
+        "title": "Red Fox (Vulpes vulpes) (W1CDR0001529 BD12)",
+        "author": "Aubrey John Williams / The British Library",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(W1CDR0001529_BD12).ogg"
+      },
+      "start": 1.9,
+      "end": 3.8
+    }
+  ],
+  "species": "A red fox (Vulpes vulpes) giving a double bark, recorded at Pinbury Park, Gloucestershire, England, on 9 January 1977",
+  "note": "British Library wildlife recording; copyright holder The British Library Board, licensed CC BY-SA 4.0 (Wikimedia permission ticket 2015111010010706)."
+}

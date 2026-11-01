@@ -1,0 +1,11 @@
+{
+  "id": "fossil",
+  "file": "fossil.mp3",
+  "duration": 1.38,
+  "title": "Stonemason",
+  "author": "achats57",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/achats57/sounds/812116/",
+  "changes": "Real recording of a stonemason tapping a chisel into stone with a hammer (four taps), used for the fossil because it sounds like a fossil dig. Trimmed to 18.50–19.85 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording, made outdoors in rural Wales. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

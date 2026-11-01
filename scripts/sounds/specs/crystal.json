@@ -1,0 +1,20 @@
+{
+  "id": "crystal",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/153/153101_2042792-hq.mp3",
+      "credit": {
+        "title": "Crystal glass",
+        "author": "mlteenie",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://freesound.org/people/mlteenie/sounds/153101/"
+      },
+      "start": 0,
+      "end": 2.95
+    }
+  ],
+  "highpass": 0,
+  "species": "Real recording of a crystal glass gently tapped with a soft object and ringing",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The ring is faded out after about 2.9 s. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

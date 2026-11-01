@@ -1,0 +1,12 @@
+{
+  "id": "pelican",
+  "layers": [
+    {
+      "file": "File:Great White Pelican (Pelecanus onocrotalus) sounds.ogg",
+      "start": 0.8,
+      "end": 3.35
+    }
+  ],
+  "highpass": 0,
+  "species": "Great white pelicans (Pelecanus onocrotalus) giving low grunting calls while feeding together in the Danube Delta (adult pelicans are mostly silent away from their flocks and colonies)"
+}

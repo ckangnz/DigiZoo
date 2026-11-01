@@ -1,0 +1,11 @@
+{
+  "id": "swan",
+  "file": "swan.mp3",
+  "duration": 2.95,
+  "title": "Cygnus olor - Mute Swan XC434964",
+  "author": "Joost van Bruggen",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cygnus_olor_-_Mute_Swan_XC434964.mp3",
+  "changes": "Mute swans (Cygnus olor) flying low overhead at night: the loud, throbbing, humming wing beats mute swans are known for (they are otherwise quiet birds), a recording from Arnhem shared through Xeno-canto (XC434964). Trimmed to 11.70–14.60 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

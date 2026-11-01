@@ -1,0 +1,19 @@
+{
+  "id": "school-bus",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/451/451697_612689-hq.mp3",
+      "credit": {
+        "title": "school bus truck int horn honk",
+        "author": "kyles",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/kyles/sounds/451697/"
+      },
+      "start": 0.0,
+      "end": 2.62
+    }
+  ],
+  "species": "A real school bus horn, 'beep-beep, beeeep', recorded from inside the bus",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The 70 Hz high-pass removes the measured low thump of the horn button and cab."
+}

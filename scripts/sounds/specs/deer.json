@@ -1,0 +1,6 @@
+{
+  "id": "deer",
+  "layers": [{ "file": "File:Male roe deer growl.ogg", "start": 1.05, "end": 2.35 }],
+  "trimDb": 50,
+  "species": "A male European roe deer (Capreolus capreolus) giving one short alarm bark (the Polish description on the file page reads 'Szczekanie samca sarny', barking of a male roe deer)"
+}

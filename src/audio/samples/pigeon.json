@@ -1,0 +1,11 @@
+{
+  "id": "pigeon",
+  "file": "pigeon.mp3",
+  "duration": 2.74,
+  "title": "Columba livia - Rock Dove XC539061",
+  "author": "Marie-Lan Taÿ Pamart",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Columba_livia_-_Rock_Dove_XC539061.mp3",
+  "changes": "Feral rock pigeon (Columba livia) in Paris giving three soft coos while waiting for seeds, a recording shared through Xeno-canto (XC539061). Trimmed to 14.40–17.10 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

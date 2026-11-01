@@ -24,9 +24,9 @@ describe('english source', () => {
 describe('language detection', () => {
   it('maps browser languages', () => {
     expect(detectLanguage(['ko-KR'])).toBe('ko');
-    expect(detectLanguage(['zh-TW'])).toBe('zh-Hant');
+    expect(detectLanguage(['zh-TW'])).toBe('zh-Hans');
     expect(detectLanguage(['zh-CN'])).toBe('zh-Hans');
-    expect(detectLanguage(['pt-BR', 'en'])).toBe('pt');
+    expect(detectLanguage(['pt-BR', 'es'])).toBe('es');
     expect(detectLanguage(['xx'])).toBe('en');
   });
 });

@@ -1,0 +1,20 @@
+{
+  "id": "cave-fish",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/384/384218_1661766-hq.mp3",
+      "credit": {
+        "title": "Underwater recording of aquatic movement, bubbles and drops.",
+        "author": "felix.blume",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/felix.blume/sounds/384218/"
+      },
+      "start": 66,
+      "end": 68.3
+    }
+  ],
+  "highpass": 0,
+  "species": "Real underwater recording (hydrophone) of air bubbles bubbling up in a river at Praia do Sono, Brazil, used for the cave fish (cave fish make no well-known sound)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "squirrel",
+  "file": "squirrel.mp3",
+  "duration": 2.19,
+  "title": "Sound Gallery - Squirrel (Natural Sounds)",
+  "author": "National Park Service",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.nps.gov/subjects/sound/sounds-squirrel.htm",
+  "changes": "A red squirrel (most likely the American red squirrel, Tamiasciurus hudsonicus) giving its rattling chatter call in Yellowstone National Park. Trimmed to 0.10–2.30 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. US National Park Service recording (public domain)."
+}

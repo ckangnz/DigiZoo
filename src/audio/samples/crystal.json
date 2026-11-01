@@ -1,0 +1,11 @@
+{
+  "id": "crystal",
+  "file": "crystal.mp3",
+  "duration": 2.95,
+  "title": "Crystal glass",
+  "author": "mlteenie",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/mlteenie/sounds/153101/",
+  "changes": "Real recording of a crystal glass gently tapped with a soft object and ringing. Trimmed to 0.00–2.95 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. The ring is faded out after about 2.9 s. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

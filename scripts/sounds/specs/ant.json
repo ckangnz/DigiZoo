@@ -1,0 +1,13 @@
+{
+  "id": "ant",
+  "layers": [
+    {
+      "file": "File:Megaponera analis, stridulerende kolonne, 2023-05-10 16h16, Skrikfontein, b.mp3",
+      "start": 1.0,
+      "end": 3.9
+    }
+  ],
+  "highpass": 0,
+  "species": "Matabele ants (Megaponera analis) stridulating: the chirping hiss of a column of ants marching home from a termite raid, made by rubbing ridged body segments together",
+  "note": "No high-pass: the clip has no measurable low-frequency rumble."
+}

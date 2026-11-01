@@ -1,23 +1,7 @@
 import type { HabitatId, StyleId } from '../art/core/types';
 import type { FoodId } from '../food/foods';
 
-export type LangCode =
-  | 'en'
-  | 'ko'
-  | 'ja'
-  | 'zh-Hans'
-  | 'zh-Hant'
-  | 'es'
-  | 'fr'
-  | 'de'
-  | 'it'
-  | 'pt'
-  | 'ru'
-  | 'ar'
-  | 'hi'
-  | 'vi'
-  | 'th'
-  | 'id';
+export type LangCode = 'en' | 'ko' | 'ja' | 'zh-Hans' | 'es';
 
 export interface UiStrings {
   pickWorld: string;

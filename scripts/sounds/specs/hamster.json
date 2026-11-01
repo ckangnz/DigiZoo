@@ -1,0 +1,20 @@
+{
+  "id": "hamster",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/204/204762_770707-hq.mp3",
+      "credit": {
+        "title": "hamster eating",
+        "author": "Yuval",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/Yuval/sounds/204762/"
+      },
+      "start": 39.2,
+      "end": 42.1
+    }
+  ],
+  "highpass": 0,
+  "species": "Pet hamster nibbling and crunching its food at night, recorded close up with a shotgun microphone",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass is applied because the clip has no measurable low-frequency rumble."
+}

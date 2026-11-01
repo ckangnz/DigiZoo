@@ -8,7 +8,7 @@ walk, swim, hop, fly or drive a few steps (it turns around before leaving the sc
 — meat makes the lion happy, carrots make it sad — and ⓘ to read (or hear) what it is, three fun
 facts and what it likes to eat. Tap the sun, clouds, trees, the windmill, the traffic lights and
 other things in the background and they react. Play the matching-card game (3×3, 4×4 or 5×5) with the stickers of a world. Toggle
-day and night, zoom and pan around, switch between 16 languages (names and facts are spoken in the
+day and night, zoom and pan around, switch between English, 한국어, 日本語, 中文 and Español (names and facts are spoken in the
 chosen language), and start over whenever you like. Everything is saved on the device and works
 offline once installed.
 

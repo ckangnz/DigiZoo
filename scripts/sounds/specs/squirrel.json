@@ -1,0 +1,19 @@
+{
+  "id": "squirrel",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/nri/avElement/nri-SquirrelYELL.mp3",
+      "credit": {
+        "title": "Sound Gallery - Squirrel (Natural Sounds)",
+        "author": "National Park Service",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/subjects/sound/sounds-squirrel.htm"
+      },
+      "start": 0.1,
+      "end": 2.3
+    }
+  ],
+  "species": "A red squirrel (most likely the American red squirrel, Tamiasciurus hudsonicus) giving its rattling chatter call in Yellowstone National Park",
+  "note": "US National Park Service recording (public domain)."
+}

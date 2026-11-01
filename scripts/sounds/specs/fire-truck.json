@@ -1,0 +1,19 @@
+{
+  "id": "fire-truck",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/635/635734_612689-hq.mp3",
+      "credit": {
+        "title": "siren fire truck north american distant drive by one block over echo +tree wind hiss",
+        "author": "kyles",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/kyles/sounds/635734/"
+      },
+      "start": 51.3,
+      "end": 54.2
+    }
+  ],
+  "species": "A real North American fire truck sounding its air horn, 'honk-honk-honk', as it drives by a block away",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (Sony PCM-D50). The 70 Hz high-pass removes measured low-frequency traffic rumble."
+}
