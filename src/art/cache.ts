@@ -31,6 +31,14 @@ export function sceneUrls(def: SceneDef, mode: Mode): { back: string; front: str
   return urls;
 }
 
+export function releaseStickersExcept(keep: Set<string>): void {
+  for (const [key, url] of stickers) {
+    if (keep.has(key.slice(0, key.indexOf(':')))) continue;
+    URL.revokeObjectURL(url);
+    stickers.delete(key);
+  }
+}
+
 export function releaseScenesExcept(themeId: string): void {
   for (const [key, urls] of scenes) {
     if (key.startsWith(`${themeId}:`)) continue;

@@ -1,6 +1,6 @@
 import { playSfx } from '../audio/engine';
 import { getAnimal } from '../registry/animals';
-import { getTheme } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
 import { useStore } from '../store/store';
 import type { Sticker } from '../store/types';
 import {
@@ -91,7 +91,7 @@ export function attachGestures(el: HTMLElement): () => void {
   };
 
   const clampToWorld = (x: number, y: number): [number, number] => {
-    const [w, h] = getTheme(store().themeId).scene.world;
+    const [w, h] = sceneOf(store().themeId).world;
     return [Math.min(w, Math.max(0, x)), Math.min(h, Math.max(0, y))];
   };
 

@@ -119,14 +119,6 @@ function ensure(): AudioContext | null {
     setTimeout(() => {
       for (const id of wanted) void loadBuffer(created, id)?.catch(() => undefined);
     }, 50);
-    const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
-    if (session) {
-      try {
-        session.type = 'playback';
-      } catch {
-        session.type = 'ambient';
-      }
-    }
   }
   if (ctx.state !== 'running') void ctx.resume().catch(() => undefined);
   return ctx;

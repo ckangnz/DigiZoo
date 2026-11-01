@@ -7,7 +7,7 @@ import { useCamera } from '../engine/camera';
 import { frameOf } from '../engine/geometry';
 import { screenToWorld } from '../engine/viewport';
 import { getAnimal } from '../registry/animals';
-import { getTheme } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
 import { useStore } from '../store/store';
 import { spawnEffect } from './fxStore';
 
@@ -80,7 +80,7 @@ export function addAnimal(animalId: string, style: StyleId, at?: [number, number
   const jitter = at ? 0 : 60;
   const x = cx + (Math.random() - 0.5) * jitter;
   const y = cy + (Math.random() - 0.5) * jitter;
-  const scale = getTheme(store().themeId).scene.stickerScale ?? 1;
+  const scale = sceneOf(store().themeId).stickerScale ?? 1;
   const id = store().add(animalId, style, x, y, scale);
   store().bumpSticker(id, 'pop');
   playSfx('pop');

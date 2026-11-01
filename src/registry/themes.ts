@@ -1,7 +1,7 @@
 import type { HabitatId } from '../art/core/types';
 import type { SceneDef } from '../art/scenes/types';
 
-const scenes = import.meta.glob<SceneDef>(
+const loaders = import.meta.glob<SceneDef>(
   [
     '../art/scenes/safari.ts',
     '../art/scenes/jungle.ts',
@@ -23,17 +23,16 @@ const scenes = import.meta.glob<SceneDef>(
     '../art/scenes/forest.ts',
     '../art/scenes/pets.ts',
   ],
-  { eager: true, import: 'default' },
+  { import: 'default' },
 );
 
 export interface ThemeMeta {
   id: HabitatId;
   name: string;
   accent: string;
-  scene: SceneDef;
 }
 
-const META: Omit<ThemeMeta, 'scene'>[] = [
+export const THEMES: ThemeMeta[] = [
   { id: 'pets', name: 'Pets', accent: '#ff7f9e' },
   { id: 'farm', name: 'Farm', accent: '#e6574e' },
   { id: 'forest', name: 'Forest', accent: '#3f8f4f' },
@@ -55,12 +54,35 @@ const META: Omit<ThemeMeta, 'scene'>[] = [
   { id: 'bible', name: 'Bible', accent: '#9a62c9' },
 ];
 
-const sceneById = new Map(Object.values(scenes).map((s) => [s.id, s]));
+const loaded = new Map<HabitatId, SceneDef>();
+const pending = new Map<HabitatId, Promise<SceneDef>>();
 
-export const THEMES: ThemeMeta[] = META.flatMap((m) => {
-  const scene = sceneById.get(m.id);
-  return scene ? [{ ...m, scene }] : [];
-});
+export function loadScene(id: HabitatId): Promise<SceneDef> {
+  const ready = loaded.get(id);
+  if (ready) return Promise.resolve(ready);
+  let job = pending.get(id);
+  if (!job) {
+    const loader = loaders[`../art/scenes/${id}.ts`];
+    if (!loader) return Promise.reject(new Error(`no scene for ${id}`));
+    job = loader().then((scene) => {
+      loaded.set(id, scene);
+      return scene;
+    });
+    job.catch(() => pending.delete(id));
+    pending.set(id, job);
+  }
+  return job;
+}
+
+export function isSceneLoaded(id: HabitatId): boolean {
+  return loaded.has(id);
+}
+
+export function sceneOf(id: HabitatId): SceneDef {
+  const scene = loaded.get(id);
+  if (!scene) throw new Error(`scene ${id} is not loaded`);
+  return scene;
+}
 
 export const DEFAULT_THEME: HabitatId = 'safari';
 

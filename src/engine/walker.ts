@@ -1,6 +1,6 @@
 import { gaitPeriod, gaitStride, travelFactor } from '../art/core/motion';
 import { getAnimal } from '../registry/animals';
-import { getTheme } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
 import { useStore } from '../store/store';
 import { useCamera } from './camera';
 import { halfWidth, metricsOf } from './geometry';
@@ -85,7 +85,7 @@ function tick(now: number) {
   const speed = strideWorld / period;
   const dir = st.flipX ? -1 : 1;
   const half = halfWidth(st, def);
-  const worldW = getTheme(state.themeId).scene.world[0];
+  const worldW = sceneOf(state.themeId).world[0];
   const [lo, hi] = patrolBounds(
     walk.originX,
     Math.max(strideWorld * CYCLES_EACH_WAY, half * 0.6),

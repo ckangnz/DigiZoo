@@ -41,7 +41,10 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-const state = (page: Page) => page.evaluate(() => window.__digizoo.useStore.getState());
+const state = async (page: Page) => {
+  await page.waitForFunction(() => !!window.__digizoo);
+  return page.evaluate(() => window.__digizoo.useStore.getState());
+};
 const cameraScale = (page: Page) => page.evaluate(() => window.__digizoo.useCamera.getState().t.s);
 
 async function openWorld(page: Page, name = 'Safari') {
@@ -82,8 +85,8 @@ test('first launch shows the world picker, then opens a world with starter anima
   await expect(page.locator('.picker')).toBeVisible();
   await expect(page.locator('.world-card')).toHaveCount(19);
   await page.locator('.world-card', { hasText: 'Farm' }).click();
+  await expect.poll(async () => (await state(page)).themeId).toBe('farm');
   const s = await state(page);
-  expect(s.themeId).toBe('farm');
   expect(s.stickers.length).toBeGreaterThan(5);
   await expect(page.locator('[data-sticker]')).toHaveCount(s.stickers.length);
 });

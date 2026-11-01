@@ -1,6 +1,6 @@
 import { playSfx } from '../audio/engine';
 import type { Interactive, InteractEffect } from '../art/scenes/types';
-import { getTheme } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
 import { useStore } from '../store/store';
 import { spawnEffect, type EffectKind } from '../ui/fxStore';
 import { useCamera } from './camera';
@@ -58,7 +58,7 @@ function triggerCloud(el: HTMLElement) {
 export function tapBackground(clientX: number, clientY: number): boolean {
   if (typeof document === 'undefined' || !document.elementsFromPoint) return false;
   const s = useStore.getState();
-  const scene = getTheme(s.themeId).scene;
+  const scene = sceneOf(s.themeId);
   for (const el of document.elementsFromPoint(clientX, clientY)) {
     if (el.closest('[data-ui]')) return false;
     const host = el.closest('[data-interactive]');

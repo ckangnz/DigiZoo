@@ -4,7 +4,13 @@ import { loadLanguage } from '../i18n';
 import { detectLanguage } from '../i18n/languages';
 import type { LangCode } from '../i18n/types';
 import { getAnimal } from '../registry/animals';
-import { DEFAULT_THEME, getTheme, hasTheme } from '../registry/themes';
+import {
+  DEFAULT_THEME,
+  hasTheme,
+  isSceneLoaded,
+  loadScene as loadSceneDef,
+  sceneOf,
+} from '../registry/themes';
 import {
   MAX_SCALE,
   MIN_SCALE,
@@ -30,8 +36,8 @@ export function newId(): string {
 const known = (id: string) => !!getAnimal(id);
 
 export function defaultStickers(theme: HabitatId): Sticker[] {
-  return getTheme(theme)
-    .scene.defaults.filter((p) => known(p.animal))
+  return sceneOf(theme)
+    .defaults.filter((p) => known(p.animal))
     .map((p) => ({
       id: newId(),
       animalId: p.animal,
@@ -134,6 +140,10 @@ export const useStore = create<State & Actions>()((set, get) => ({
   bump: null,
 
   openTheme: (id) => {
+    if (!isSceneLoaded(id)) {
+      void loadSceneDef(id).then(() => get().openTheme(id));
+      return;
+    }
     const s = get();
     flushSaves();
     if (id !== s.themeId) {

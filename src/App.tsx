@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { preloadSounds, setAudioMuted, setPreferredVoice } from './audio/engine';
 import { animalsIn } from './registry/animals';
-import { releaseScenesExcept } from './art/cache';
+import { releaseScenesExcept, releaseStickersExcept } from './art/cache';
 import { zoomBy } from './engine/camera';
 import { ttsLang, useI18n } from './i18n';
 import { LANGUAGES } from './i18n/languages';
@@ -141,7 +141,12 @@ export function App() {
   }, [voices]);
 
   useEffect(() => {
-    if (!pickerOpen) releaseScenesExcept(themeId);
+    if (pickerOpen) return;
+    releaseScenesExcept(themeId);
+    const keep = new Set(animalsIn(themeId).map((a) => a.id));
+    for (const s of useStore.getState().stickers) keep.add(s.animalId);
+    keep.add('lion');
+    releaseStickersExcept(keep);
   }, [themeId, pickerOpen]);
 
   useEffect(() => {

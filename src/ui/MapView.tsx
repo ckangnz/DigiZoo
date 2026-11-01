@@ -1,7 +1,8 @@
 import { memo, useEffect, useLayoutEffect, useRef } from 'react';
 import { initCamera, onViewSettled, resizeCamera, useCamera } from '../engine/camera';
 import { attachGestures } from '../engine/gestures';
-import { getTheme, type ThemeMeta } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
+import type { SceneDef } from '../art/scenes/types';
 import { useStore } from '../store/store';
 import { Ambient } from './Ambient';
 import { EffectsLayer } from './EffectsLayer';
@@ -11,9 +12,9 @@ import { SelectionOverlay, Toolbar } from './Selection';
 import { ShadowLayer } from './Shadows';
 import { StickerLayer } from './Stickers';
 
-const World = memo(function World({ theme, night }: { theme: ThemeMeta; night: boolean }) {
+const World = memo(function World({ scene, night }: { scene: SceneDef; night: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [w, h] = theme.scene.world;
+  const [w, h] = scene.world;
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -29,15 +30,15 @@ const World = memo(function World({ theme, night }: { theme: ThemeMeta; night: b
 
   return (
     <div ref={ref} className={`world${night ? ' night' : ''}`} style={{ width: w, height: h }}>
-      <SceneBack scene={theme.scene} night={night} />
-      <Ambient scene={theme.scene} night={night} sky />
-      <InteractiveLayer scene={theme.scene} night={night} front={false} />
-      <Ambient scene={theme.scene} night={night} sky={false} />
+      <SceneBack scene={scene} night={night} />
+      <Ambient scene={scene} night={night} sky />
+      <InteractiveLayer scene={scene} night={night} front={false} />
+      <Ambient scene={scene} night={night} sky={false} />
       <ShadowLayer />
       <StickerLayer />
       <EffectsLayer />
-      <SceneFront scene={theme.scene} night={night} />
-      <InteractiveLayer scene={theme.scene} night={night} front />
+      <SceneFront scene={scene} night={night} />
+      <InteractiveLayer scene={scene} night={night} front />
     </div>
   );
 });
@@ -46,17 +47,13 @@ export function MapView() {
   const ref = useRef<HTMLDivElement>(null);
   const themeId = useStore((s) => s.themeId);
   const night = useStore((s) => s.night);
-  const theme = getTheme(themeId);
+  const scene = sceneOf(themeId);
 
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    initCamera(
-      theme.scene.world,
-      { w: el.clientWidth, h: el.clientHeight },
-      useStore.getState().view,
-    );
-  }, [theme]);
+    initCamera(scene.world, { w: el.clientWidth, h: el.clientHeight }, useStore.getState().view);
+  }, [scene]);
 
   useEffect(() => {
     const el = ref.current;
@@ -76,7 +73,7 @@ export function MapView() {
 
   return (
     <div ref={ref} className={`map theme-${themeId}${night ? ' is-night' : ''}`}>
-      <World theme={theme} night={night} />
+      <World scene={scene} night={night} />
       <SelectionOverlay />
       <Toolbar />
     </div>

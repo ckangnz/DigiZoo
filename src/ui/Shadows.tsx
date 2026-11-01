@@ -2,7 +2,7 @@ import { memo } from 'react';
 import type { HabitatId, Locomotion } from '../art/core/types';
 import { frameOf } from '../engine/geometry';
 import { getAnimal } from '../registry/animals';
-import { getTheme } from '../registry/themes';
+import { sceneOf } from '../registry/themes';
 import { useStore } from '../store/store';
 
 const GROUNDED = new Set<Locomotion>([
@@ -23,7 +23,7 @@ export const ShadowLayer = memo(function ShadowLayer() {
   const themeId = useStore((s) => s.themeId);
   const stickers = useStore((s) => s.stickers);
   if (NO_GROUND.has(themeId)) return null;
-  const scene = getTheme(themeId).scene;
+  const scene = sceneOf(themeId);
   const groundTop = scene.groundTop ?? scene.horizon;
   return (
     <div className="layer shadows" aria-hidden="true">
