@@ -1,6 +1,6 @@
-import type { AnimalDef, Locomotion, Motion, PartNode, Pose } from './types';
+import type { AnimalDef, AnimalInfo, Locomotion, Motion, PartNode, Pose } from './types';
 
-type MotionFn = (phi: number, def: AnimalDef, part: PartNode) => Partial<Pose>;
+type MotionFn = (phi: number, def: AnimalInfo, part: PartNode) => Partial<Pose>;
 type Spec = Motion | MotionFn;
 
 const TAU = Math.PI * 2;
@@ -33,8 +33,8 @@ export function evalMotion(m: Motion, phi: number, phaseOffset = 0): Pose {
   };
 }
 
-const swing = (def: AnimalDef, fallback: number) => def.gait?.swing ?? fallback;
-const height = (def: AnimalDef) => def.box[1];
+const swing = (def: AnimalInfo, fallback: number) => def.gait?.swing ?? fallback;
+const height = (def: AnimalInfo) => def.box[1];
 
 function hopT(phi: number): { air: boolean; t: number } {
   const p = phi - Math.floor(phi);
@@ -277,7 +277,7 @@ export function partPose(def: AnimalDef, part: PartNode, phi: number): Pose {
   return evalMotion(spec, phi, part.phase ?? 0);
 }
 
-export function rootPose(def: AnimalDef, phi: number): Pose {
+export function rootPose(def: AnimalInfo, phi: number): Pose {
   const spec = PRESETS[def.locomotion].root;
   if (!spec) return IDENTITY;
   const rootPart: PartNode = { id: 'root' };
@@ -285,7 +285,7 @@ export function rootPose(def: AnimalDef, phi: number): Pose {
   return evalMotion(spec, phi);
 }
 
-export function rootPivot(def: AnimalDef): [number, number] {
+export function rootPivot(def: AnimalInfo): [number, number] {
   const [w, h] = def.box;
   switch (def.locomotion) {
     case 'fly':
@@ -303,7 +303,7 @@ export function rootPivot(def: AnimalDef): [number, number] {
   }
 }
 
-export function travelFactor(def: AnimalDef, phi: number): number {
+export function travelFactor(def: AnimalInfo, phi: number): number {
   if (def.locomotion !== 'hop') return 1;
   const p = phi - Math.floor(phi);
   return p < HOP_AIR ? 1 / HOP_AIR : 0;
@@ -347,11 +347,11 @@ const DEFAULT_STRIDE: Record<Locomotion, number> = {
   drive: 0.35,
 };
 
-export function gaitPeriod(def: AnimalDef): number {
+export function gaitPeriod(def: AnimalInfo): number {
   return def.gait?.period ?? DEFAULT_PERIOD[def.locomotion];
 }
 
-export function gaitStride(def: AnimalDef): number {
+export function gaitStride(def: AnimalInfo): number {
   return def.gait?.stride ?? DEFAULT_STRIDE[def.locomotion] * def.box[0];
 }
 

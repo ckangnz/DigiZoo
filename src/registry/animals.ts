@@ -1,18 +1,63 @@
+import { create } from 'zustand';
 import type { AnimalDef, AnimalGroup, HabitatId } from '../art/core/types';
+import meta from './animal-meta.json';
+import type { AnimalMeta } from './meta';
 
-const modules = import.meta.glob<AnimalDef>(['../art/animals/*.ts', '!../art/animals/*.test.ts'], {
-  eager: true,
-  import: 'default',
-});
+const artLoaders = import.meta.glob<AnimalDef>(
+  ['../art/animals/*.ts', '!../art/animals/*.test.ts'],
+  { import: 'default' },
+);
 
-export const ANIMALS: AnimalDef[] = Object.values(modules)
-  .filter(Boolean)
+export const ANIMALS: AnimalMeta[] = (meta as unknown as AnimalMeta[])
+  .slice()
   .sort((a, b) => a.name.localeCompare(b.name));
 
 const BY_ID = new Map(ANIMALS.map((a) => [a.id, a]));
 
-export function getAnimal(id: string): AnimalDef | undefined {
+export function getAnimal(id: string): AnimalMeta | undefined {
   return BY_ID.get(id);
+}
+
+const art = new Map<string, AnimalDef>();
+const artJobs = new Map<string, Promise<void>>();
+
+export const useArt = create<{ version: number }>(() => ({ version: 0 }));
+
+export function getArt(id: string): AnimalDef | undefined {
+  return art.get(id);
+}
+
+export function loadArt(ids: Iterable<string>): Promise<void> {
+  const jobs: Promise<void>[] = [];
+  for (const id of ids) {
+    if (art.has(id)) continue;
+    let job = artJobs.get(id);
+    if (!job) {
+      const loader = artLoaders[`../art/animals/${id}.ts`];
+      if (!loader) continue;
+      job = loader().then((def) => {
+        art.set(id, def);
+        useArt.setState((s) => ({ version: s.version + 1 }));
+      });
+      job.catch(() => artJobs.delete(id));
+      artJobs.set(id, job);
+    }
+    jobs.push(job);
+  }
+  return Promise.all(jobs).then(() => undefined);
+}
+
+export function hasArt(ids: Iterable<string>): boolean {
+  for (const id of ids) if (BY_ID.has(id) && !art.has(id)) return false;
+  return true;
+}
+
+export function useArtOf(id: string | undefined): AnimalDef | undefined {
+  useArt((s) => s.version);
+  if (!id) return undefined;
+  const def = art.get(id);
+  if (!def) void loadArt([id]);
+  return def;
 }
 
 const GROUP_WORDS: Record<AnimalGroup, string[]> = {
@@ -55,7 +100,7 @@ function singular(word: string): string {
   return word;
 }
 
-function score(def: AnimalDef, q: string, extra: string[]): number {
+function score(def: AnimalMeta, q: string, extra: string[]): number {
   let localBest = 0;
   extra.map(normalize).forEach((term, i) => {
     if (!term) return;
@@ -91,8 +136,8 @@ function score(def: AnimalDef, q: string, extra: string[]): number {
 
 export function searchAnimals(
   query: string,
-  localTerms: (def: AnimalDef) => string[] = () => [],
-): AnimalDef[] {
+  localTerms: (def: AnimalMeta) => string[] = () => [],
+): AnimalMeta[] {
   const q = normalize(query);
   if (!q) return ANIMALS;
   return ANIMALS.map((def) => ({ def, s: score(def, q, localTerms(def)) }))
@@ -101,6 +146,6 @@ export function searchAnimals(
     .map((r) => r.def);
 }
 
-export function animalsIn(habitat: HabitatId): AnimalDef[] {
+export function animalsIn(habitat: HabitatId): AnimalMeta[] {
   return ANIMALS.filter((a) => a.habitats.includes(habitat));
 }

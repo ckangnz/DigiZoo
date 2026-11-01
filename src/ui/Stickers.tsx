@@ -6,7 +6,7 @@ import { flattenParts, renderAnimal, renderPartPieces } from '../art/core/render
 import type { AnimalDef, StyleId } from '../art/core/types';
 import { metricsOf } from '../engine/geometry';
 import { attachRig } from '../engine/walker';
-import { getAnimal } from '../registry/animals';
+import { getAnimal, useArtOf } from '../registry/animals';
 import { useT } from '../i18n';
 import { useStore } from '../store/store';
 
@@ -82,6 +82,7 @@ const StickerView = memo(function StickerView({ id }: { id: string }) {
 
   const { name } = useT();
   const def = st ? getAnimal(st.animalId) : undefined;
+  const art = useArtOf(st?.animalId);
   if (!st || !def) return null;
   const m = metricsOf(def);
   return (
@@ -97,10 +98,10 @@ const StickerView = memo(function StickerView({ id }: { id: string }) {
       <div className={`sticker-flip${st.flipX ? ' flipped' : ''}`}>
         <div ref={bodyRef} className={`sticker-body${talking ? ' talking' : ''}`}>
           {walking ? (
-            <WalkerSvg id={id} def={def} style={st.style} />
+            art && <WalkerSvg id={id} def={art} style={st.style} />
           ) : (
             <img
-              src={stickerUrl(def, st.style)}
+              src={art ? stickerUrl(art, st.style) : undefined}
               alt={name(def.id, def.name)}
               draggable={false}
               decoding="async"

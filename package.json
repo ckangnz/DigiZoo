@@ -17,7 +17,8 @@
     "icons": "node --import tsx scripts/generate-icons.ts",
     "audio:check": "node --import tsx scripts/audio-check.ts",
     "credits": "node --import tsx scripts/credits.ts",
-    "thumbs": "node --import tsx scripts/scene-thumbs.ts"
+    "thumbs": "node --import tsx scripts/scene-thumbs.ts",
+    "meta": "node --import tsx scripts/animal-meta.ts && prettier --write src/registry/animal-meta.json"
   },
   "dependencies": {
     "react": "^19.3.1",

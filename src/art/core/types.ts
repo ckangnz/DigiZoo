@@ -118,6 +118,8 @@ export interface AnimalDef {
   sound: string;
 }
 
+export type AnimalInfo = Omit<AnimalDef, 'parts' | 'palette'>;
+
 export interface Pose {
   tx: number;
   ty: number;

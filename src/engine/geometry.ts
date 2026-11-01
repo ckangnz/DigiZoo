@@ -1,5 +1,5 @@
-import { animalBounds, viewBoxOf } from '../art/core/render';
-import type { AnimalDef } from '../art/core/types';
+import { viewBoxOf } from '../art/core/render';
+import type { AnimalMeta } from '../registry/meta';
 import type { Bounds } from '../art/core/paths';
 import { getAnimal } from '../registry/animals';
 import type { Sticker } from '../store/types';
@@ -15,7 +15,7 @@ export interface Metrics {
 
 const cache = new Map<string, Metrics>();
 
-export function metricsOf(def: AnimalDef): Metrics {
+export function metricsOf(def: AnimalMeta): Metrics {
   let m = cache.get(def.id);
   if (!m) {
     const [, , vw, vh] = viewBoxOf(def);
@@ -24,7 +24,7 @@ export function metricsOf(def: AnimalDef): Metrics {
       k,
       w: vw * k,
       h: vh * k,
-      bounds: animalBounds(def),
+      bounds: def.bounds,
       cx: def.box[0] / 2,
       cy: def.box[1] / 2,
     };
@@ -69,7 +69,7 @@ export interface Frame {
   rotation: number;
 }
 
-export function frameOf(st: Sticker, def: AnimalDef): Frame {
+export function frameOf(st: Sticker, def: AnimalMeta): Frame {
   const m = metricsOf(def);
   const b = m.bounds;
   const unit = m.k * st.scale;
@@ -86,7 +86,7 @@ export function frameOf(st: Sticker, def: AnimalDef): Frame {
   };
 }
 
-export function halfWidth(st: Sticker, def: AnimalDef): number {
+export function halfWidth(st: Sticker, def: AnimalMeta): number {
   const m = metricsOf(def);
   return ((m.bounds.maxX - m.bounds.minX) / 2) * m.k * st.scale;
 }

@@ -3,7 +3,7 @@ import type { HabitatId, StyleId } from '../art/core/types';
 import { loadLanguage } from '../i18n';
 import { detectLanguage } from '../i18n/languages';
 import type { LangCode } from '../i18n/types';
-import { getAnimal } from '../registry/animals';
+import { animalsIn, getAnimal, hasArt, loadArt } from '../registry/animals';
 import {
   DEFAULT_THEME,
   hasTheme,
@@ -48,6 +48,12 @@ export function defaultStickers(theme: HabitatId): Sticker[] {
       rotation: p.rotation ?? 0,
       flipX: p.flip ?? false,
     }));
+}
+
+export function artFor(theme: HabitatId): string[] {
+  const ids = new Set(animalsIn(theme).map((a) => a.id));
+  for (const s of loadScene(theme, known) ?? []) ids.add(s.animalId);
+  return [...ids];
 }
 
 function stickersFor(theme: HabitatId): Sticker[] {
@@ -140,8 +146,9 @@ export const useStore = create<State & Actions>()((set, get) => ({
   bump: null,
 
   openTheme: (id) => {
-    if (!isSceneLoaded(id)) {
-      void loadSceneDef(id).then(() => get().openTheme(id));
+    const art = artFor(id);
+    if (!isSceneLoaded(id) || !hasArt(art)) {
+      void Promise.all([loadSceneDef(id), loadArt(art)]).then(() => get().openTheme(id));
       return;
     }
     const s = get();

@@ -1,15 +1,29 @@
 import type { Recipe, SfxName, Voice } from './types';
 
-const recipeModules = import.meta.glob<Recipe>('./recipes/*.ts', {
-  eager: true,
-  import: 'default',
-});
-const RECIPES = new Map(
-  Object.entries(recipeModules).map(([file, recipe]) => [
+const recipeLoaders = import.meta.glob<Recipe>('./recipes/*.ts', { import: 'default' });
+const RECIPE_LOADERS = new Map(
+  Object.entries(recipeLoaders).map(([file, load]) => [
     file.replace(/^.*\//, '').replace(/\.ts$/, ''),
-    recipe,
+    load,
   ]),
 );
+const RECIPES = new Map<string, Recipe>();
+const recipeJobs = new Map<string, Promise<void>>();
+let pendingRecipe: object | null = null;
+
+function loadRecipe(id: string): Promise<void> {
+  let job = recipeJobs.get(id);
+  if (!job) {
+    const load = RECIPE_LOADERS.get(id);
+    if (!load) return Promise.resolve();
+    job = load().then((recipe) => {
+      RECIPES.set(id, recipe);
+    });
+    job.catch(() => recipeJobs.delete(id));
+    recipeJobs.set(id, job);
+  }
+  return job;
+}
 
 const sfxModules = import.meta.glob<Partial<Record<SfxName, Recipe>>>('./sfx.ts', {
   eager: true,
@@ -147,7 +161,7 @@ function createVoice(c: AudioContext, level: number): { voice: Voice; gain: Gain
 }
 
 export function hasRecipe(id: string): boolean {
-  return RECIPES.has(id);
+  return RECIPE_LOADERS.has(id);
 }
 
 function loadBuffer(c: BaseAudioContext, id: string): Promise<AudioBuffer> | null {
@@ -170,11 +184,20 @@ export function preloadSounds(ids: string[]): void {
   wanted = ids;
   const keep = new Set(ids);
   for (const id of [...buffers.keys()]) if (!keep.has(id)) buffers.delete(id);
+  for (const id of ids) if (!SAMPLE_URLS.has(id)) void loadRecipe(id).catch(() => undefined);
   if (!ctx) return;
   for (const id of ids) void loadBuffer(ctx, id)?.catch(() => undefined);
 }
 
 function playRecipe(c: AudioContext, id: string): number {
+  if (!RECIPES.has(id) && RECIPE_LOADERS.has(id)) {
+    const token = {};
+    pendingRecipe = token;
+    void loadRecipe(id).then(() => {
+      if (pendingRecipe === token && !muted) playRecipe(c, id);
+    });
+    return 1.2;
+  }
   const { voice, gain } = createVoice(c, 1);
   let duration = 0.8;
   try {
@@ -234,6 +257,7 @@ export function playAnimal(id: string): number {
 }
 
 export function stopAnimal(): void {
+  pendingRecipe = null;
   if (!current || !ctx) return;
   const { gain, timer, source } = current;
   current = null;

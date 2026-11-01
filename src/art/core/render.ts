@@ -1,7 +1,7 @@
 import { darken, luminance, saturate } from './color';
 import { emptyBounds, extendBounds, samplePath, type Bounds } from './paths';
 import { IDENTITY, partPose, poseToTransform, rootPivot, rootPose } from './motion';
-import type { AnimalDef, PartNode, Pose, Shape, StyleId } from './types';
+import type { AnimalDef, AnimalInfo, PartNode, Pose, Shape, StyleId } from './types';
 
 export interface RenderOptions {
   style: StyleId;
@@ -69,13 +69,13 @@ export const DEFAULT_PALETTE: Record<string, string> = {
 const BORDER = 7;
 const PAD = 20;
 
-export const unit = (def: AnimalDef): number => Math.max(def.box[0], def.box[1]) / 320;
+export const unit = (def: AnimalInfo): number => Math.max(def.box[0], def.box[1]) / 320;
 
-export function padOf(def: AnimalDef): number {
+export function padOf(def: AnimalInfo): number {
   return PAD * unit(def);
 }
 
-export function viewBoxOf(def: AnimalDef): [number, number, number, number] {
+export function viewBoxOf(def: AnimalInfo): [number, number, number, number] {
   const pad = padOf(def);
   return [-pad, -pad, def.box[0] + pad * 2, def.box[1] + pad * 2];
 }

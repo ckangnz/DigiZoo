@@ -8,14 +8,16 @@ import {
 } from 'react';
 import { playSfx } from '../audio/engine';
 import { stickerUrl } from '../art/cache';
-import { STYLES, type AnimalDef, type HabitatId, type StyleId } from '../art/core/types';
+import { STYLES, type HabitatId, type StyleId } from '../art/core/types';
 import { useCamera } from '../engine/camera';
 import { screenToWorld } from '../engine/viewport';
-import { ANIMALS, animalsIn, searchAnimals } from '../registry/animals';
+import { ANIMALS, animalsIn, getArt, searchAnimals } from '../registry/animals';
+import type { AnimalMeta } from '../registry/meta';
 import { THEMES, getTheme } from '../registry/themes';
 import { useStore } from '../store/store';
 import { useT } from '../i18n';
 import { addAnimal } from './actions';
+import { StickerImage } from './StickerImage';
 import { AddAnimalIcon, ChevronLeftIcon, CloseIcon, SearchIcon } from './icons';
 
 type Chip = 'here' | 'all' | HabitatId;
@@ -61,7 +63,11 @@ function dropToWorld(clientX: number, clientY: number): [number, number] | null 
   return screenToWorld(useCamera.getState().t, clientX - r.left, clientY - r.top);
 }
 
-function startTileGesture(e: ReactPointerEvent<HTMLButtonElement>, def: AnimalDef, style: StyleId) {
+function startTileGesture(
+  e: ReactPointerEvent<HTMLButtonElement>,
+  def: AnimalMeta,
+  style: StyleId,
+) {
   if (e.pointerType === 'mouse' && e.button !== 0) return;
   const tile = e.currentTarget;
   const pointerId = e.pointerId;
@@ -97,8 +103,9 @@ function startTileGesture(e: ReactPointerEvent<HTMLButtonElement>, def: AnimalDe
       } catch {
         return;
       }
+      const art = getArt(def.id);
       ghost = document.createElement('img');
-      ghost.src = stickerUrl(def, style);
+      if (art) ghost.src = stickerUrl(art, style);
       ghost.className = 'drag-ghost';
       ghost.alt = '';
       document.body.appendChild(ghost);
@@ -132,7 +139,7 @@ function startTileGesture(e: ReactPointerEvent<HTMLButtonElement>, def: AnimalDe
   window.addEventListener('pointercancel', cancel);
 }
 
-const StickerTile = memo(function StickerTile({ def, style }: { def: AnimalDef; style: StyleId }) {
+const StickerTile = memo(function StickerTile({ def, style }: { def: AnimalMeta; style: StyleId }) {
   const ref = useRef<HTMLButtonElement>(null);
   const visible = useInView(ref);
   const tr = useT();
@@ -150,13 +157,15 @@ const StickerTile = memo(function StickerTile({ def, style }: { def: AnimalDef; 
       }}
       onContextMenu={(e) => e.preventDefault()}
     >
-      {visible && <img src={stickerUrl(def, style)} alt="" draggable={false} decoding="async" />}
+      {visible && (
+        <StickerImage id={def.id} look={style} alt="" draggable={false} decoding="async" />
+      )}
       <span className="tile-style">{tr.style(style)}</span>
     </button>
   );
 });
 
-const AnimalRow = memo(function AnimalRow({ def }: { def: AnimalDef }) {
+const AnimalRow = memo(function AnimalRow({ def }: { def: AnimalMeta }) {
   const tr = useT();
   return (
     <section className="animal-row">

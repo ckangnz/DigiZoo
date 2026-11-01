@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { playSfx } from '../audio/engine';
-import { stickerUrl } from '../art/cache';
 import { useT } from '../i18n';
 import { animalsIn, getAnimal } from '../registry/animals';
 import { THEMES } from '../registry/themes';
 import { useInstall } from '../pwa';
+import { StickerImage } from './StickerImage';
 import { useStore } from '../store/store';
 import { openInstallGuide } from './InstallGuide';
 import { CloseIcon, InstallIcon, PawsIcon } from './icons';
@@ -44,7 +44,9 @@ function PickerContent() {
     <div className="picker" data-ui>
       <div className="picker-inner">
         <header className="picker-head">
-          {mascot && <img className="picker-mascot" src={stickerUrl(mascot, 'cartoon')} alt="" />}
+          {mascot && (
+            <StickerImage id={mascot.id} look="cartoon" className="picker-mascot" alt="" />
+          )}
           <div>
             <h1 className="logo" aria-label="DigiZoo">
               {LETTERS.map((l, i) => (

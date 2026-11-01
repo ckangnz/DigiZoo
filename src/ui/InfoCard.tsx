@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { cancelSpeech, playAnimal, playSfx, speak } from '../audio/engine';
-import { stickerUrl } from '../art/cache';
 import type { StyleId } from '../art/core/types';
 import { foodSvg } from '../food/art';
 import { dietOf } from '../food/diets';
@@ -9,6 +8,7 @@ import { ttsLang, useT } from '../i18n';
 import { loadInfo } from '../info';
 import type { StickerInfo } from '../info/types';
 import { getAnimal } from '../registry/animals';
+import { StickerImage } from './StickerImage';
 import { getTheme, hasTheme } from '../registry/themes';
 import { Modal } from './Chrome';
 import { SpeechIcon, StopIcon } from './icons';
@@ -79,7 +79,7 @@ function InfoContent({ id }: { id: string }) {
         aria-label={tr.t('playSound')}
         onClick={() => playAnimal(def.sound || def.id)}
       >
-        <img src={stickerUrl(def, style)} alt="" draggable={false} />
+        <StickerImage id={def.id} look={style} alt="" draggable={false} />
       </button>
       <button
         className={`info-read${reading ? ' on' : ''}`}

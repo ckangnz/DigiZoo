@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { create } from 'zustand';
 import { cancelSpeech, playAnimal, playSfx, speak, stopAnimal } from '../audio/engine';
-import { stickerUrl } from '../art/cache';
 import { GRID_SIZES, buildDeck, pairsFor, pickAnimals, type GridSize } from '../game/deck';
 import { ttsLang, useT } from '../i18n';
 import { ANIMALS, animalsIn, getAnimal } from '../registry/animals';
+import { StickerImage } from './StickerImage';
 import { getTheme } from '../registry/themes';
 import { useStore } from '../store/store';
 import { ChevronLeftIcon, PawsIcon, RefreshIcon } from './icons';
@@ -282,7 +282,7 @@ function Game() {
                   <PawsIcon size={36} />
                 </span>
                 <span className="card-face card-front">
-                  {def && <img src={stickerUrl(def, 'cartoon')} alt="" draggable={false} />}
+                  {def && <StickerImage id={def.id} look="cartoon" alt="" draggable={false} />}
                 </span>
               </span>
             </button>
