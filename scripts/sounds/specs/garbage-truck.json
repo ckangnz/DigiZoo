@@ -1,0 +1,20 @@
+{
+  "id": "garbage-truck",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/856/856764_16682330-hq.mp3",
+      "credit": {
+        "title": "Garbage Truck Suburban Neighborhood Trash Pickup",
+        "author": "loganzsound",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://freesound.org/people/loganzsound/sounds/856764/"
+      },
+      "start": 20.8,
+      "end": 23.7
+    }
+  ],
+  "highpass": 0,
+  "species": "A real garbage truck on a suburban street, its reversing alarm going 'beep… beep… beep' over the rumbling engine",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording (AT897 and Zoom H5)."
+}

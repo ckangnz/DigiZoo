@@ -1,0 +1,11 @@
+{
+  "id": "sea-lion",
+  "file": "sea-lion.mp3",
+  "duration": 2.8,
+  "title": "Sea Lions in Newport, Oregon",
+  "author": "Steven Pavlov",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sea_Lions_in_Newport,_Oregon.ogv",
+  "changes": "California sea lions (Zalophus californianus) barking on the docks at Newport, Oregon; audio track of a video. Trimmed to 19.90–22.65 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. No high-pass: the excerpt has no measured low-frequency rumble."
+}

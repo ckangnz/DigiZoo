@@ -1,0 +1,11 @@
+{
+  "id": "beluga",
+  "file": "beluga.mp3",
+  "duration": 2.53,
+  "title": "Dele_Multisound_NOAA_Castellote_01 (beluga whale)",
+  "author": "NOAA Fisheries (M. Castellote)",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.fisheries.noaa.gov/national/science-data/sounds-ocean-mammals",
+  "changes": "Beluga whale (Delphinapterus leucas) whistling underwater, an arched whistle followed by quieter calls, from a NOAA hydrophone recording. Trimmed to 18.35–20.85 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. US government work (NOAA Fisheries 'Sounds in the Ocean' library). No high-pass: the recording has no measured low rumble."
+}

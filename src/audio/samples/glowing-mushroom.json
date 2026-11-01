@@ -1,0 +1,11 @@
+{
+  "id": "glowing-mushroom",
+  "file": "glowing-mushroom.mp3",
+  "duration": 2.38,
+  "title": "Sansula 04 F' [RAW]",
+  "author": "cabled_mess",
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/cabled_mess/sounds/380739/",
+  "changes": "Real recording of a single note plucked on a sansula (a kalimba thumb piano mounted on a small frame drum), used for the glowing mushroom for a gentle, magical sound. Trimmed to 0.00–2.90 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording. No high-pass is applied because the low hum in the ring is the sansula's own drum resonance, not rumble."
+}

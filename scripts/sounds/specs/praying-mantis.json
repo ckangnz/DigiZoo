@@ -1,0 +1,7 @@
+{
+  "id": "praying-mantis",
+  "layers": [{ "file": "File:Praying mantis threat display.webm", "start": 12.98, "end": 14.72 }],
+  "highpass": 150,
+  "species": "Praying mantis (Mantis religiosa) in its threat display, filmed in Corsica: the dry rustling hiss and ticks it makes as it spreads and rattles its wings at an attacker",
+  "note": "Audio track of the video. The 150 Hz high-pass removes measured low-frequency background noise; the wing rustles sit between 400 Hz and 5 kHz."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "firefly",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/348/348068_8043-hq.mp3",
+      "credit": {
+        "title": "20160616_night.15.wav",
+        "author": "dobroide",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://freesound.org/people/dobroide/sounds/348068/"
+      },
+      "start": 3.9,
+      "end": 6.6
+    }
+  ],
+  "species": "Real recording of a summer night in a pine forest near Aznalcázar, Spain: crickets trilling while a flying firefly beetle (Lampyridae) buzzes past the microphone",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. The 70 Hz high-pass removes measured low-frequency rumble."
+}

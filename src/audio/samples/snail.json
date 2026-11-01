@@ -1,0 +1,11 @@
+{
+  "id": "snail",
+  "file": "snail.mp3",
+  "duration": 1.88,
+  "title": "snail_munching.wav",
+  "author": "reinsamba",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/reinsamba/sounds/72755/",
+  "changes": "Real close-up recording of a Roman snail (Helix pomatia) eating a lettuce leaf: the faint rasping scrapes of its radula (its rough, file-like tongue). Trimmed to 26.55–28.40 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 1000 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording, made about 10 cm from the snail. The 1 kHz high-pass removes the measured kitchen background rumble, which sits below the rasps."
+}

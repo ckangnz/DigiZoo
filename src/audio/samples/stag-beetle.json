@@ -1,0 +1,11 @@
+{
+  "id": "stag-beetle",
+  "file": "stag-beetle.mp3",
+  "duration": 1.2,
+  "title": "20060628.night.beetle.flac",
+  "author": "dobroide",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/dobroide/sounds/20528/",
+  "changes": "Real recording of the deep wing drone of a large night-flying beetle (species not identified) buzzing around a flashlight on a summer night in Doñana, Spain, used for the stag beetle, which makes a similar low buzzing drone in flight. Trimmed to 0.45–1.60 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording; crickets can be heard faintly in the background. The 70 Hz high-pass removes measured low-frequency rumble."
+}

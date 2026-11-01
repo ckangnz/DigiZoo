@@ -1,0 +1,8 @@
+{
+  "id": "tractor",
+  "layers": [
+    { "file": "File:WWS TractorLanzBuldogHL12engineinoperation.ogg", "start": 50.0, "end": 52.9 }
+  ],
+  "species": "A real vintage Lanz Bulldog HL 12 tractor, whose big single-cylinder engine goes 'putt-putt-putt'",
+  "note": "Recorded at the National Museum of Agriculture in Szreniawa, Poland, for the Work With Sounds project. The 70 Hz high-pass trims measured sub-bass engine rumble."
+}

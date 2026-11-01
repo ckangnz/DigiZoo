@@ -1,0 +1,11 @@
+{
+  "id": "kingfisher",
+  "file": "kingfisher.mp3",
+  "duration": 2.32,
+  "title": "Common kingfisher call recorded in December 2015 at Anjarle, Ratnagiri",
+  "author": "Sharadapte",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Common_kingfisher_call_recorded_in_December_2015_at_Anjarle,_Ratnagiri.wav",
+  "changes": "Common kingfisher (Alcedo atthis) giving its thin, high, whistled 'tseee' calls, recorded at Anjarle, Ratnagiri, India. Trimmed to 0.00–2.29 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

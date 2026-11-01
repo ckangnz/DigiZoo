@@ -1,0 +1,9 @@
+{
+  "id": "crow",
+  "layers": [
+    { "file": "File:Corvus corone - Carrion Crow XC24828.mp3", "start": 1.88, "end": 4.85 }
+  ],
+  "highpass": 70,
+  "species": "Carrion crow (Corvus corone) giving four loud 'kraa' caws in The Hague, Netherlands, a recording shared through Xeno-canto (XC24828)",
+  "note": "The default 70 Hz high-pass is kept because the recording has low rumble below 80 Hz (about −24 dB relative to the caws)."
+}

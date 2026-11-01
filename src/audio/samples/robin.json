@@ -1,0 +1,11 @@
+{
+  "id": "robin",
+  "file": "robin.mp3",
+  "duration": 2.8,
+  "title": "Erithacus rubecula - European Robin XC559972",
+  "author": "Marie-Lan Taÿ Pamart",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_-_European_Robin_XC559972.mp3",
+  "changes": "European robin (Erithacus rubecula) singing one phrase of its warbling song from a tree in a mixed forest in France, a recording shared through Xeno-canto (XC559972). Trimmed to 3.10–5.85 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

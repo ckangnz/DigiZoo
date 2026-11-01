@@ -1,0 +1,11 @@
+{
+  "id": "woodpecker",
+  "file": "woodpecker.mp3",
+  "duration": 1.04,
+  "title": "Dendrocopos major",
+  "author": "Vladimir Yu. Arkhipov, Arkhivov",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Dendrocopos_major.ogg",
+  "changes": "Great spotted woodpecker (Dendrocopos major) drumming on a tree in the Kaluga region, Russia: one fast drum roll. Trimmed to 8.20–9.60 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 0.8 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "crow",
+  "file": "crow.mp3",
+  "duration": 2.95,
+  "title": "Corvus corone - Carrion Crow XC24828",
+  "author": "Sander Pieterse",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Corvus_corone_-_Carrion_Crow_XC24828.mp3",
+  "changes": "Carrion crow (Corvus corone) giving four loud 'kraa' caws in The Hague, Netherlands, a recording shared through Xeno-canto (XC24828). Trimmed to 1.88–4.85 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. The default 70 Hz high-pass is kept because the recording has low rumble below 80 Hz (about −24 dB relative to the caws)."
+}

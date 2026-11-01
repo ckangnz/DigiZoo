@@ -1,0 +1,11 @@
+{
+  "id": "tuatara",
+  "file": "tuatara.mp3",
+  "duration": 1.83,
+  "title": "Gecko babillard son MHNT",
+  "author": "Roger Culos",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Gecko_babillard_son_MHNT.wav",
+  "changes": "Real recording of a common barking gecko (Ptenopus garrulus) calling in Damaraland, Namibia, used for the tuatara: tuatara almost never call and no free recording of their rare croak exists, so this is a gecko, a lizard from tuatara's closest living relatives (lizards and snakes). Trimmed to 0.78–2.62 s of the original, mixed to mono, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3."
+}

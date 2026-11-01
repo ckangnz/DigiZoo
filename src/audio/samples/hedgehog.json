@@ -1,0 +1,11 @@
+{
+  "id": "hedgehog",
+  "file": "hedgehog.mp3",
+  "duration": 2.95,
+  "title": "hedgehog",
+  "author": "soundmary",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/soundmary/sounds/194938/",
+  "changes": "A hedgehog snuffling and sniffing, recorded indoors (the Freesound page does not name the species; most likely the European hedgehog, Erinaceus europaeus). Trimmed to 4.10–7.00 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 70 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Taken from the Freesound high-quality MP3 preview of the recording."
+}

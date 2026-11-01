@@ -1,0 +1,20 @@
+{
+  "id": "moose",
+  "layers": [
+    {
+      "url": "https://www.nps.gov/nps-audiovideo/legacy/mp3/akr/avElement/dena-DENAUnknownLocation200509mooseruttingbullcowAMPLIFY5dBFScreditRichardNelson.mp3",
+      "credit": {
+        "title": "Rutting Moose Audio Clip (Denali National Park & Preserve)",
+        "author": "NPS Media / Richard Nelson",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.nps.gov/dena/learn/nature/moose.htm"
+      },
+      "start": 9.6,
+      "end": 11.5
+    }
+  ],
+  "highpass": 200,
+  "species": "A cow moose (Alces alces) giving her nasal, bawling call during the autumn rut in Denali National Park, Alaska",
+  "note": "US National Park Service recording. The high-pass removes the measured wind rumble that dominates the recording below 200 Hz."
+}

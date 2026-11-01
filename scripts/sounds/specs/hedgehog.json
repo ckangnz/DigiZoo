@@ -1,0 +1,19 @@
+{
+  "id": "hedgehog",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/194/194938_1160789-hq.mp3",
+      "credit": {
+        "title": "hedgehog",
+        "author": "soundmary",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://freesound.org/people/soundmary/sounds/194938/"
+      },
+      "start": 4.1,
+      "end": 7.0
+    }
+  ],
+  "species": "A hedgehog snuffling and sniffing, recorded indoors (the Freesound page does not name the species; most likely the European hedgehog, Erinaceus europaeus)",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording."
+}

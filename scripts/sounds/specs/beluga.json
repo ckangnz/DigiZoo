@@ -1,0 +1,20 @@
+{
+  "id": "beluga",
+  "layers": [
+    {
+      "url": "https://www.fisheries.noaa.gov/s3/2023-04/Dele-multisound-NOAA-Castellote-01-beluga-clip.mp3",
+      "credit": {
+        "title": "Dele_Multisound_NOAA_Castellote_01 (beluga whale)",
+        "author": "NOAA Fisheries (M. Castellote)",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "source": "https://www.fisheries.noaa.gov/national/science-data/sounds-ocean-mammals"
+      },
+      "start": 18.35,
+      "end": 20.85
+    }
+  ],
+  "highpass": 0,
+  "species": "Beluga whale (Delphinapterus leucas) whistling underwater, an arched whistle followed by quieter calls, from a NOAA hydrophone recording",
+  "note": "US government work (NOAA Fisheries 'Sounds in the Ocean' library). No high-pass: the recording has no measured low rumble."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "moose",
+  "file": "moose.mp3",
+  "duration": 1.93,
+  "title": "Rutting Moose Audio Clip (Denali National Park & Preserve)",
+  "author": "NPS Media / Richard Nelson",
+  "license": "Public domain",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.nps.gov/dena/learn/nature/moose.htm",
+  "changes": "A cow moose (Alces alces) giving her nasal, bawling call during the autumn rut in Denali National Park, Alaska. Trimmed to 9.60–11.50 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 200 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. US National Park Service recording. The high-pass removes the measured wind rumble that dominates the recording below 200 Hz."
+}

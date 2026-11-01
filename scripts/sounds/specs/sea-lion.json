@@ -1,0 +1,7 @@
+{
+  "id": "sea-lion",
+  "layers": [{ "file": "File:Sea Lions in Newport, Oregon.ogv", "start": 19.9, "end": 22.65 }],
+  "highpass": 0,
+  "species": "California sea lions (Zalophus californianus) barking on the docks at Newport, Oregon; audio track of a video",
+  "note": "No high-pass: the excerpt has no measured low-frequency rumble."
+}

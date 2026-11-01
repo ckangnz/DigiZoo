@@ -1,0 +1,20 @@
+{
+  "id": "earthworm",
+  "layers": [
+    {
+      "url": "https://cdn.freesound.org/previews/82/82390_634166-hq.mp3",
+      "credit": {
+        "title": "Retreating Earthworms.wav",
+        "author": "Benboncan",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://freesound.org/people/Benboncan/sounds/82390/"
+      },
+      "start": 0.6,
+      "end": 3.4
+    }
+  ],
+  "highpass": 0,
+  "species": "Real recording of hundreds of compost earthworms (Eisenia fetida) wriggling back down into the damp compost of a wormery after the lid was lifted: soft wet crackles and squelches",
+  "note": "Taken from the Freesound high-quality MP3 preview of the recording. No high-pass: the clip has no measurable low-frequency rumble."
+}

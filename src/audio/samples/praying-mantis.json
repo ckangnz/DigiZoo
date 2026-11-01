@@ -1,0 +1,11 @@
+{
+  "id": "praying-mantis",
+  "file": "praying-mantis.mp3",
+  "duration": 1.78,
+  "title": "Praying mantis threat display",
+  "author": "Quentin Scouflaire",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Praying_mantis_threat_display.webm",
+  "changes": "Praying mantis (Mantis religiosa) in its threat display, filmed in Corsica: the dry rustling hiss and ticks it makes as it spreads and rattles its wings at an attacker. Trimmed to 12.98–14.72 s of the original, mixed to mono, gentle 12 dB/oct high-pass at 150 Hz, silence trimmed, loudness-normalised (≈ −18 dBFS RMS, peak ≤ −1 dBFS), peaks limited by 2.0 dB, 10 ms fade-in / 120 ms fade-out, encoded as 96 kbps mono MP3. Audio track of the video. The 150 Hz high-pass removes measured low-frequency background noise; the wing rustles sit between 400 Hz and 5 kHz."
+}

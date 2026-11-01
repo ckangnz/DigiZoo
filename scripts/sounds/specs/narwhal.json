@@ -1,0 +1,20 @@
+{
+  "id": "narwhal",
+  "layers": [
+    {
+      "url": "https://doi.org/10.1371/journal.pone.0198295.s007",
+      "credit": {
+        "title": "S7 Audio. Calls by several narwhals in close proximity (Blackwell et al. 2018, Spatial and temporal patterns of sound production in East Greenland narwhals, PLOS ONE)",
+        "author": "Susanna B. Blackwell, Outi M. Tervo, Alexander S. Conrad, Mikkel H. S. Sinding, Rikke G. Hansen, Susanne Ditlevsen, Mads Peter Heide-Jørgensen",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "source": "https://doi.org/10.1371/journal.pone.0198295.s007"
+      },
+      "start": 0.45,
+      "end": 3.15
+    }
+  ],
+  "highpass": 0,
+  "species": "Narwhals (Monodon monoceros) calling in Scoresby Sound, East Greenland, recorded by an Acousonde tag on a narwhal: a tonal call followed by a pulsed call",
+  "note": "Supplementary audio of an open-access PLOS ONE article. No high-pass: the tag recording has no energy below about 1 kHz."
+}
