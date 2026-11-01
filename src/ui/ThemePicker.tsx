@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { playSfx } from '../audio/engine';
-import { rasterizeSceneThumb, sceneThumbSrc, stickerUrl } from '../art/cache';
+import { stickerUrl } from '../art/cache';
 import { useT } from '../i18n';
 import { animalsIn, getAnimal } from '../registry/animals';
 import { THEMES } from '../registry/themes';
@@ -30,23 +30,7 @@ export function ThemePicker() {
   return <PickerContent />;
 }
 
-function useThumbs(): Record<string, string> {
-  const [srcs, setSrcs] = useState<Record<string, string>>(() =>
-    Object.fromEntries(THEMES.map((t) => [t.id, sceneThumbSrc(t.scene)])),
-  );
-  useEffect(() => {
-    let live = true;
-    for (const t of THEMES) {
-      void rasterizeSceneThumb(t.scene).then((url) => {
-        if (live) setSrcs((prev) => ({ ...prev, [t.id]: url }));
-      });
-    }
-    return () => {
-      live = false;
-    };
-  }, []);
-  return srcs;
-}
+const thumbSrc = (id: string) => `${import.meta.env.BASE_URL}thumbs/${id}.png`;
 
 function PickerContent() {
   const firstRun = useStore((s) => s.firstRun);
@@ -54,7 +38,6 @@ function PickerContent() {
   const openTheme = useStore((s) => s.openTheme);
   const close = useStore((s) => s.setPickerOpen);
   const installed = useInstall((s) => s.installed);
-  const thumbs = useThumbs();
   const tr = useT();
   const mascot = getAnimal('lion');
   return (
@@ -96,7 +79,13 @@ function PickerContent() {
               }}
             >
               <span className="world-thumb">
-                <img src={thumbs[t.id]} alt="" draggable={false} />
+                <img
+                  src={thumbSrc(t.id)}
+                  alt=""
+                  draggable={false}
+                  loading="lazy"
+                  decoding="async"
+                />
               </span>
               <span className="world-name" dir="auto">
                 {tr.world(t.id)}
