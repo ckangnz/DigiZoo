@@ -20,7 +20,8 @@ document.addEventListener(
   },
   { passive: false },
 );
-window.addEventListener('pointerdown', unlockAudio, { capture: true });
+for (const type of ['pointerdown', 'touchend', 'click', 'keydown'])
+  window.addEventListener(type, unlockAudio, { capture: true });
 
 if (import.meta.env.DEV || new URLSearchParams(location.search).has('debug')) {
   Object.assign(window, { __digizoo: { useStore, useCamera, centerOn, playAnimal, playSfx } });

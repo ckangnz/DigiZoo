@@ -25,6 +25,7 @@ export function playSticker(id: string): void {
   const found = stickerFrame(id);
   if (!found) return;
   const { def, frame } = found;
+  cancelSpeech();
   const duration = playAnimal(def.sound || def.id);
   store().setTalking(id);
   clearTimeout(talkTimer);
@@ -38,7 +39,6 @@ export function playSticker(id: string): void {
   const t = tr();
   if (store().sayNames)
     speak(t.name(def.id, def.name), duration ? duration * 1000 + 120 : 0, ttsLang(t.lang));
-  else cancelSpeech();
 }
 
 let feedTimer: ReturnType<typeof setTimeout> | undefined;

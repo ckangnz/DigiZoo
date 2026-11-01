@@ -128,21 +128,22 @@ function ensure(): AudioContext | null {
       }
     }
   }
-  if (ctx.state === 'suspended') void ctx.resume();
+  if (ctx.state !== 'running') void ctx.resume().catch(() => undefined);
   return ctx;
 }
 
-export function unlockAudio(): void {
+export function unlockAudio(event?: Event): void {
   ensure();
-  if (!speechUnlocked && typeof speechSynthesis !== 'undefined') {
+  if (event?.type === 'pointerdown') return;
+  if (speechUnlocked || typeof speechSynthesis === 'undefined') return;
+  try {
+    const u = new SpeechSynthesisUtterance('.');
+    u.volume = 0;
+    u.rate = 2;
+    speechSynthesis.speak(u);
     speechUnlocked = true;
-    try {
-      const u = new SpeechSynthesisUtterance(' ');
-      u.volume = 0;
-      speechSynthesis.speak(u);
-    } catch {
-      speechUnlocked = false;
-    }
+  } catch {
+    speechUnlocked = false;
   }
 }
 
@@ -249,14 +250,12 @@ export function stopAnimal(): void {
   gain.gain.cancelScheduledValues(t);
   gain.gain.setValueAtTime(gain.gain.value, t);
   gain.gain.linearRampToValueAtTime(0, t + 0.08);
-  setTimeout(() => {
-    try {
-      source?.stop();
-    } catch {
-      gain.disconnect();
-    }
-    gain.disconnect();
-  }, 160);
+  try {
+    source?.stop(t + 0.1);
+  } catch {
+    source?.disconnect();
+  }
+  setTimeout(() => gain.disconnect(), 160);
 }
 
 export function playSfx(name: SfxName): void {
@@ -352,7 +351,8 @@ export function speak(text: string, delayMs = 0, lang = 'en-US', onEnd?: () => v
   clearTimeout(speakTimer);
   speakTimer = setTimeout(() => {
     try {
-      speechSynthesis.cancel();
+      if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
+      if (speechSynthesis.paused) speechSynthesis.resume();
       const u = new SpeechSynthesisUtterance(text);
       u.rate = 0.95;
       u.pitch = 1;
